@@ -1,3 +1,5 @@
+@import url("https://use.typekit.net/jlv6wwc.css");
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -10,10 +12,14 @@
   }
 }
 
+
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: "noka", sans-serif;
+font-weight: 600;
+font-style: normal;
 }
 
 body {
