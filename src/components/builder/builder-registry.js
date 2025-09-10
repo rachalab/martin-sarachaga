@@ -9,7 +9,6 @@ Builder.registerComponent(Counter, {
   name: "Counter",
 });
 
-
 // Registramos NavCategory
 Builder.registerComponent(NavCategory, {
   name: "NavCategory",
