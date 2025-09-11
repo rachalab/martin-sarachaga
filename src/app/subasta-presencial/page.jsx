@@ -1,28 +1,14 @@
 import apiGetServer from "@/lib/apiGetServer";
-
-export async function generateMetadata({ params, searchParams }) {
-
-  const data = await apiGetServer({
-    url: "auctions.php",
-  });
-
-  if(!data) return;
-
-
-  return {
-    title: `Subasta Nro ${data.subasta.nro}`,
-    description: data.subasta.description,  
-  }
-}
+import { redirect } from "next/navigation";
 
 export default async function Page() {
   const data = await apiGetServer({
-    url: "auctions.php",
+    url: "auctions/last",
   });
 
-  return (
-    <>
-      <h1>Subasta Nro: {data.subasta.nro}</h1>
-    </>
-  );
+  if (!data?.subasta?.id) {
+    redirect(`/404`);
+  }
+
+  redirect(`/subasta-presencial/${data.subasta.id}`);
 }
