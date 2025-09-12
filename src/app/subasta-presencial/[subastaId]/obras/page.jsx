@@ -33,6 +33,13 @@ export default async function Page({ params }) {
   return (
     <>
       <h1>Subasta Nro: {data.subasta.nro}</h1>
+
+
+      <h2>Lotes</h2>
+      <pre>
+        <code>{JSON.stringify(data?.lotes ?? [], null, 2)}</code>
+      </pre>
+
     </>
   );
 }

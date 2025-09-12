@@ -6,7 +6,7 @@ export async function generateMetadata({ params }) {
   const{ subastaId } = await params;
 
   const data = await apiGetServer({
-    url: `category.php?id=${subastaId}`,
+    url: `category/${subastaId}`,
   });
 
   //Si no hay dotos redireccionamos
