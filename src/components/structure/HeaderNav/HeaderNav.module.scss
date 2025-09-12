@@ -1,0 +1,174 @@
+@use "../../../styles/system";
+
+.header{    
+    .navbar{
+        //background-color: #ffffff82;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 900;        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(58px + (190 - 58) * ((100vw - 1200px) / (3840 - 1200)));
+        padding: 
+        0
+        calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)))
+        ;   
+        //backdrop-filter: blur(10px);  
+        background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);  
+        @media screen and (max-width: 1024px){   
+            /* padding: 
+            calc(8px + (16 - 8) * ((100vw - 300px) / (1200 - 300)))
+            calc(10px + (38 - 10) * ((100vw - 300px) / (1200 - 300)))
+            ; */     
+        }   
+     /*    &:hover{
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);  
+        }   */ 
+          
+        .brand{ 
+            position: absolute;
+            top: calc(22px + (75.4 - 22) * ((100vw - 1200px) / (3840 - 1200)));  
+            left: calc(20px + (39 - 20) * ((100vw - 1200px) / (3840 - 1200)));  
+            display: flex;    
+            align-items: flex-start;              
+            line-height: 100%; 
+            color: system.$black;
+            text-decoration: none;    
+            @include system.font-level-5;   
+            font-weight: 800;
+            a{
+                color: system.$black;
+                text-decoration: none;
+                text-transform: uppercase;
+                img{
+                    display: flex;
+                    width: calc(110px + (345 - 110) * ((100vw - 1200px) / (3840 - 1200)));
+                    height: auto;  
+                    @media screen and (max-width: 1024px){   
+                        //width: calc(110px + (320 - 110) * ((100vw - 300px) / (1200 - 300)));    
+                    }             
+                }                
+            }                
+        }
+
+        &.no_iso{
+            .brand{                                 
+                left: calc(30px + (76 - 30) * ((100vw - 1200px) / (3840 - 1200)));  
+                a{
+                    img{
+                        display: none;             
+                    }                       
+                }                 
+            }
+        }
+
+        &.active{
+            background-color: transparent;
+            z-index: 1100;
+           .brand{                                 
+                left: calc(30px + (76 - 30) * ((100vw - 1200px) / (3840 - 1200)));  
+                a{
+                    color: system.$white;
+                    img{
+                        display: none;             
+                    }                       
+                }                 
+            }
+        }
+
+        .menu_btn{ 
+            position: relative;
+            margin-left: auto;   
+            height: calc(20px + (60 - 20) * ((100vw - 1200px) / (3840 - 1200)));
+            width: calc(48px + (188 - 48) * ((100vw - 1200px) / (3840 - 1200)));
+            span{
+                display: block;
+                height: calc(4px + (9 - 4) * ((100vw - 1200px) / (3840 - 1200)));
+                width: calc(48px + (188 - 48) * ((100vw - 1200px) / (3840 - 1200)));
+                background-color: system.$black;
+                &:nth-child(1){
+                    margin-bottom: calc(4px + (9 - 4) * ((100vw - 1200px) / (3840 - 1200)));
+                }
+                &:nth-child(2){
+                    margin-top: calc(4px + (9 - 4) * ((100vw - 1200px) / (3840 - 1200)));
+                }
+            }
+            &.close{
+                height: calc(40px + (146 - 40) * ((100vw - 1200px) / (3840 - 1200)));
+                span{
+                    position: absolute;
+                    background-color: system.$white;
+                    &:nth-child(1){                        
+                        transform: rotate(45deg);
+                        top: calc(18px + (68 - 18) * ((100vw - 1200px) / (3840 - 1200)));
+                    }
+                    &:nth-child(2){
+                        transform: rotate(-45deg);           
+                        top: calc(14px + (60 - 14) * ((100vw - 1200px) / (3840 - 1200)));          
+                    }
+                }
+            }
+        }
+    }    
+
+    .inner_menu{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 1050;
+        display: flex;
+        justify-content: center;
+        background-color: system.$red;
+        @media screen and (max-width: 1024px){ 
+            /* padding: 
+            calc(80px + (240 - 80) * ((100vw - 300px) / (1200 - 300)))
+            calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200))) 
+            0
+            calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200)))
+            ;   */ 
+        }
+
+        .items_wrapper{
+            display: flex;
+            flex-direction: column;  
+            align-items: center; 
+            justify-content: center;       
+            .item{ 
+                font-weight: 900;
+                line-height: 100%;
+                color: system.$white;
+                text-decoration: none;  
+                text-transform: uppercase;              
+                @media screen and (min-aspect-ratio: 23/9){
+                    font-size: 5vw;                       
+                } 
+                @media screen and (min-aspect-ratio: 20/9) and (max-aspect-ratio: 23/9){
+                    font-size: 6vw;                    
+                } 
+                @media screen and (max-aspect-ratio: 20/9){
+                    @include system.font-level-1;                      
+                }  
+                @media screen and (max-width: 1024px){ 
+                    @include system.font-level-1;   
+                }                
+                &.active{
+                    //color: $red;
+                    //-webkit-text-stroke: calc(2px + (6 - 2) * ((100vw - 1200px) / (3840 - 1200))) $white;               
+                }
+                @media screen and (min-width: 1024px){
+                    &:hover{   
+                        color: system.$red;
+                        -webkit-text-stroke: calc(2px + (6 - 2) * ((100vw - 1200px) / (3840 - 1200))) system.$white;                  
+                    }                    
+                }
+            }
+        }
+    }
+}

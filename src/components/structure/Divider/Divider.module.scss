@@ -1,0 +1,17 @@
+@use "../../../styles/system";
+
+.wrapper{
+    @include system.container-width-1;    
+    padding-bottom: calc(16px + (44 - 16) * ((100vw - 1200px) / (3840 - 1200)));  
+    margin-bottom: calc(18px + (46 - 18) * ((100vw - 1200px) / (3840 - 1200)));   
+    border-bottom: solid system.$line system.$black;
+    p{
+        @include system.font-level-5;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: system.$black;
+         &.red{
+            color: system.$red;
+        }
+    }
+}
