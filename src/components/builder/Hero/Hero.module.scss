@@ -1,0 +1,70 @@
+@use "../../../styles/system";
+
+.container{
+    position: relative;
+    @include system.container-width-1;
+    height: 100vh;
+    margin-bottom: calc(72px + (216 - 72) * ((100vw - 1200px) / (3840 - 1200)));    
+    .wrapper{
+        position: absolute;        
+        width: 100%;
+        top: calc(58px + (190 - 58) * ((100vw - 1200px) / (3840 - 1200)));
+        //bottom: calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)));
+        bottom: 0;
+        background-color: rgb(0, 0, 0); 
+        background-repeat: no-repeat;
+        background-position: top center;  
+        background-size: cover;
+        .info{            
+            position: absolute;
+            z-index: 200;
+            top: calc(22px + (68 - 22) * ((100vw - 1200px) / (3840 - 1200)));
+            right: calc(28px + (78 - 28) * ((100vw - 1200px) / (3840 - 1200)));
+            text-align: right;
+            mix-blend-mode: screen;
+            .headline{
+                text-transform: uppercase;
+                text-align: right;
+                @include system.font-level-2;
+                font-weight: 900;
+                line-height: 105%;
+                color: system.$white;  
+                margin-bottom: calc(12px + (36 - 12) * ((100vw - 1200px) / (3840 - 1200)));           
+            }
+            .view_pieces_btn{
+                @include system.button;
+                background-color: system.$white;
+                color: system.$black;                
+            }
+        }
+        .point_grid{
+            position: absolute;
+            z-index: 100;
+            width: 100%;
+            height: 100%;  
+            overflow: hidden;   
+            display: grid;  
+            grid-template-columns: repeat(auto-fit, minmax(calc(45px + (85 - 45) * ((100vw - 1200px) / (2560 - 1200))), 1fr));
+            .point{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: calc(45px + (85 - 45) * ((100vw - 1200px) / (2560 - 1200)));    
+                .inner{
+                    width: 100%;
+                    height: 100%;
+                    background-color: system.$red;
+                    border-radius: 50%;
+                    transform: scale(0);
+                    transition: all 1s;
+                }
+                &:hover{
+                    .inner{
+                        transform: scale(1);
+                        transition: all 0s; 
+                    } 
+                }
+            }
+        }
+    }
+}

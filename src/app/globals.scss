@@ -1,0 +1,84 @@
+//Font Family
+@import url("https://use.typekit.net/jlv6wwc.css");
+
+html,
+body {
+  /* max-width: 100vw; */
+  /* overflow-x: hidden; */
+  font-family: "noka", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  //necesario para custom scrollbar
+  overscroll-behavior-y: none;
+  overflow: hidden;      
+  @media screen and (max-width: 1024px){
+    overflow-y: visible; 
+    overscroll-behavior-y: auto;
+  }
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+button{
+    background-color: transparent;
+    outline: inherit;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: "noka", sans-serif;
+    font-weight: 600;
+    line-height: 100%;
+}
+
+
+// Custom Scrollbar
+
+#scroll-container{
+    overflow: hidden!important; 
+}
+  
+[data-scrollbar] {
+    min-width: 100vw;
+    height: 100vh; 
+}
+  
+.scrollbar-track{
+    background: rgba(255, 255, 255, 0)!important;
+    z-index: 1000!important;     
+    .scrollbar-thumb{
+      background: #000000!important;
+      border-radius: 0!important;          
+    }
+}
+
+
+// Grilla de referencia
+.master_grid{
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)));
+    margin: 0 calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)));
+    display: none;
+    div{
+        height: 100%;
+        border-left: 1px solid #ee5757;
+        border-right: 1px solid #ee5757;
+    }
+}
