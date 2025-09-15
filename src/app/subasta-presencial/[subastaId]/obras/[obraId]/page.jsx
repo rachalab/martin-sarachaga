@@ -1,5 +1,5 @@
 import apiGetServer from "@/lib/apiGetServer";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
 
@@ -10,7 +10,12 @@ export async function generateMetadata({ params }) {
 
   const data = await apiGetServer({
     url: `batch/${batchId}`,
+    slug: obraId
   });
+
+  if(data.lote.subasta !== parseInt(subastaId)){
+    notFound();
+  }
 
   return {
     title: `Lote ${data.lote.titulo}`,
@@ -26,7 +31,13 @@ export default async function Page({ params }) {
 
   const data = await apiGetServer({
     url: `batch/${batchId}`,
+    slug: obraId  
   });
+
+
+  if(data.lote.subasta !== parseInt(subastaId)){
+    notFound();
+  }
 
   return (
     <>
