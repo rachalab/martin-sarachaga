@@ -1,4 +1,4 @@
-@use "../../styles/system";
+@use "../../../styles/system";
 
 .nights{
     @include system.container-width-1;
@@ -8,7 +8,7 @@
     .night{
         margin-right: calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200)));
         p{
-            @include system.font-level-5;
+            @include system.font-level-6;
             font-weight: 800;
             color: system.$black;
             text-transform: uppercase;

@@ -1,4 +1,4 @@
-import MainWrapper from "../components/structure/MainWrapper/MainWrapper";
+import AppContext from "./context/AppContext";
 import HeaderNav from "../components/structure/HeaderNav/HeaderNav";
 import "./globals.scss";
 
@@ -12,8 +12,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <div className="master_grid"><div/><div/><div/><div/><div/><div/></div>
-        <HeaderNav />
-        {children}
+        <AppContext>
+          <div id="modal-root"/>
+          <HeaderNav />
+          <div id="filters-btn-root"/>
+          {children}
+        </AppContext>
       </body>
     </html>
   );

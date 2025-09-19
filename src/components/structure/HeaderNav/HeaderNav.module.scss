@@ -2,7 +2,6 @@
 
 .header{    
     .navbar{
-        //background-color: #ffffff82;
         position: fixed;
         top: 0;
         left: 0;
@@ -15,21 +14,10 @@
         padding: 
         0
         calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)))
-        ;   
-        //backdrop-filter: blur(10px);  
-        background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);  
-        @media screen and (max-width: 1024px){   
-            /* padding: 
-            calc(8px + (16 - 8) * ((100vw - 300px) / (1200 - 300)))
-            calc(10px + (38 - 10) * ((100vw - 300px) / (1200 - 300)))
-            ; */     
-        }   
-     /*    &:hover{
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);  
-        }   */ 
-          
+        ;    
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);  
+        
         .brand{ 
             position: absolute;
             top: calc(22px + (75.4 - 22) * ((100vw - 1200px) / (3840 - 1200)));  
@@ -39,7 +27,7 @@
             line-height: 100%; 
             color: system.$black;
             text-decoration: none;    
-            @include system.font-level-5;   
+            @include system.font-level-6;   
             font-weight: 800;
             a{
                 color: system.$black;
@@ -57,7 +45,7 @@
         }
 
         &.no_iso{
-            .brand{                                 
+            .brand{                                  
                 left: calc(30px + (76 - 30) * ((100vw - 1200px) / (3840 - 1200)));  
                 a{
                     img{
@@ -70,6 +58,7 @@
         &.active{
             background-color: transparent;
             z-index: 1100;
+           // transition: background-color .01s ease-in-out;
            .brand{                                 
                 left: calc(30px + (76 - 30) * ((100vw - 1200px) / (3840 - 1200)));  
                 a{
@@ -158,10 +147,6 @@
                 @media screen and (max-width: 1024px){ 
                     @include system.font-level-1;   
                 }                
-                &.active{
-                    //color: $red;
-                    //-webkit-text-stroke: calc(2px + (6 - 2) * ((100vw - 1200px) / (3840 - 1200))) $white;               
-                }
                 @media screen and (min-width: 1024px){
                     &:hover{   
                         color: system.$red;

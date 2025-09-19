@@ -34,7 +34,13 @@
             .view_pieces_btn{
                 @include system.button;
                 background-color: system.$white;
-                color: system.$black;                
+                color: system.$black;     
+                @media screen and (min-width: 1024px){   
+                    &:hover{
+                        background-color: system.$white;
+                        color: system.$black;   
+                    }
+                }           
             }
         }
         .point_grid{

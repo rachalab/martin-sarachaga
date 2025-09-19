@@ -1,0 +1,26 @@
+@use "../../../styles/system";
+
+.item{
+    margin-bottom: calc(30px + (130 - 30) * ((100vw - 1200px) / (3840 - 1200))); 
+    text-decoration: none;
+    height: fit-content;
+    &:nth-last-child(-n+3){
+        margin-bottom: 0;
+    }
+    .image_wrapper{
+        width: 100%;
+        max-height: calc(450px + (1450 - 450) * ((100vw - 1200px) / (3840 - 1200)));
+        overflow: hidden;
+        margin-bottom: calc(5px + (10 - 5) * ((100vw - 1200px) / (3840 - 1200))); 
+        img{
+            display: flex;
+            width: 100%;
+            height: auto;
+        }
+    }    
+    p{
+        @include system.font-level-6;
+        font-weight: 600;
+        color: system.$black;
+    }
+}
