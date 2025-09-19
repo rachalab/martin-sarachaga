@@ -1,0 +1,111 @@
+@use "../../../styles/system";
+
+.wrapper{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;    
+    .panel{
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: calc(320px + (1000 - 320) * ((100vw - 1200px) / (3840 - 1200)));
+        background-color: system.$white;
+        overflow-y: scroll;
+        padding:
+        calc(15px + (60 - 15) * ((100vw - 1200px) / (3840 - 1200)))
+        calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)))
+        ;
+        scrollbar-width: thin;
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(30px + (85 - 30) * ((100vw - 1200px) / (3840 - 1200)));
+            h4{
+                @include system.font-level-4;
+                font-weight: 800;
+                color: system.$red;
+            }
+            .close_btn{
+                width: calc(28px + (88 - 28) * ((100vw - 1200px) / (3840 - 1200)));
+                height: calc(28px + (88 - 28) * ((100vw - 1200px) / (3840 - 1200)));
+                //background-color: red;
+                background-image: url('../../../../public/assets/images/close-icon-black.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100% auto;
+            }
+        }
+        .filter_group{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: calc(25px + (75 - 25) * ((100vw - 1200px) / (3840 - 1200)));
+            .title{
+                @include system.font-level-6;
+                font-weight: 800;
+                color: system.$red;
+                margin-bottom: calc(6px + (12 - 6) * ((100vw - 1200px) / (3840 - 1200)));
+            }
+            .btn_filter{               
+                position: relative;
+                @include system.font-level-6;
+                font-weight: 600;
+                color: system.$black;
+                text-align: left;
+                padding: calc(6px + (12 - 6) * ((100vw - 1200px) / (3840 - 1200)));
+                border-bottom: solid system.$line system.$black;
+                &:first-of-type{
+                border-top: solid system.$line system.$black;
+                }
+                &.active{
+                    background-color: system.$black;
+                    color: system.$white;
+                }
+                span{        
+                    &.text{
+                        position: relative;
+                        z-index: 2;
+                    }
+                    &.bg{
+                        position: absolute;     
+                        top: 0;
+                        bottom: 0;                   
+                        left: 0;
+                        right: 0;
+                        z-index: 1;
+                        background-color: system.$black;                        
+                        visibility: hidden;
+                        height: 0%;    
+                        transition: all .3s ease-out;                    
+                    }
+                }
+                @media screen and (min-width: 1024px){   
+                    &:hover{
+                        span{
+                            color: system.$white;
+                            &.bg{
+                                visibility: visible;
+                                height: 100%;
+                                transition: all .2s ease-out;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .overlay_close{
+        position: absolute;
+        z-index: 1;
+        background-color: rgba(206, 206, 206, .5);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}

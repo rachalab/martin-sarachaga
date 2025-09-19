@@ -9,7 +9,7 @@ export default function Hero(){
 
         <div className={styles.info}>
           <h2 className={styles.headline}>Subasta presencial<br />12 y 13 de Agosto</h2>
-          <Link href="/prefiltro" className={styles.view_pieces_btn}>VER PIEZAS</Link>
+          <Link href="subasta-presencial/113" className={styles.view_pieces_btn}>VER PIEZAS</Link>
         </div>
 
         <div className={styles.point_grid}>

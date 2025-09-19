@@ -22,27 +22,34 @@ $red: #EF3824;
 }
 
 @mixin font-level-3 {
-    //font-size: calc(28px + (74 - 28) * ((100vw - 1200px) / (3840 - 1200)));
+    font-size: calc(46px + (140 - 46) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
         //font-size: calc(24px + (62 - 24) * ((100vw - 300px) / (1024 - 300)));
     }
 }
 
 @mixin font-level-4 {
+    font-size: calc(32px + (100 - 32) * ((100vw - 1200px) / (3840 - 1200)));
+    @media screen and (max-width: 1024px){
+        //font-size: calc(24px + (62 - 24) * ((100vw - 300px) / (1024 - 300)));
+    }
+}
+
+@mixin font-level-5 {
     //font-size: calc(17.5px + (48 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
         //font-size: calc(16px + (28 - 16) * ((100vw - 300px) / (1024 - 300)));
     }
 }
 
-@mixin font-level-5 {
+@mixin font-level-6 {
     font-size: calc(14px + (42 - 14) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
         //font-size: calc(16px + (28 - 16) * ((100vw - 300px) / (1024 - 300)));
     }
 }
 
-@mixin font-level-6 {
+@mixin font-level-7 {
     //font-size: calc(17.5px + (48 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
         //font-size: calc(16px + (28 - 16) * ((100vw - 300px) / (1024 - 300)));
@@ -65,19 +72,25 @@ $red: #EF3824;
 
 @mixin button {
     display: inline-block;
-    @include font-level-5;
+    @include font-level-6;
     font-weight: 800;    
     background-color: $red;
     color: $white;
     text-decoration: none;
     padding:
     calc(8px + (24 - 8) * ((100vw - 1200px) / (3840 - 1200)))
-    calc(16px + (50 - 16) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(16px + (52 - 16) * ((100vw - 1200px) / (3840 - 1200)))
     ;
+    @media screen and (min-width: 1024px){   
+        &:hover{
+            background-color: $black;
+            color: $white;
+        }
+    }
 }
 
 
 // Lines
 
-$line: calc(1px + (2 - 1) * ((100vw - 1200px) / (3840 - 1200)));
+$line: calc(1.5px + (3 - 1.5) * ((100vw - 1200px) / (3840 - 1200)));
 $line-mobile: calc(1px + (2 - 1) * ((100vw - 300px) / (1200 - 300)));

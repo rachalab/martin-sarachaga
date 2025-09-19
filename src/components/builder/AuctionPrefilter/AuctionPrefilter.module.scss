@@ -21,7 +21,7 @@
     color: system.$black;    
     border-top: solid system.$line system.$black;
     text-align: left;
-    &:last-of-type{
+    &.cta{
       border-bottom: solid system.$line system.$black;
     }
   }
