@@ -1,0 +1,79 @@
+@use "../../../styles/system";
+
+.wrapper{
+    @include system.container-width-1;
+    display: grid;
+    grid-template-areas: 'col-left col-right';
+    grid-template-columns:
+    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)))
+    ;
+    grid-gap: calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)));
+    padding-top: calc(80px + (240 - 80) * ((100vw - 1200px) / (3840 - 1200)));
+    min-height: 60vh;
+    .col_left{
+        grid-area: col-left;
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+    .col_right{
+        grid-area: col-right;   
+        p, li, a, .print_btn{
+            @include system.font-level-6;
+            font-weight: 600;
+            color: system.$black;
+            display: block;
+            text-decoration: none;
+        }
+        .header{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: calc(25px + (85 - 25) * ((100vw - 1200px) / (3840 - 1200)));
+            .link_back{
+                text-transform: uppercase;
+                font-weight: 800;
+                background-image: url('../../../../public/assets/images/arrow-back-icon.svg');
+                background-repeat: no-repeat;
+                background-position: left center;
+                background-size: calc(12.5px + (38 - 12.5) * ((100vw - 1200px) / (3840 - 1200))) auto;
+                padding-left: calc(16px + (46 - 16) * ((100vw - 1200px) / (3840 - 1200)));
+                border-bottom: solid system.$line system.$black;
+            }
+            .print_btn{
+                font-weight: 800;
+                border-bottom: solid system.$line system.$black;
+            }
+        }     
+        .headline{
+            @include system.font-level-3;
+            font-weight: 800;
+            color: system.$black;
+            line-height: 100%;
+            margin-bottom: calc(16px + (38 - 16) * ((100vw - 1200px) / (3840 - 1200)));
+        }        
+        .description{
+            line-height: 130%;
+            padding-right: calc(45px + (200 - 45) * ((100vw - 1200px) / (3840 - 1200)));
+            margin-bottom: calc(25px + (64 - 25) * ((100vw - 1200px) / (3840 - 1200)));
+        }
+        .technical_sheet{
+            list-style: none;
+            margin-bottom: calc(29px + (74 - 29) * ((100vw - 1200px) / (3840 - 1200)));
+            li{
+                span{
+                    color: system.$red;
+                }
+                padding: calc(6px + (12 - 6) * ((100vw - 1200px) / (3840 - 1200)));
+                border-bottom: solid system.$line system.$black;
+                &:first-of-type{
+                border-top: solid system.$line system.$black;
+                }
+            }
+        }
+        .query_button{
+            @include system.button;          
+        }
+    }
+}

@@ -1,0 +1,68 @@
+@use "../../../styles/system";
+
+.footer{    
+    background-color: system.$black;
+    margin-top: calc(110px + (328 - 110) * ((100vw - 1200px) / (3840 - 1200)));
+    padding:
+    calc(110px + (328 - 110) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(30px + (70 - 30) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(25px + (45 - 25) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(20px + (40 - 20) * ((100vw - 1200px) / (3840 - 1200)))
+    ;
+    .wrapper{
+        width: 100%;        
+        display: grid;
+        grid-template-areas: 'col-left col-right';
+        grid-template-columns:
+        calc(595px + (1920 - 595) * ((100vw - 1200px) / (3840 - 1200)))
+        calc(555px + (1805 - 555) * ((100vw - 1200px) / (3840 - 1200)))
+        ;
+        color: system.$white;
+        p, a{
+            @include system.font-level-6;
+            font-weight: 800;
+            color: system.$white;
+        }
+        .col_left{
+            grid-area: col-left;
+            position: relative;
+            p{
+                background-image: url('../../../../public/assets/images/sarachaga-brand-white.svg');
+                background-position: left top;
+                background-repeat: no-repeat;
+                background-size: calc(110px + (345 - 110) * ((100vw - 1200px) / (3840 - 1200))) auto;
+                height: calc(80px + (245 - 80) * ((100vw - 1200px) / (3840 - 1200)));
+                padding-left: calc(130px + (385 - 130) * ((100vw - 1200px) / (3840 - 1200)));
+            }            
+        }
+        .col_right{
+            grid-area: col-right;
+            display: grid;
+            grid-template-areas: 'whatsapp networks adress';
+            grid-template-columns:
+            calc(210px + (700 - 210) * ((100vw - 1200px) / (3840 - 1200)))
+            calc(145px + (510 - 145) * ((100vw - 1200px) / (3840 - 1200)))
+            calc(200px + (595 - 200) * ((100vw - 1200px) / (3840 - 1200)))
+            ;
+            .whatsapp{
+                grid-area: whatsapp;
+                a{
+                    display: block;
+                    margin-bottom: calc(17.5px + (56 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
+                }
+            }
+            .social_networks{
+                grid-area: networks;
+                display: flex;
+                flex-direction: column;
+            }
+            .adress{
+                grid-area: adress;
+                a{
+                    display: block;
+                    margin-bottom: calc(17.5px + (56 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
+                }
+            }
+        }
+    }
+}

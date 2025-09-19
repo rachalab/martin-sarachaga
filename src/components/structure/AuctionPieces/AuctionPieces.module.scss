@@ -1,0 +1,47 @@
+@use "../../../styles/system";
+
+.wrapper{
+    .divider{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        @include system.container-width-1;    
+        padding-bottom: calc(16px + (44 - 16) * ((100vw - 1200px) / (3840 - 1200)));  
+        margin-bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200)));   
+        border-bottom: solid system.$line system.$black;        
+        .info{
+            p{
+                @include system.font-level-6;
+                font-weight: 800;
+                text-transform: uppercase;
+                color: system.$black;
+                &.red{
+                    color: system.$red;
+                }
+            }
+        }    
+        .btn_filters{        
+            margin-bottom: calc(2px + (8 - 2) * ((100vw - 1200px) / (3840 - 1200)));        
+        }
+    }
+
+    .itemsGrid{
+        @include system.container-width-1;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: calc(20px + (56 - 20) * ((100vw - 1200px) / (3840 - 1200)));
+        margin-bottom: calc(55px + (185 - 55) * ((100vw - 1200px) / (3840 - 1200)));     
+    }
+}
+
+.btn_filters{
+    @include system.button;             
+}
+
+.floating_filters{
+    position: fixed;
+    //top: calc(80px + (260 - 80) * ((100vw - 1200px) / (3840 - 1200)));
+    //right: calc(31px + (76 - 31) * ((100vw - 1200px) / (3840 - 1200)));
+    bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200)));   
+    right: calc(31px + (76 - 31) * ((100vw - 1200px) / (3840 - 1200)));
+}
