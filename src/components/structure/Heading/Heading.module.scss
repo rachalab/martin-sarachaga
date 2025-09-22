@@ -5,6 +5,7 @@
     @include system.font-level-1;
     font-weight: 900;
     color: system.$black;
+    text-transform: uppercase;
     padding-top: calc(65px + (210 - 65) * ((100vw - 1200px) / (3840 - 1200)));
     margin-bottom: calc(25px + (105 - 25) * ((100vw - 1200px) / (3840 - 1200)));
 }

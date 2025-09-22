@@ -1,4 +1,7 @@
 import apiGetServer from "@/lib/apiGetServer";
+import MainWrapper from "../../../../../components/structure/MainWrapper/MainWrapper";
+import ItemDetail from "@/src/components/structure/ItemDetail/ItemDetail";
+import Footer from "../../../../../components/structure/Footer/Footer";
 
 export async function generateMetadata({ params }) {
 
@@ -27,34 +30,14 @@ export default async function Page({ params }) {
 
   const data = await apiGetServer({
     url: `batch/${batchId}`,
-    slug: obraId  
+    slug: obraId,
+    id: subastaId     
   });
 
-  return (
-    <>
-      <h1>Id Subasta: {data.subasta.id}</h1>
-      <h1>Obra: {data.lote.titulo}</h1>
-
-      <h2>Obra</h2>
-      <pre>
-        <code>{JSON.stringify(data?.lote ?? [], null, 2)}</code>
-      </pre>
-      <h2>Subasta</h2>
-      <pre>
-        <code>{JSON.stringify(data?.subasta ?? [], null, 2)}</code>
-      </pre>
-      <h2>Categorías</h2>
-      <pre>
-        <code>{JSON.stringify(data?.categoria ?? [], null, 2)}</code>
-      </pre>
-      <h2>Noches</h2>
-      <pre>
-        <code>{JSON.stringify(data?.noche ?? [], null, 2)}</code>
-      </pre>
-
-
-
-
-    </>
+  return (   
+    <MainWrapper>
+      <ItemDetail dataPiece={data.lote} />
+      <Footer />
+    </MainWrapper>
   );
-}
+} 

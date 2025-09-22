@@ -1,5 +1,9 @@
 import apiGetServer from "@/lib/apiGetServer";
 import { redirect } from "next/navigation";
+import MainWrapper from "../../../../components/structure/MainWrapper/MainWrapper";
+import Heading from "../../../../components/structure/Heading/Heading";
+import AuctionPieces from "@/src/components/structure/AuctionPieces/AuctionPieces";
+import Footer from "../../../../components/structure/Footer/Footer";
 
 export async function generateMetadata({ params, searchParams }) {
 
@@ -9,7 +13,7 @@ export async function generateMetadata({ params, searchParams }) {
     url: `/auctions/${subastaId}`,
   });
 
-  //Si no hay dotos redireccionamos
+  //Si no hay datos redireccionamos
   if (!data?.subasta) return redirect(`/404`);
 
   return {
@@ -27,19 +31,15 @@ export default async function Page({ params }) {
   });
 
 
-  //Si no hay dotos redireccionamos
+  //Si no hay datos redireccionamos
   if (!data?.subasta) return redirect(`/404`);
 
+
   return (
-    <>
-      <h1>Subasta Nro: {data.subasta.nro}</h1>
-
-
-      <h2>Lotes</h2>
-      <pre>
-        <code>{JSON.stringify(data?.lotes ?? [], null, 2)}</code>
-      </pre>
-
-    </>
+    <MainWrapper>
+      <Heading data={{heading: 'SUBASTA PRESENCIAL'}} />
+      <AuctionPieces data={data} />
+      <Footer />
+    </MainWrapper>
   );
 }

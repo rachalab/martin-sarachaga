@@ -1,0 +1,44 @@
+@use "../../../styles/system";
+
+.wrapper{
+    @include system.container-width-1;
+    display: grid;
+    grid-template-areas: 'col-left col-right';
+    grid-template-columns:
+    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)));
+    grid-gap: calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)));     
+    margin-bottom: calc(22px + (60 - 22) * ((100vw - 1200px) / (3840 - 1200)));
+
+    .col_left{
+        grid-area: col-left;
+        .image_wrapper{
+            position: relative;
+            width: 100%;
+            height: calc(385px + (1215 - 385) * ((100vw - 1200px) / (3840 - 1200)));
+            background-color: rgb(231, 231, 231);
+            img{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                &.hide{
+                    opacity: 0;
+                }
+            }
+        }
+    }
+    .col_right{
+        grid-area: col-right;           
+        p{
+            @include system.font-level-4;
+            font-weight: 800;
+            color: system.$black;
+            line-height: 105%;
+            margin-bottom: calc(35px + (125 - 35) * ((100vw - 1200px) / (3840 - 1200)));
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }  
+    }
+} 

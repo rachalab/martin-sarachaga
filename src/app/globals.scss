@@ -43,7 +43,6 @@ button{
 
 
 // Custom Scrollbar
-
 #scroll-container{
     overflow: hidden!important; 
 }
@@ -62,6 +61,17 @@ button{
     }
 }
 
+
+// Estilos contenedor Root Modal
+#modal-root{
+  position: relative;
+  z-index: 6000;
+}
+
+#filters-btn-root{
+  position: relative;
+  z-index: 50;
+}
 
 // Grilla de referencia
 .master_grid{
