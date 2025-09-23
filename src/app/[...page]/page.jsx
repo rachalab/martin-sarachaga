@@ -7,6 +7,10 @@ builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 export default async function Page(props) {
   const builderModelName = "page";
 
+  const searchParams = await props.searchParams;
+
+  const isBuilder = searchParams["builder.space"] ? true : false;
+
   const content = await builder
     // Get the page content from Builder with the specified options
     .get(builderModelName, {
@@ -21,6 +25,10 @@ export default async function Page(props) {
   return (
     <>
       {/* Render the Builder page */}
+      <h1>Hola</h1>
+      <p style={{ padding: "200px", style: "block" }}>
+        {isBuilder ? "Es builder" : "No es builder"}
+      </p>
       <RenderBuilderContent content={content} model={builderModelName} />
     </>
   );
