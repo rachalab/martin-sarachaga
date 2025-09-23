@@ -1,7 +1,6 @@
 import { builder } from "@builder.io/sdk";
-import { RenderBuilderContent } from "../../components/builder/builder";
-import MainWrapper from "../../components/structure/MainWrapper/MainWrapper";
-import Heading from "../../components/structure/Heading/Heading";
+import { RenderBuilderContent } from "../components/builder/builder";
+import MainWrapper from "../components/structure/MainWrapper/MainWrapper";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
@@ -32,7 +31,6 @@ export default async function Page(props) {
   // ✅ En el sitio real, envolver con MainWrapper
   return (
     <MainWrapper>
-      {content?.data?.title && <Heading data={{heading: content?.data?.title}} />}
       <RenderBuilderContent content={content} model={builderModelName} />
     </MainWrapper>
   );

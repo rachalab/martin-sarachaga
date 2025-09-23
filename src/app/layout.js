@@ -11,12 +11,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="master_grid"><div/><div/><div/><div/><div/><div/></div>
         <AppContext>
           <div id="modal-root"/>
           <HeaderNav />
           <div id="filters-btn-root"/>
-          {children}
+          <>{children}</>
         </AppContext>
       </body>
     </html>

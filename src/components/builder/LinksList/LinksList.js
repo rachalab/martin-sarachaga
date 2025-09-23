@@ -1,6 +1,7 @@
 "use client";
 import Link from 'next/link';
 import styles from "./LinksList.module.scss"; 
+import { Fragment } from 'react';
 
 export default function LinksList({ title, links }){
 
@@ -10,10 +11,19 @@ export default function LinksList({ title, links }){
         
         {links?.map((data, i) => {               
           return (
-            <Link href={data?.destination ? data?.destination : "#" } className={styles.link} key={i}>{data?.title ? data?.title : ""}</Link>
+            <Fragment key={i}>
+              {data?.title && 
+                <Link 
+                  href={data?.destination ? data?.destination : "#" } 
+                  className={styles.link} 
+                  key={i}
+                >
+                  {data.title}
+                </Link>
+              }
+            </Fragment>
           );
         })}
-
       </section>
   )
 }

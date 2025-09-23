@@ -4,12 +4,12 @@ import styles from "./ImageWithText.module.scss";
 
 export default function ImageWithText({ text, images }){
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-  const imagesLength = typeof (images && images !== 'undefined') ? images?.length : 0;
+  const imagesLength =  images ? images.length : 0;
 
    useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImgIndex((prevIndex) => 
-        prevIndex >= images.length - 1 ? 0 : prevIndex + 1
+        prevIndex >= images?.length - 1 ? 0 : prevIndex + 1
       );
     }, imagesLength ? imagesLength * 200 : 3000 ); 
     return () => clearInterval(intervalId);

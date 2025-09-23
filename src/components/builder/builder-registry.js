@@ -3,9 +3,17 @@ import { builder, Builder } from "@builder.io/react";
 import ImageWithText from "./ImageWithText/ImageWithText";
 import LinksList from "./LinksList/LinksList";
 import Hero from "./Hero/Hero";
-
+import Timeline from "./Timeline/Timeline";
+import Test from "./Test/Test";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
+
+
+Builder.registerComponent(Test, {
+  name: "Test", // cómo aparece en Builder
+  friendlyName: "Test"
+});
+
 
 Builder.registerComponent(Hero, {
   name: "hero", // cómo aparece en Builder
@@ -117,3 +125,45 @@ Builder.registerComponent(LinksList, {
     }
   ],
 });
+
+
+Builder.registerComponent(Timeline, {
+  name: "Timeline", // cómo aparece en Builder
+  friendlyName: "Línea de tiempo",
+  inputs: [
+    {
+      name: "subtitle",
+      friendlyName: "Texto",
+      type: "string"
+    },
+    {
+      name: "years",
+      friendlyName: "Años",
+      type: "array",
+      subFields: [
+        {
+          name: "date",
+          friendlyName: "Año",
+          type: "integer"
+        },
+        {
+          name: "description",
+          friendlyName: "Descripción",
+          type: "longText"
+        },
+        {
+          name: "photo",
+          friendlyName: "Imagen",
+          type: "file",
+          allowedFileTypes: ["png", "jpg", "jpeg", "webp", "avif"],
+        },
+        {
+          name: "alt",
+          friendlyName: "Texto alternativo",
+          type: "string"
+        }
+      ]
+    }
+  ]
+});
+
