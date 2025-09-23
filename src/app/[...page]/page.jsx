@@ -1,5 +1,6 @@
 import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "../../components/builder/builder";
+import MainWrapper from "../../components/structure/MainWrapper/MainWrapper";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
@@ -19,9 +20,9 @@ export default async function Page(props) {
     .toPromise();
 
   return (
-    <>
+    <MainWrapper>
       {/* Render the Builder page */}
       <RenderBuilderContent content={content} model={builderModelName} />
-    </>
+    </MainWrapper>
   );
 }

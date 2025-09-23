@@ -6,11 +6,11 @@ export default function LinksList({ title, links }){
 
   return (
       <section className={styles.wrapper}>
-        {title?.value && <h3 className={styles.heading}>{title.value}</h3>}
+        {title && <h3 className={styles.heading}>{title}</h3>}
         
         {links?.map((data, i) => {               
           return (
-            <Link href={`/`} className={styles.link} key={i}>{data.nombre}</Link>
+            <Link href={data?.destination ? data?.destination : "#" } className={styles.link} key={i}>{data?.title ? data?.title : ""}</Link>
           );
         })}
 
