@@ -1,6 +1,7 @@
 import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "../components/builder/builder";
 import MainWrapper from "../components/structure/MainWrapper/MainWrapper";
+import Footer from "../components/structure/Footer/Footer";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
@@ -32,6 +33,7 @@ export default async function Page(props) {
   return (
     <MainWrapper>
       <RenderBuilderContent content={content} model={builderModelName} />
+      <Footer />
     </MainWrapper>
   );
 }
