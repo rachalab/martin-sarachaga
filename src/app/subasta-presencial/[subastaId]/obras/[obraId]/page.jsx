@@ -17,8 +17,8 @@ export async function generateMetadata({ params }) {
   });
 
   return {
-    title: `Lote ${data.lote.titulo}`,
-    description: data.lote.descripcion,
+    title: `Lote ${data?.lote?.titulo}`,
+    description: data?.lote?.descripcion,
   };
 }
 
