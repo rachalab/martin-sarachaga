@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AuctionPiecesContainer({ data }){
     const container = useRef(null);
+    const [isBrowser, setIsBrowser] = useState(false);
     const [floatingFiltersBtn, setFloatingFiltersBtn] = useState(false);
 
     //Traemos lo que necesitamos de AppContext        
@@ -20,6 +21,7 @@ export default function AuctionPiecesContainer({ data }){
         currentAuctionNight,
         currentAuctionCategory,
         currentAuctionAuthor,
+        auctionFilterPanelStatus,
         setAuctionFilterPanelStatus
     } = useAppContext(); 
 
@@ -37,8 +39,12 @@ export default function AuctionPiecesContainer({ data }){
             pieces = pieces.filter((piece) => piece.nronoche === currentAuctionNight);
         }
         setDataAuctionPieces(pieces);       
-    }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, data]);    
+    }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, data]);   
+    
 
+    useEffect(() => {
+        setIsBrowser(true);  
+    }, []);
 
     //Muestra y oculta el botón de filtros flotante
     useEffect(() => {
@@ -61,11 +67,11 @@ export default function AuctionPiecesContainer({ data }){
 
     return (
         <>           
-            <AuctionFilterPanel data={data} />  
+            {auctionFilterPanelStatus && <AuctionFilterPanel data={data} />}  
 
-            {floatingFiltersBtn && ReactDOM.createPortal(<div className={styles.floating_filters}>
+            {isBrowser && ReactDOM.createPortal(<div className={!floatingFiltersBtn ? `${styles.floating_filters}` : `${styles.floating_filters} ${styles.active}`}>
                 <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>
-            </div>,document.getElementById("filters-btn-root"))};    
+            </div>,document.getElementById("filters-btn-root"))}    
             
             <div ref={container}>     
                 {data?.noches.map((dataNoche, i) => {     
@@ -80,7 +86,7 @@ export default function AuctionPiecesContainer({ data }){
                                             <p>{dataNoche.dia.format.substring(dataNoche.dia.format.indexOf(',') + 1)}</p>
                                             <p>{dataNoche.horario.format} H.</p>
                                         </div> 
-                                        <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>
+                                        {/* <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button> */}
                                     </div>                                     
 
                                     <div className={styles.itemsGrid}>

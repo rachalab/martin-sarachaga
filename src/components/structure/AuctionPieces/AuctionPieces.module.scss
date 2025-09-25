@@ -8,7 +8,11 @@
         @include system.container-width-1;    
         padding-bottom: calc(16px + (44 - 16) * ((100vw - 1200px) / (3840 - 1200)));  
         margin-bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200)));   
-        border-bottom: solid system.$line system.$black;        
+        border-bottom: solid system.$line system.$black;   
+        @media screen and (max-width: 1024px){
+            padding-bottom: calc(10px + (32 - 10) * ((100vw - 300px) / (1024 - 300)));  
+            margin-bottom: calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300)));
+        }     
         .info{
             p{
                 @include system.font-level-6;
@@ -31,6 +35,11 @@
         grid-template-columns: repeat(3, 1fr);
         grid-gap: calc(20px + (56 - 20) * ((100vw - 1200px) / (3840 - 1200)));
         margin-bottom: calc(55px + (185 - 55) * ((100vw - 1200px) / (3840 - 1200)));     
+        @media screen and (max-width: 1024px){
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: calc(10.5px + (34 - 10.5) * ((100vw - 300px) / (1024 - 300)));
+            margin-bottom: calc(35px + (125 - 35) * ((100vw - 300px) / (1024 - 300))); 
+        }
     }
 }
 
@@ -39,9 +48,22 @@
 }
 
 .floating_filters{
-    position: fixed;
-    //top: calc(80px + (260 - 80) * ((100vw - 1200px) / (3840 - 1200)));
-    //right: calc(31px + (76 - 31) * ((100vw - 1200px) / (3840 - 1200)));
-    bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200)));   
+    position: fixed;       
+    bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200))); 
     right: calc(31px + (76 - 31) * ((100vw - 1200px) / (3840 - 1200)));
+    transition: all .2s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    @media screen and (max-width: 1024px){
+        bottom: calc(15px + (34 - 15) * ((100vw - 300px) / (1024 - 300)));
+        right: calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300))); 
+    }
+    &.active{
+        visibility: visible;
+        opacity: 1;        
+        transition: all .2s ease-in-out;
+        @media screen and (max-width: 1024px){
+             //bottom: calc(15px + (34 - 15) * ((100vw - 300px) / (1024 - 300)));   
+        }
+    }
 }

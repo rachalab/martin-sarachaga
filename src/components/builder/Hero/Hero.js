@@ -1,10 +1,42 @@
+'use client'
+import { useRef, useEffect } from 'react';
+import { useAppContext } from '../../../app/context/AppContext';
+import { gsap } from 'gsap';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
 import styles from "./Hero.module.scss"; 
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero(){
+  const refHero = useRef(null);
+  const { setShowNavBar } = useAppContext(); 
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {        
+      ScrollTrigger.create({
+        trigger: refHero.current,
+        start: "30% top",
+        end: "top bottom",
+        onEnter: () => {
+          setShowNavBar(true);
+        },
+        onEnterBack: () => {
+          setShowNavBar(false);
+        },
+      });    
+    }, refHero);
+    return () => ctx.revert();
+  }, [refHero]);
+
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={refHero}>
+
+      <div className={styles.brand}>
+        <img src="/assets/images/sarachaga-brand.svg" alt="Logo" />
+        <p>MARTÍN SARÁCHAGA SUBASTAS</p>
+      </div>
+
       <div className={styles.wrapper} style={{backgroundImage: `url(https://www.galeriasur.uy/wp-content/uploads/2023/07/Julio-Le-Parc-Modulacion-734-oleo-sobre-tela-80-x-80-cm-Galeria-Sur-scaled.jpg)`}}>
 
         <div className={styles.info}>
