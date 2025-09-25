@@ -1,9 +1,12 @@
 @use "../../../styles/system";
 
-.item{
-    margin-bottom: calc(30px + (130 - 30) * ((100vw - 1200px) / (3840 - 1200))); 
+.item{    
     text-decoration: none;
-    height: fit-content;
+    height: fit-content;   
+    margin-bottom: calc(30px + (130 - 30) * ((100vw - 1200px) / (3840 - 1200)));  
+    @media screen and (max-width: 1024px){
+        margin-bottom: calc(15px + (40 - 15) * ((100vw - 300px) / (1024 - 300)));
+    }
     &:nth-last-child(-n+3){
         margin-bottom: 0;
     }
@@ -11,16 +14,28 @@
         width: 100%;
         max-height: calc(450px + (1450 - 450) * ((100vw - 1200px) / (3840 - 1200)));
         overflow: hidden;
-        margin-bottom: calc(5px + (10 - 5) * ((100vw - 1200px) / (3840 - 1200))); 
+        margin-bottom: calc(6px + (14 - 6) * ((100vw - 1200px) / (3840 - 1200))); 
+        @media screen and (max-width: 1024px){
+            max-height: calc(250px + (860 - 250) * ((100vw - 300px) / (1024 - 300)));
+            margin-bottom: calc(4px + (8 - 4) * ((100vw - 300px) / (1024 - 300)));
+        }
         img{
             display: flex;
             width: 100%;
             height: auto;
         }
+        .img_void{
+            background-color: rgb(231, 231, 231);
+            height: calc(366px + (1194 - 366) * ((100vw - 1200px) / (3840 - 1200)));
+            @media screen and (max-width: 1024px){
+                height: calc(165px + (585 - 165) * ((100vw - 300px) / (1024 - 300)));
+            }
+        }
     }    
     p{
         @include system.font-level-6;
         font-weight: 600;
+        line-height: 110%;
         color: system.$black;
     }
 }

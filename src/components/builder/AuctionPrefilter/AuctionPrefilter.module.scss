@@ -1,28 +1,84 @@
 @use "../../../styles/system";
 
-.wrapper{
+.categories_wrapper{
   position: relative;
   @include system.container-width-1;
   display: flex;
   flex-direction: column;
-  margin-bottom: calc(72px + (216 - 72) * ((100vw - 1200px) / (3840 - 1200))); 
-  .heading{
-    @include system.font-level-6;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: system.$black;
-    margin-bottom: calc(20px + (60 - 20) * ((100vw - 1200px) / (3840 - 1200))); 
-  }
+  margin-bottom: calc(72px + (216 - 72) * ((100vw - 1200px) / (3840 - 1200)));   
   .link{
+    position: relative;
     @include system.font-level-1;
     line-height: 128%;
     font-weight: 900; 
     text-decoration: none;
     color: system.$black;    
-    border-top: solid system.$line system.$black;
-    text-align: left;
+    border-top: solid system.$line transparent;
+    text-align: left;  
+    z-index: 0;       
+    @media screen and (max-width: 1024px){
+      @include system.font-level-3;
+      line-height: 142%;
+      border-top: solid system.$line-mobile transparent;
+    }
+    &:last-of-type{
+      border-bottom: solid system.$line transparent; 
+      @media screen and (max-width: 1024px){
+        border-bottom: solid system.$line-mobile transparent;
+      }
+    } 
     &.cta{
       border-bottom: solid system.$line system.$black;
+      @media screen and (max-width: 1024px){
+        border-bottom: solid system.$line-mobile system.$black;
+      }
     }
   }
-} 
+  .lines{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    .line{
+      @include system.font-level-1;
+      line-height: 128%;
+      font-weight: 900; 
+      color: #fff;
+      border-top: solid system.$line system.$black;           
+      @media screen and (max-width: 1024px){
+        @include system.font-level-3;
+        line-height: 142%;
+        border-top: solid system.$line-mobile system.$black;
+      }
+      &:last-of-type{
+        border-bottom: solid system.$line system.$black; 
+        @media screen and (max-width: 1024px){
+          border-bottom: solid system.$line-mobile system.$black;
+        }
+      }   
+    }
+  }
+}  
+
+.images{
+  position: relative;
+  .image_wrapper{
+    position: absolute;
+    height: calc(260px + (800 - 260) * ((100vw - 1200px) / (3840 - 1200))); 
+    width: calc(260px + (800 - 260) * ((100vw - 1200px) / (3840 - 1200))); 
+    opacity: 0;
+    z-index: 1;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+    overflow: hidden;
+    border-radius: 50%;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;      
+    }
+  }  
+}

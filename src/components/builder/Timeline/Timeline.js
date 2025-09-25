@@ -6,7 +6,7 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import styles from "./Timeline.module.scss"; 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Timeline({ data }){
+export default function Timeline({ subtitle, years }){
   const windowSize = useWindowSize();
   const container = useRef(null);
   const colRight = useRef(null);
@@ -14,11 +14,14 @@ export default function Timeline({ data }){
   const [currentYear, setCurrentYear] = useState(null);
   const [previousYear, setPreviousYear] = useState(null); 
 
+console.log("subtitle: ", subtitle);
+console.log("years: ", years);
+
 
   useEffect(() => {
     if (!colRight.current) return;
     const resizeObserver = new ResizeObserver(() => {
-      setColRightHeight(colRight.current.offsetHeight);
+      colRight?.current?.offsetHeight && setColRightHeight(colRight.current.offsetHeight);
     });
     resizeObserver.observe(colRight.current);            
     return () => resizeObserver.disconnect();        
@@ -45,15 +48,16 @@ export default function Timeline({ data }){
   
   useEffect(() => {
     let ctx = gsap.context(() => {
-      data?.years.forEach((year) => {        
-        if (year.photo) {
+      years?.forEach((year) => {        
+        if (year?.photo) {
           ScrollTrigger.create({
             trigger: `#date_${year.date}`,
             start: "top 80%",
             end: "top 80%",
             onEnter: () => {
               setPreviousYear(currentYear); 
-              setCurrentYear(year.date);
+              
+              year?.date && setCurrentYear(year?.date);
             },
             onEnterBack: () => {
               setCurrentYear(previousYear); 
@@ -70,29 +74,38 @@ export default function Timeline({ data }){
     <div className={styles.wrapper} ref={container}>
 
       <div className={styles.col_left}>
-        <h3 className={styles.subtitle}>{data?.subtitle}</h3>
-        <div className={styles.image_wrapper}>
-          {data?.years.map((year, i) => {    
-            return (            
-                year.photo && <img src={year.photo.url} alt={year.photo.alt} key={i} className={currentYear === year.date ? `${styles.image} ${styles.active}` : `${styles.image}`} />          
-            );
+        {subtitle && 
+          <h3 className={styles.subtitle}>{subtitle}</h3> 
+        }
+
+        {years && 
+          <div className={styles.image_wrapper}>
+            {years?.map((year, i) => {    
+              return (            
+                year?.photo && <img src={year.photo} alt={year?.alt} key={i} className={currentYear === year?.date ? `${styles.image} ${styles.active}` : `${styles.image}`} />          
+              );
+            })}
+          </div>
+        }
+      </div>
+      {years &&
+        <div className={styles.col_right} ref={colRight}>
+          {years?.map((year, i) => {    
+              return (            
+                <div className={styles.year} key={i} id={`date_${year.date}`}>
+                  {year?.date &&
+                    <>
+                      <div className={styles.date}>
+                        <p>{year.date}</p>
+                      </div> 
+                    {year?.description && <p className={styles.description}>{year?.description}</p> }
+                    </>
+                  }
+                </div>         
+              );
           })}
         </div>
-      </div>
-
-      <div className={styles.col_right} ref={colRight}>
-        {data?.years.map((year, i) => {    
-            return (            
-              <div className={styles.year} key={i} id={`date_${year.date}`}>
-                <div className={styles.date}>
-                  <p>{year.date}</p>
-                </div> 
-                <p className={styles.description}>{year.description}</p>
-              </div>         
-            );
-        })}
-      </div>
-
+      }
     </div>
   )
 }

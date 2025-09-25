@@ -9,6 +9,15 @@
     calc(25px + (45 - 25) * ((100vw - 1200px) / (3840 - 1200)))
     calc(20px + (40 - 20) * ((100vw - 1200px) / (3840 - 1200)))
     ;
+    @media screen and (max-width: 1024px){
+        margin-top: calc(43px + (143 - 43) * ((100vw - 300px) / (1024 - 300)));
+        padding:
+        calc(42px + (136 - 42) * ((100vw - 300px) / (1024 - 300)))
+        calc(12px + (34 - 12) * ((100vw - 300px) / (1024 - 300)))
+        calc(40px + (115 - 40) * ((100vw - 300px) / (1024 - 300)))
+        calc(12px + (34 - 12) * ((100vw - 300px) / (1024 - 300)))
+        ; 
+    }
     .wrapper{
         width: 100%;        
         display: grid;
@@ -18,6 +27,10 @@
         calc(555px + (1805 - 555) * ((100vw - 1200px) / (3840 - 1200)))
         ;
         color: system.$white;
+        @media screen and (max-width: 1024px){
+            grid-template-areas: 'col-left' 'col-right';
+            grid-template-columns: 100% 100%;
+        }
         p, a{
             @include system.font-level-6;
             font-weight: 800;
@@ -33,6 +46,13 @@
                 background-size: calc(110px + (345 - 110) * ((100vw - 1200px) / (3840 - 1200))) auto;
                 height: calc(80px + (245 - 80) * ((100vw - 1200px) / (3840 - 1200)));
                 padding-left: calc(130px + (385 - 130) * ((100vw - 1200px) / (3840 - 1200)));
+                @media screen and (max-width: 1024px){
+                    //background-color: red;
+                    background-size: calc(80px + (195 - 80) * ((100vw - 300px) / (1024 - 300))) auto;
+                    height: calc(58px + (140 - 58) * ((100vw - 300px) / (1024 - 300)));
+                    padding-left: calc(95px + (230 - 95) * ((100vw - 300px) / (1024 - 300)));
+                    margin-bottom: calc(18px + (48 - 18) * ((100vw - 300px) / (1024 - 300))); 
+                }
             }            
         }
         .col_right{
@@ -44,23 +64,45 @@
             calc(145px + (510 - 145) * ((100vw - 1200px) / (3840 - 1200)))
             calc(200px + (595 - 200) * ((100vw - 1200px) / (3840 - 1200)))
             ;
+            @media screen and (max-width: 1024px){
+                grid-template-areas: 'whatsapp' 'networks' 'adress';
+                grid-template-columns: 100% 100% 100%;
+                padding-left: calc(95px + (230 - 95) * ((100vw - 300px) / (1024 - 300)));
+            }
             .whatsapp{
                 grid-area: whatsapp;
+                @media screen and (max-width: 1024px){
+                    margin-bottom: calc(18px + (48 - 18) * ((100vw - 300px) / (1024 - 300))); 
+                }
                 a{
                     display: block;
                     margin-bottom: calc(17.5px + (56 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
+                    @media screen and (max-width: 1024px){
+                        margin-bottom: calc(10px + (20 - 10) * ((100vw - 300px) / (1024 - 300))); 
+                    }
                 }
             }
             .social_networks{
                 grid-area: networks;
                 display: flex;
                 flex-direction: column;
+                @media screen and (max-width: 1024px){
+                    margin-bottom: calc(18px + (48 - 18) * ((100vw - 300px) / (1024 - 300)));                    
+                }
+                a{                    
+                    @media screen and (max-width: 1024px){
+                        line-height: 170%;                    
+                    }
+                }
             }
             .adress{
                 grid-area: adress;
                 a{
                     display: block;
                     margin-bottom: calc(17.5px + (56 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
+                    @media screen and (max-width: 1024px){
+                        margin-bottom: calc(10px + (20 - 10) * ((100vw - 300px) / (1024 - 300))); 
+                    }
                 }
             }
         }

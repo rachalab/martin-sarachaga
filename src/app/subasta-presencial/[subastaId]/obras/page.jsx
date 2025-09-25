@@ -1,5 +1,5 @@
 import apiGetServer from "@/lib/apiGetServer";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import MainWrapper from "../../../../components/structure/MainWrapper/MainWrapper";
 import Heading from "../../../../components/structure/Heading/Heading";
 import AuctionPieces from "@/src/components/structure/AuctionPieces/AuctionPieces";
@@ -14,11 +14,11 @@ export async function generateMetadata({ params, searchParams }) {
   });
 
   //Si no hay datos redireccionamos
-  if (!data?.subasta) return redirect(`/404`);
+  if (!data?.subasta) return notFound();
 
   return {
-    title: `Subasta Nro ${data.subasta.nro}`,
-    description: data.subasta.description,  
+    title: `Subasta Nro ${data?.subasta?.nro}`,
+    description: data?.subasta?.description,  
   }
 }
 
@@ -32,7 +32,7 @@ export default async function Page({ params }) {
 
 
   //Si no hay datos redireccionamos
-  if (!data?.subasta) return redirect(`/404`);
+  if (!data?.subasta) return notFound();
 
 
   return (

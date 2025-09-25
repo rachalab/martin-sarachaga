@@ -1,6 +1,7 @@
 'use client'
 import { useWindowSize } from "@uidotdev/usehooks";
 import CustomScrollbar from '../../../customScrollbar/CustomScrollbar';
+import styles from "./MainWrapper.module.scss"; 
 
 export default function MainWrapper({ children }) {
 
@@ -9,6 +10,6 @@ export default function MainWrapper({ children }) {
     if(size.width >= 1025) {
         return(<CustomScrollbar>{children}</CustomScrollbar>);
     } else {
-        return (<main>{children}</main>);
+        return (<main className={styles.main_container}>{children}</main>);
     }
 }

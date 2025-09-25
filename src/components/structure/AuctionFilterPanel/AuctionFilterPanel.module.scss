@@ -11,7 +11,7 @@
         z-index: 2;
         top: 0;
         bottom: 0;
-        right: 0;
+        right: -100vw;
         width: calc(320px + (1000 - 320) * ((100vw - 1200px) / (3840 - 1200)));
         background-color: system.$white;
         overflow-y: scroll;
@@ -20,35 +20,65 @@
         calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)))
         ;
         scrollbar-width: thin;
+        animation-name: slicePanelIn;
+        animation-duration: 0.8s;  
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards; 
+        @media screen and (max-width: 1024px){
+            width: calc(240px + (600 - 240) * ((100vw - 300px) / (1024 - 300))); 
+            padding:
+            calc(20px + (60 - 20) * ((100vw - 300px) / (1024 - 300)))
+            calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300)))
+            ;
+            animation-duration: 0.3s;
+        }
         .header{
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: calc(30px + (85 - 30) * ((100vw - 1200px) / (3840 - 1200)));
+            @media screen and (max-width: 1024px){
+                margin-bottom: calc(22px + (65 - 22) * ((100vw - 300px) / (1024 - 300)));
+            }
             h4{
                 @include system.font-level-4;
                 font-weight: 800;
                 color: system.$red;
+                @media screen and (max-width: 1024px){
+                    padding-top: calc(4px + (8 - 4) * ((100vw - 300px) / (1024 - 300)));
+                }
             }
             .close_btn{
                 width: calc(28px + (88 - 28) * ((100vw - 1200px) / (3840 - 1200)));
-                height: calc(28px + (88 - 28) * ((100vw - 1200px) / (3840 - 1200)));
-                //background-color: red;
+                height: calc(28px + (88 - 28) * ((100vw - 1200px) / (3840 - 1200)));                
                 background-image: url('../../../../public/assets/images/close-icon-black.svg');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: 100% auto;
+                @media screen and (max-width: 1024px){
+                    width: calc(22px + (62 - 22) * ((100vw - 300px) / (1024 - 300)));
+                    height: calc(22px + (62 - 22) * ((100vw - 300px) / (1024 - 300)));
+                }
             }
         }
         .filter_group{
             display: flex;
             flex-direction: column;
             margin-bottom: calc(25px + (75 - 25) * ((100vw - 1200px) / (3840 - 1200)));
+            &:last-of-type{
+                margin-bottom: 0;
+            }
+            @media screen and (max-width: 1024px){
+                margin-bottom: calc(22px + (65 - 22) * ((100vw - 300px) / (1024 - 300)));
+            }
             .title{
                 @include system.font-level-6;
                 font-weight: 800;
                 color: system.$red;
                 margin-bottom: calc(6px + (12 - 6) * ((100vw - 1200px) / (3840 - 1200)));
+                @media screen and (max-width: 1024px){
+                    margin-bottom: calc(5px + (10 - 5) * ((100vw - 300px) / (1024 - 300)));
+                }
             }
             .btn_filter{               
                 position: relative;
@@ -58,6 +88,12 @@
                 text-align: left;
                 padding: calc(6px + (12 - 6) * ((100vw - 1200px) / (3840 - 1200)));
                 border-bottom: solid system.$line system.$black;
+                @media screen and (max-width: 1024px){
+                    padding:
+                    calc(6px + (12 - 6) * ((100vw - 300px) / (1024 - 300)))
+                    calc(3px + (6 - 3) * ((100vw - 300px) / (1024 - 300)))
+                    ;
+                }
                 &:first-of-type{
                 border-top: solid system.$line system.$black;
                 }
@@ -83,7 +119,7 @@
                         transition: all .3s ease-out;                    
                     }
                 }
-                @media screen and (min-width: 1024px){   
+                @media screen and (min-width: 1025px){   
                     &:hover{
                         span{
                             color: system.$white;
@@ -97,15 +133,76 @@
                 }
             }
         }
-    }
+    }    
 
     .overlay_close{
         position: absolute;
         z-index: 1;
-        background-color: rgba(206, 206, 206, .5);
+        background-color: rgba(185, 185, 185, 0.5);
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
+        opacity: 0;
+        animation-name: fadeIn;
+        animation-duration: 0.4s;  
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards; 
+    }
+
+    &.closing{
+        .panel{
+            animation-name: slicePanelOut;
+            animation-duration: 1.2s;  
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards; 
+            @media screen and (max-width: 1024px){
+                animation-duration: 0.3s;  
+            }
+        }
+        .overlay_close{
+            opacity: 1;
+            animation-name: fadeOut;
+            animation-delay: 0.2s;
+            animation-duration: 0.4s;  
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards; 
+        }
+    }
+}
+
+@keyframes slicePanelIn {
+    0% {
+        right: -100vw;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes slicePanelOut {
+    0% {
+        right: 0;
+    }
+    100% {
+        right: -100vw;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
