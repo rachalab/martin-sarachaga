@@ -5,13 +5,19 @@
   @include system.container-width-1;
   display: flex;
   flex-direction: column;
-  margin-bottom: calc(72px + (216 - 72) * ((100vw - 1200px) / (3840 - 1200))); 
+  margin-bottom: calc(72px + (216 - 72) * ((100vw - 1200px) / (3840 - 1200)));
+  @media screen and (max-width: 1024px){
+    margin-bottom: calc(22px + (82 - 22) * ((100vw - 300px) / (1024 - 300)));
+  } 
   .heading{
     @include system.font-level-6;
     font-weight: 800;
     text-transform: uppercase;
     color: system.$black;
     margin-bottom: calc(20px + (60 - 20) * ((100vw - 1200px) / (3840 - 1200))); 
+    @media screen and (max-width: 1024px){
+      margin-bottom: calc(6px + (24 - 6) * ((100vw - 300px) / (1024 - 300)));
+    } 
   }
   .link{
     @include system.font-level-1;
@@ -21,8 +27,16 @@
     color: system.$black;    
     border-top: solid system.$line system.$black;
     text-align: left;
+    @media screen and (max-width: 1024px){
+      @include system.font-level-3;
+      line-height: 142%;
+      border-top: solid system.$line-mobile system.$black;
+    }
     &:last-of-type{
       border-bottom: solid system.$line system.$black;
+      @media screen and (max-width: 1024px){
+        border-bottom: solid system.$line-mobile system.$black;
+      }
     }
   }
 } 

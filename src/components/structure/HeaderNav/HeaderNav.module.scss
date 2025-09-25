@@ -1,9 +1,8 @@
 @use "../../../styles/system";
 
-.header{    
+.header{      
     .navbar{
-        position: fixed;
-        top: 0;
+        position: fixed;        
         left: 0;
         right: 0;
         z-index: 900;        
@@ -16,56 +15,46 @@
         calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)))
         ;    
         background-color: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);  
+        backdrop-filter: blur(10px);          
+        @media screen and (max-width: 1024px){
+            transform: translateY(-80px);
+            padding: 
+            0
+            calc(11px + (35 - 11) * ((100vw - 300px) / (1024 - 300)))
+            ; 
+            height: calc(40px + (101 - 40) * ((100vw - 300px) / (1024 - 300)));
+            backdrop-filter: blur(8px); 
+        }
         
         .brand{ 
             position: absolute;
             top: calc(22px + (75.4 - 22) * ((100vw - 1200px) / (3840 - 1200)));  
-            left: calc(20px + (39 - 20) * ((100vw - 1200px) / (3840 - 1200)));  
+            left: calc(30px + (76 - 30) * ((100vw - 1200px) / (3840 - 1200))); 
             display: flex;    
             align-items: flex-start;              
-            line-height: 100%; 
-            color: system.$black;
-            text-decoration: none;    
-            @include system.font-level-6;   
-            font-weight: 800;
-            a{
+            @media screen and (max-width: 1024px){
+                top: calc(14px + (36 - 14) * ((100vw - 300px) / (1024 - 300)));
+                left: calc(10px + (34 - 10) * ((100vw - 300px) / (1024 - 300))); 
+                justify-content: space-between;
+                width: calc(286px + (976 - 286) * ((100vw - 300px) / (1024 - 300)));
+            }
+            .logotype{
+                @include system.font-level-6;   
+                font-weight: 800;
+                line-height: 100%; 
                 color: system.$black;
-                text-decoration: none;
-                text-transform: uppercase;
-                img{
-                    display: flex;
-                    width: calc(110px + (345 - 110) * ((100vw - 1200px) / (3840 - 1200)));
-                    height: auto;  
-                    @media screen and (max-width: 1024px){   
-                        //width: calc(110px + (320 - 110) * ((100vw - 300px) / (1200 - 300)));    
-                    }             
-                }                
+                text-decoration: none;    
+                text-transform: uppercase;             
             }                
         }
 
-        &.no_iso{
-            .brand{                                  
-                left: calc(30px + (76 - 30) * ((100vw - 1200px) / (3840 - 1200)));  
-                a{
-                    img{
-                        display: none;             
-                    }                       
-                }                 
-            }
-        }
-
-        &.active{
+        &.is_menu{
             background-color: transparent;
             z-index: 1100;
-           // transition: background-color .01s ease-in-out;
            .brand{                                 
-                left: calc(30px + (76 - 30) * ((100vw - 1200px) / (3840 - 1200)));  
-                a{
-                    color: system.$white;
-                    img{
-                        display: none;             
-                    }                       
+                .logotype{
+                    color: system.$white;      
+                    cursor: default;                
                 }                 
             }
         }
@@ -75,30 +64,55 @@
             margin-left: auto;   
             height: calc(20px + (60 - 20) * ((100vw - 1200px) / (3840 - 1200)));
             width: calc(48px + (188 - 48) * ((100vw - 1200px) / (3840 - 1200)));
+            @media screen and (max-width: 1024px){
+                height: calc(15px + (30 - 15) * ((100vw - 300px) / (1024 - 300)));
+                width: calc(32px + (95 - 32) * ((100vw - 300px) / (1024 - 300)));                
+            }
             span{
                 display: block;
                 height: calc(4px + (9 - 4) * ((100vw - 1200px) / (3840 - 1200)));
                 width: calc(48px + (188 - 48) * ((100vw - 1200px) / (3840 - 1200)));
                 background-color: system.$black;
+                @media screen and (max-width: 1024px){
+                    height: calc(2.5px + (6 - 2.5) * ((100vw - 300px) / (1024 - 300)));
+                    width: calc(32px + (95 - 32) * ((100vw - 300px) / (1024 - 300)));
+                }
                 &:nth-child(1){
                     margin-bottom: calc(4px + (9 - 4) * ((100vw - 1200px) / (3840 - 1200)));
+                    @media screen and (max-width: 1024px){
+                        margin-bottom: calc(3px + (7 - 3) * ((100vw - 300px) / (1024 - 300)));
+                    }
                 }
                 &:nth-child(2){
                     margin-top: calc(4px + (9 - 4) * ((100vw - 1200px) / (3840 - 1200)));
+                    @media screen and (max-width: 1024px){
+                        margin-top: calc(3px + (7 - 3) * ((100vw - 300px) / (1024 - 300)));
+                    }
                 }
             }
             &.close{
                 height: calc(40px + (146 - 40) * ((100vw - 1200px) / (3840 - 1200)));
+                @media screen and (max-width: 1024px){
+                    height: calc(32px + (95 - 32) * ((100vw - 300px) / (1024 - 300)));
+                }
                 span{
                     position: absolute;
-                    background-color: system.$white;
+                    background-color: system.$white;                    
                     &:nth-child(1){                        
                         transform: rotate(45deg);
                         top: calc(18px + (68 - 18) * ((100vw - 1200px) / (3840 - 1200)));
+                        margin-bottom: 0;
+                        @media screen and (max-width: 1024px){
+                            top: calc(15px + (46 - 15) * ((100vw - 300px) / (1024 - 300)));
+                        }
                     }
                     &:nth-child(2){
                         transform: rotate(-45deg);           
-                        top: calc(14px + (60 - 14) * ((100vw - 1200px) / (3840 - 1200)));          
+                        top: calc(18px + (68 - 18) * ((100vw - 1200px) / (3840 - 1200)));
+                        margin-top: 0;
+                        @media screen and (max-width: 1024px){
+                            top: calc(15px + (46 - 15) * ((100vw - 300px) / (1024 - 300)));
+                        }          
                     }
                 }
             }
@@ -115,20 +129,12 @@
         display: flex;
         justify-content: center;
         background-color: system.$red;
-        @media screen and (max-width: 1024px){ 
-            /* padding: 
-            calc(80px + (240 - 80) * ((100vw - 300px) / (1200 - 300)))
-            calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200))) 
-            0
-            calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200)))
-            ;   */ 
-        }
 
         .items_wrapper{
             display: flex;
             flex-direction: column;  
             align-items: center; 
-            justify-content: center;       
+            justify-content: center;      
             .item{ 
                 font-weight: 900;
                 line-height: 100%;
@@ -144,16 +150,34 @@
                 @media screen and (max-aspect-ratio: 20/9){
                     @include system.font-level-1;                      
                 }  
-                @media screen and (max-width: 1024px){ 
-                    @include system.font-level-1;   
+                @media screen and (max-width: 1024px){                                          
+                    font-size: calc(23px + (83 - 23) * ((100vw - 300px) / (1024 - 300)));  
+                    line-height: 120%;          
                 }                
-                @media screen and (min-width: 1024px){
+                @media screen and (min-width: 1025px){
                     &:hover{   
                         color: system.$red;
                         -webkit-text-stroke: calc(2px + (6 - 2) * ((100vw - 1200px) / (3840 - 1200))) system.$white;                  
                     }                    
                 }
             }
+        }
+    }
+    &.in_home{
+        .navbar{
+            transform: translateY(-150px);
+            transition: transform .3s ease-out;
+        }
+        &.active{
+            .navbar{
+                transform: translateY(0px);
+                transition: transform .3s ease-out;
+            }
+        } 
+    }    
+    &.inner_pages{
+        .navbar{
+            transform: translateY(0px);
         }
     }
 }
