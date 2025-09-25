@@ -6,6 +6,8 @@ import styles from "./AuctionFilterPanel.module.scss";
 
 export default function AuctionFilterPanel({ data }) {
   const [isBrowser, setIsBrowser] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+
   const {
         dataAuctionPieces,
         currentAuctionNight,
@@ -14,7 +16,6 @@ export default function AuctionFilterPanel({ data }) {
         setCurrentAuctionCategory,
         currentAuctionAuthor,
         setCurrentAuctionAuthor,
-        AuctionFilterPanelStatus,
         setAuctionFilterPanelStatus
     } = useAppContext(); 
 
@@ -22,13 +23,20 @@ export default function AuctionFilterPanel({ data }) {
     setIsBrowser(true);  
   }, []);
 
+  function closeFilters() {
+    setIsClosing(true);
+    setTimeout(() => {
+      setAuctionFilterPanelStatus(false);
+    }, 800);
+  }
+
   const panelContent = (
-    <div className={styles.wrapper}>
+    <div className={!isClosing ? `${styles.wrapper}` : `${styles.wrapper} ${styles.closing}`}>
       <div className={styles.panel}>
 
         <div className={styles.header}>
           <h4>FILTROS</h4>
-          <button onClick={ () => setAuctionFilterPanelStatus(false) } className={styles.close_btn} />
+          <button onClick={ () => closeFilters() } className={styles.close_btn} />
         </div>
 
         <div className={styles.filter_group}>
@@ -72,11 +80,11 @@ export default function AuctionFilterPanel({ data }) {
 
       </div>
 
-      <button onClick={ () => setAuctionFilterPanelStatus(false) } className={styles.overlay_close} />
+      <button onClick={ () => closeFilters() } className={styles.overlay_close} />
     </div>
   );
 
-  if (isBrowser && AuctionFilterPanelStatus) {
+  if (isBrowser) {
     return ReactDOM.createPortal(
       panelContent,
       document.getElementById("modal-root")

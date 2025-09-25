@@ -5,29 +5,33 @@ import Footer from "../../../../../components/structure/Footer/Footer";
 
 export async function generateMetadata({ params }) {
 
-  const { obraId } = await params;
+  const { subastaId, obraId } = await params;
 
   // acá params ya está disponible
   const batchId = obraId.split("-")[0];
 
   const data = await apiGetServer({
     url: `batch/${batchId}`,
+    slug: obraId,
+    id: subastaId
   });
 
   return {
-    title: `Lote ${data.lote.titulo}`,
-    description: data.lote.descripcion,
+    title: `Lote ${data?.lote?.titulo}`,
+    description: data?.lote?.descripcion,
   };
 }
 
 export default async function Page({ params }) {
-  const { obraId } = await params;
+  const { subastaId, obraId } = await params;
 
   // acá params ya está disponible
   const batchId = obraId.split("-")[0];
 
   const data = await apiGetServer({
     url: `batch/${batchId}`,
+    slug: obraId,
+    id: subastaId     
   });
 
   return (   

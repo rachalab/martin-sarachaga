@@ -1,10 +1,9 @@
 import MainWrapper from "../../../components/structure/MainWrapper/MainWrapper";
 import Heading from "../../../components/structure/Heading/Heading";
-import LinksList from "../../../components/builder/AuctionPrefilter/AuctionPrefilter";
 import AuctionPrefilter from "../../../components/builder/AuctionPrefilter/AuctionPrefilter";
 import Footer from "../../../components/structure/Footer/Footer";
 import apiGetServer from "@/lib/apiGetServer";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import styles from "./page.module.scss"
 
 export async function generateMetadata({ params }) {
@@ -16,11 +15,11 @@ export async function generateMetadata({ params }) {
   });
 
   //Si no hay dotos redireccionamos
-  if (!data?.categorias) return redirect(`/404`);
+  if (!data?.categorias) return notFound();
 
   return {
-    title: `Subasta Nro ${data.subasta.nro}`,
-    description: data.subasta.description,  
+    title: `Subasta Nro ${data?.subasta?.nro}`,
+    description: data?.subasta?.description,  
   };
 }
 
@@ -33,7 +32,7 @@ export default async function Page({ params }) {
   });
 
   //Si no hay datos redireccionamos
-  if (!data?.categorias) return redirect(`/404`);
+  if (!data?.categorias) return notFound();
 
   
   return (

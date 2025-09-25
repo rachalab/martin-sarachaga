@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Hero from '@/src/components/builder/Hero/Hero';
+import MainWrapper from '@/src/components/structure/MainWrapper/MainWrapper';
 import Head from 'next/head';
 import { gsap } from 'gsap';
 import styles from './page.module.scss';
@@ -156,6 +158,9 @@ const subasta = () => {
           />
         ))}
       </Head>
+     
+      <MainWrapper>
+         <Hero/>
     <div className={styles.container}>
       {/* Círculo que sigue al cursor */}
       <div
@@ -194,6 +199,7 @@ const subasta = () => {
         )}
       </div>
     </div>
+     </MainWrapper>
     </>
   );
 };

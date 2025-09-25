@@ -1,5 +1,5 @@
 import apiGetServer from "@/lib/apiGetServer";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export default async function Page() {
   const data = await apiGetServer({
@@ -7,7 +7,7 @@ export default async function Page() {
   });
 
   if (!data?.subasta?.id) {
-    redirect(`/404`);
+    notFound();
   }
 
   redirect(`/subasta-presencial/${data.subasta.id}`);

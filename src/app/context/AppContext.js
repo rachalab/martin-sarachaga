@@ -12,12 +12,16 @@ export default function AppProvider({ children }) {
   const [currentAuctionNight, setCurrentAuctionNight] = useState('all');
   const [currentAuctionCategory, setCurrentAuctionCategory] = useState('all');
   const [currentAuctionAuthor, setCurrentAuctionAuthor] = useState('all');
-  const [AuctionFilterPanelStatus, setAuctionFilterPanelStatus] = useState(false);
+  const [auctionFilterPanelStatus, setAuctionFilterPanelStatus] = useState(false);
+
+  const [ showNavBar, setShowNavBar] = useState(false);
  
 
   return (
     <AppContext.Provider
     value={{
+      showNavBar,
+      setShowNavBar,
       dataAuctionPieces,
       setDataAuctionPieces,
       currentAuctionNight,
@@ -26,7 +30,7 @@ export default function AppProvider({ children }) {
       setCurrentAuctionCategory,
       currentAuctionAuthor,
       setCurrentAuctionAuthor,
-      AuctionFilterPanelStatus,
+      auctionFilterPanelStatus,
       setAuctionFilterPanelStatus
     }}>{children}</AppContext.Provider>
   );

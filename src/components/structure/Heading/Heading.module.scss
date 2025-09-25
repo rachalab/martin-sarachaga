@@ -8,4 +8,9 @@
     text-transform: uppercase;
     padding-top: calc(65px + (210 - 65) * ((100vw - 1200px) / (3840 - 1200)));
     margin-bottom: calc(25px + (105 - 25) * ((100vw - 1200px) / (3840 - 1200)));
+    @media screen and (max-width: 1024px){
+        line-height: 90%;
+        padding-top: calc(52px + (145 - 52) * ((100vw - 300px) / (1024 - 300)));
+        margin-bottom: calc(25px + (75 - 25) * ((100vw - 300px) / (1024 - 300)));
+    }
 }

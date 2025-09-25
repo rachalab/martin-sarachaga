@@ -8,6 +8,7 @@ import "./builder-registry";
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
+// Importar BuilderComponent solo en cliente
 export function RenderBuilderContent({ content, model }) {
   // Call the useIsPreviewing hook to determine if
   // the page is being previewed in Builder
