@@ -3,16 +3,16 @@
 .container{
     position: relative;    
     height: 100vh;
-    margin-bottom: calc(72px + (216 - 72) * ((100vw - 1200px) / (3840 - 1200))); 
+    margin-bottom: calc(72px + (222 - 72) * ((100vw - 1200px) / (3840 - 1200))); 
     @media screen and (max-width: 1024px){
         height: 100svh; 
-        margin-bottom: calc(22px + (82 - 22) * ((100vw - 300px) / (1024 - 300)));
+        margin-bottom: calc(22px + (78 - 22) * ((100vw - 300px) / (1024 - 300)));
     }  
     .brand{ 
         position: absolute;
         top: calc(22px + (75.4 - 22) * ((100vw - 1200px) / (3840 - 1200)));  
-        left: calc(20px + (39 - 20) * ((100vw - 1200px) / (3840 - 1200)));  
-        right: calc(31px + (76 - 31) * ((100vw - 1200px) / (3840 - 1200)));
+        left: calc(16px + (39 - 16) * ((100vw - 1200px) / (3840 - 1200)));  
+        right: calc(27px + (76 - 27) * ((100vw - 1200px) / (3840 - 1200)));
         display: flex;    
         align-items: flex-start;  
         justify-content: space-between;         
@@ -29,7 +29,7 @@
                 width: calc(80px + (195 - 80) * ((100vw - 300px) / (1024 - 300))); 
             }        
         }     
-        p{
+        h1{
             @include system.font-level-6;  
             line-height: 100%; 
             color: system.$black; 

@@ -9,32 +9,33 @@ export default function HeaderNav(){
   const pathname = usePathname();
   const router = useRouter();
   const [ menuState, setMenuState ] = useState(false);
-  const { showNavBar } = useAppContext(); 
+  const { showNavBar, setShowNavBar } = useAppContext(); 
 
   function changeMenuState() {
     !menuState ? setMenuState(true) : setMenuState(false);
   }
 
   function toHome() {  
+    pathname !== '/' && setShowNavBar(false);
     !menuState && router.push('/');   
   }
 
   const menuLinks = [
     { 
       title: 'subasta presencial', 
-      url: '/', 
+      url: '/subasta-presencial', 
     },
     { 
       title: 'subastas virtuales', 
-      url: '/', 
+      url: '/subastas-virtuales', 
     },
     { 
       title: 'Venta privada', 
-      url: '/', 
+      url: '/venta-privada', 
     },
     { 
       title: 'la casa', 
-      url: '/', 
+      url: '/la-casa', 
     },
   ]
 
@@ -46,20 +47,15 @@ export default function HeaderNav(){
       }>
 
       <div className={!menuState ? `${styles.navbar}` : `${styles.navbar} ${styles.is_menu}`}>
-
-        <h1 className={styles.brand}>
-          <button type="button" onClick={ () => toHome() } className={styles.logotype}>MARTÍN SARÁCHAGA SUBASTAS</button> 
-        </h1>       
-  
-        <button type="button" className={!menuState ? `${styles.menu_btn}` : `${styles.menu_btn} ${styles.close}`} onClick={ () => changeMenuState() }><span/><span/></button>        
-
+        <button type="button" onClick={ () => toHome() } className={styles.logotype}>MARTÍN SARÁCHAGA SUBASTAS</button>      
+        <button type="button" className={!menuState ? `${styles.menu_btn}` : `${styles.menu_btn} ${styles.close}`} onClick={ () => changeMenuState() }><span/><span/></button>       
       </div>      
       
       {menuState &&
       <nav className={styles.inner_menu}>        
         <div className={styles.items_wrapper}>
           {menuLinks.map((menuLink, key)=>
-            <NavLink key={key} href={menuLink.url} className={styles.item} activeClassName={styles.active}  onClick={ () => changeMenuState(false) }>{menuLink.title}</NavLink>
+            <NavLink key={key} href={menuLink.url} className={styles.item} onClick={ () => changeMenuState(false) }>{menuLink.title}</NavLink>
           )}
         </div>
       </nav>

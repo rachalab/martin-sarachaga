@@ -5,9 +5,9 @@
     display: grid;
     grid-template-areas: 'col-left col-right';
     grid-template-columns:
-    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)))
-    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)));
-    grid-gap: calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)));     
+    calc(559.5px + (1808 - 559.5) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(559.5px + (1808 - 559.5) * ((100vw - 1200px) / (3840 - 1200)));
+    grid-gap: calc(27px + (74 - 27) * ((100vw - 1200px) / (3840 - 1200)));     
     margin-bottom: calc(22px + (60 - 22) * ((100vw - 1200px) / (3840 - 1200)));
 
     .col_left{
