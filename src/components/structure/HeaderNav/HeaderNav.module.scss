@@ -12,10 +12,11 @@
         height: calc(58px + (190 - 58) * ((100vw - 1200px) / (3840 - 1200)));
         padding: 
         0
-        calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)))
+        calc(27px + (74 - 27) * ((100vw - 1200px) / (3840 - 1200)))
         ;    
         background-color: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);          
+        backdrop-filter: blur(10px);     
+        transform: translateY(-150px);     
         @media screen and (max-width: 1024px){
             transform: translateY(-80px);
             padding: 
@@ -24,39 +25,35 @@
             ; 
             height: calc(40px + (101 - 40) * ((100vw - 300px) / (1024 - 300)));
             backdrop-filter: blur(8px); 
-        }
-        
-        .brand{ 
+        }        
+ 
+        .logotype{
             position: absolute;
             top: calc(22px + (75.4 - 22) * ((100vw - 1200px) / (3840 - 1200)));  
-            left: calc(30px + (76 - 30) * ((100vw - 1200px) / (3840 - 1200))); 
+            left: calc(27px + (76 - 27) * ((100vw - 1200px) / (3840 - 1200))); 
             display: flex;    
-            align-items: flex-start;              
+            align-items: flex-start;  
+            @include system.font-level-6;   
+            font-weight: 800;
+            line-height: 100%; 
+            color: system.$black;
+            text-decoration: none;    
+            text-transform: uppercase;  
             @media screen and (max-width: 1024px){
                 top: calc(14px + (36 - 14) * ((100vw - 300px) / (1024 - 300)));
                 left: calc(10px + (34 - 10) * ((100vw - 300px) / (1024 - 300))); 
                 justify-content: space-between;
                 width: calc(286px + (976 - 286) * ((100vw - 300px) / (1024 - 300)));
-            }
-            .logotype{
-                @include system.font-level-6;   
-                font-weight: 800;
-                line-height: 100%; 
-                color: system.$black;
-                text-decoration: none;    
-                text-transform: uppercase;             
-            }                
-        }
+            }           
+        }               
 
         &.is_menu{
             background-color: transparent;
-            z-index: 1100;
-           .brand{                                 
-                .logotype{
-                    color: system.$white;      
-                    cursor: default;                
-                }                 
-            }
+            z-index: 1100;                                          
+            .logotype{
+                color: system.$white;      
+                cursor: default;                
+            }                 
         }
 
         .menu_btn{ 

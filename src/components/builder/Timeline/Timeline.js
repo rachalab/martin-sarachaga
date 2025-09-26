@@ -13,10 +13,7 @@ export default function Timeline({ subtitle, years }){
   const [colRightHeight, setColRightHeight] = useState(0);
   const [currentYear, setCurrentYear] = useState(null);
   const [previousYear, setPreviousYear] = useState(null); 
-
-console.log("subtitle: ", subtitle);
-console.log("years: ", years);
-
+  
 
   useEffect(() => {
     if (!colRight.current) return;

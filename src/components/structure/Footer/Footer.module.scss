@@ -2,15 +2,15 @@
 
 .footer{    
     background-color: system.$black;
-    margin-top: calc(110px + (328 - 110) * ((100vw - 1200px) / (3840 - 1200)));
+    margin-top: calc(36px + (118 - 36) * ((100vw - 1200px) / (3840 - 1200)));
     padding:
     calc(110px + (328 - 110) * ((100vw - 1200px) / (3840 - 1200)))
-    calc(30px + (70 - 30) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(25px + (70 - 25) * ((100vw - 1200px) / (3840 - 1200)))
     calc(25px + (45 - 25) * ((100vw - 1200px) / (3840 - 1200)))
-    calc(20px + (40 - 20) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(18px + (40 - 18) * ((100vw - 1200px) / (3840 - 1200)))
     ;
     @media screen and (max-width: 1024px){
-        margin-top: calc(43px + (143 - 43) * ((100vw - 300px) / (1024 - 300)));
+        margin-top: calc(21px + (65 - 21) * ((100vw - 300px) / (1024 - 300)));
         padding:
         calc(42px + (136 - 42) * ((100vw - 300px) / (1024 - 300)))
         calc(12px + (34 - 12) * ((100vw - 300px) / (1024 - 300)))
@@ -45,9 +45,8 @@
                 background-repeat: no-repeat;
                 background-size: calc(110px + (345 - 110) * ((100vw - 1200px) / (3840 - 1200))) auto;
                 height: calc(80px + (245 - 80) * ((100vw - 1200px) / (3840 - 1200)));
-                padding-left: calc(130px + (385 - 130) * ((100vw - 1200px) / (3840 - 1200)));
+                padding-left: calc(128px + (385 - 128) * ((100vw - 1200px) / (3840 - 1200)));
                 @media screen and (max-width: 1024px){
-                    //background-color: red;
                     background-size: calc(80px + (195 - 80) * ((100vw - 300px) / (1024 - 300))) auto;
                     height: calc(58px + (140 - 58) * ((100vw - 300px) / (1024 - 300)));
                     padding-left: calc(95px + (230 - 95) * ((100vw - 300px) / (1024 - 300)));
