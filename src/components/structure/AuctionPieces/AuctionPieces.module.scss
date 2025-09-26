@@ -34,7 +34,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: calc(20px + (56 - 20) * ((100vw - 1200px) / (3840 - 1200)));
-        margin-bottom: calc(55px + (185 - 55) * ((100vw - 1200px) / (3840 - 1200)));     
+        margin-bottom: calc(95px + (300 - 95) * ((100vw - 1200px) / (3840 - 1200)));     
         @media screen and (max-width: 1024px){
             grid-template-columns: repeat(2, 1fr);
             grid-gap: calc(10.5px + (34 - 10.5) * ((100vw - 300px) / (1024 - 300)));
@@ -50,7 +50,7 @@
 .floating_filters{
     position: fixed;       
     bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200))); 
-    right: calc(31px + (76 - 31) * ((100vw - 1200px) / (3840 - 1200)));
+    right: calc(27px + (76 - 27) * ((100vw - 1200px) / (3840 - 1200)));
     transition: all .2s ease-in-out;
     opacity: 0;
     visibility: hidden;
@@ -62,8 +62,5 @@
         visibility: visible;
         opacity: 1;        
         transition: all .2s ease-in-out;
-        @media screen and (max-width: 1024px){
-             //bottom: calc(15px + (34 - 15) * ((100vw - 300px) / (1024 - 300)));   
-        }
     }
 }
