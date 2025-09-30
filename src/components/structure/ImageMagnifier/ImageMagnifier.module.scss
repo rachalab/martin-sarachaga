@@ -1,0 +1,31 @@
+.image_container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+    .image {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.overlay {
+    background-color: #000;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: calc(587px + (1885 - 587) * ((100vw - 1200px) / (3840 - 1200))); 
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.overlay_width{
+    background-size: 200% auto;
+}
+
+.overlay_height{
+    background-size: auto 100%;
+}

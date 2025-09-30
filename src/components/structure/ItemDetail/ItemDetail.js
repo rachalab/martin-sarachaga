@@ -4,6 +4,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
+import ImageMagnifier from '../ImageMagnifier/ImageMagnifier';
 import styles from "./ItemDetail.module.scss"; 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,10 +47,11 @@ export default function ItemDetail({ dataPiece }){
 
       {windowSize.width >= 1025 &&
         <div className={styles.col_left} ref={colLeft}>
+          
           {dataPiece?.images.map((photo, i) => {   
             return(
               <div key={i} className={styles.img_wrapper}>
-                <img src={photo} alt={'Imagen pieza'} />  
+                <ImageMagnifier photo={photo} /> 
               </div>                                           
             );
           })} 

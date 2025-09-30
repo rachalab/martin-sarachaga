@@ -85,13 +85,15 @@ export default function AuctionPrefilter({ subastaId, links }){
   return (
     <>
       <div className={styles.images}>
-        {links?.map((link, i) => {               
-          return (
-            <div className={styles.image_wrapper} data-image={`id_${link.id}`} key={i}>
-              <PrefilterImagesChange images={link.images} />
-            </div>            
-          );
-        })}
+        {windowSize.width >= 1025 &&
+          links?.map((link, i) => {               
+            return (
+              <div className={styles.image_wrapper} data-image={`id_${link.id}`} key={i}>
+                <PrefilterImagesChange images={link.images} />
+              </div>            
+            );
+          })
+        }       
       </div>
 
       <section className={styles.categories_wrapper} ref={container}>      

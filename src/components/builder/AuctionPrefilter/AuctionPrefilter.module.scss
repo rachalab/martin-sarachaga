@@ -67,6 +67,9 @@
 
 .images{
   position: relative;
+  @media screen and (max-width: 1024px){
+    display: none;
+  }
   .image_wrapper{
     position: absolute;
     height: calc(260px + (800 - 260) * ((100vw - 1200px) / (3840 - 1200))); 
