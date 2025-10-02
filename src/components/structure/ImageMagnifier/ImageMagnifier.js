@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { use, useEffect, useState , useRef } from 'react';
 import ReactDOM from "react-dom";
 import { useWindowSize } from "@uidotdev/usehooks";
 import styles from './ImageMagnifier.module.scss';
@@ -8,6 +8,8 @@ const ImageMagnifier = ({ photo }) => {
     const imageContainerRef = useRef(null);
     const overlayRef = useRef(null);  
     const windowSize = useWindowSize();
+
+    const [overlayClass, setOverlayClass] = useState(styles.overlay_width);
 
     useEffect(() => {
         if (windowSize.width < 1025) return;
@@ -48,22 +50,42 @@ const ImageMagnifier = ({ photo }) => {
         };
     }, [windowSize.width]);
 
+    // Ajustar clase del overlay según las proporciones de la imagen
+    useEffect(() => {
+        if (photo?.width && photo?.height) {
+            const proportions = photo?.width / photo?.height;
+            //Si la imagen es más ancha que alta
+            if (proportions > 1) {
+                setOverlayClass(styles.overlay_height);
+            //Si la imagen es más alta que ancha
+            } else if (proportions < 1) {
+                setOverlayClass(styles.overlay_width);
+            //Si la imagen es cuadrada
+            } else {
+                setOverlayClass(styles.overlay_height);
+            }
+        }
+    }, [photo]);
 
     return (
         <>
-            {windowSize.width > 1024 && ReactDOM.createPortal(<div
-                ref={overlayRef}
-                className={`${styles.overlay} ${styles.overlay_width}`}
-                style={{ backgroundImage: `url(${photo})` }}
-            />,document.getElementById("modal-root"))}
+            {windowSize.width > 1024 && ReactDOM.createPortal(
+                <div
+                    ref={overlayRef}
+                    className={`${styles.overlay} ${overlayClass}`}
+                    style={{ backgroundImage: `url(${photo?.src})` }}
+                />
+            ,document.getElementById("modal-root"))}
 
-            <div ref={imageContainerRef} className={styles.image_container}>
-                <img
-                    src={photo}
-                    alt="Imagen"
-                    className={styles.image}
-                />      
-            </div>
+            {photo?.src && 
+                <div ref={imageContainerRef} className={styles.image_container}>
+                    <img 
+                        src={photo?.src}
+                        alt="Imagen"
+                        className={styles.image}
+                    />
+                </div>
+            }
         </>
     );
 };
