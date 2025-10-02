@@ -9,15 +9,15 @@ export default function AuctionFilterPanel({ data }) {
   const [isClosing, setIsClosing] = useState(false);
 
   const {
-        dataAuctionPieces,
-        currentAuctionNight,
-        setCurrentAuctionNight,
-        currentAuctionCategory,
-        setCurrentAuctionCategory,
-        currentAuctionAuthor,
-        setCurrentAuctionAuthor,
-        setAuctionFilterPanelStatus
-    } = useAppContext(); 
+    dataAuctionPieces,
+    currentAuctionNight,
+    setCurrentAuctionNight,
+    currentAuctionCategory,
+    setCurrentAuctionCategory,
+    currentAuctionAuthor,
+    setCurrentAuctionAuthor,
+    setAuctionFilterPanelStatus
+  } = useAppContext(); 
 
   useEffect(() => {
     setIsBrowser(true);  
@@ -28,7 +28,7 @@ export default function AuctionFilterPanel({ data }) {
     setTimeout(() => {
       setAuctionFilterPanelStatus(false);
     }, 800);
-  }
+  }  
 
   const panelContent = (
     <div className={!isClosing ? `${styles.wrapper}` : `${styles.wrapper} ${styles.closing}`}>
@@ -36,7 +36,7 @@ export default function AuctionFilterPanel({ data }) {
 
         <div className={styles.header}>
           <h4>FILTROS</h4>
-          <button onClick={ () => closeFilters() } className={styles.close_btn} />
+          <button onClick={() => closeFilters()} className={styles.close_btn}/>
         </div>
 
         <div className={styles.filter_group}>
@@ -80,7 +80,7 @@ export default function AuctionFilterPanel({ data }) {
 
       </div>
 
-      <button onClick={ () => closeFilters() } className={styles.overlay_close} />
+      <button onClick={ () => closeFilters() } className={styles.overlay_close}/>
     </div>
   );
 

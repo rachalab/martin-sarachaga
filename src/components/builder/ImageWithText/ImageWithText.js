@@ -22,7 +22,7 @@ export default function ImageWithText({ text, images }){
       <div className={styles.col_left}>
         <div className={styles.image_wrapper}>
           {images?.map((image, i)=> 
-            image?.photo && <img src={image?.photo} key={i} className={i == currentImgIndex ? "": styles.hide} alt="Satsch Gallery" />
+            image?.photo && <img src={image?.photo} key={i} className={i == currentImgIndex ? "": styles.hide} alt="Imagen" />
           )}           
         </div>
       </div>

@@ -1,5 +1,6 @@
 'use client'
 import { useRef, useEffect } from 'react';
+import { useAppContext } from '../app/context/AppContext';
 import SmoothScrollbar from 'smooth-scrollbar';
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
@@ -8,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Layout({ children, ...rest }) {
   
   let $content = useRef();
-  let scrollbar = useRef();
+  const {scrollbar} = useAppContext()
 
   useEffect(() => {
     const contentScroll = $content.current;
@@ -47,7 +48,6 @@ export default function Layout({ children, ...rest }) {
     }; */
     
   }, []);
-
 
   return (
     <main data-scrollbar ref={$content} {...rest} id="scroll-container">{children}</main>

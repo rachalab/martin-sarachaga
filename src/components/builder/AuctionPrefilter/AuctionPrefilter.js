@@ -4,6 +4,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import { useRouter } from "next/navigation";
 import { useAppContext } from '../../../app/context/AppContext';
 import { gsap } from 'gsap';
+import PrefilterImagesChange from './PrefilterImagesChange/PrefilterImagesChange';
 import Link from 'next/link';
 import styles from "./AuctionPrefilter.module.scss"; 
 
@@ -37,7 +38,7 @@ export default function AuctionPrefilter({ subastaId, links }){
           y: mouseY,
           xPercent: -40,
           yPercent: -45,
-          stagger: 0.05,
+          stagger: 0.02,
           ease: "power3.out"
         });
       };
@@ -52,7 +53,6 @@ export default function AuctionPrefilter({ subastaId, links }){
 
         const handleMouseEnter = () => {
           gsap.to(`.${styles.image_wrapper}[data-image=${label}]`, { opacity: 1, scale: 1 });
-          //gsap.set(`.${styles.image_wrapper}[data-image=${label}]`, { zIndex: 1 });
           gsap.set(`button[data-label=${label}]`, { zIndex: 4 });
         };
 
@@ -85,13 +85,15 @@ export default function AuctionPrefilter({ subastaId, links }){
   return (
     <>
       <div className={styles.images}>
-        {links?.map((link, i) => {               
-          return (
-            <div className={styles.image_wrapper} data-image={`id_${link.id}`} key={i}>
-              <img src={link.images[0]} alt="img" />
-            </div>            
-          );
-        })}
+        {windowSize.width >= 1025 &&
+          links?.map((link, i) => {               
+            return (
+              <div className={styles.image_wrapper} data-image={`id_${link.id}`} key={i}>
+                <PrefilterImagesChange images={link.images} />
+              </div>            
+            );
+          })
+        }       
       </div>
 
       <section className={styles.categories_wrapper} ref={container}>      

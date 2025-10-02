@@ -35,6 +35,12 @@ $red: #EF3824;
     }
 }
 
+@mixin font-level-4-b-mobile {
+    @media screen and (max-width: 1024px){
+        font-size: calc(17px + (57 - 17) * ((100vw - 300px) / (1024 - 300)));
+    }
+}
+
 @mixin font-level-5 {
     //font-size: calc(17.5px + (48 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
@@ -63,7 +69,7 @@ $red: #EF3824;
 // Container width
 
 @mixin container-width-1 {
-    width: calc(1138px + (3688 - 1138) * ((100vw - 1200px) / (3840 - 1200)));
+    width: calc(1146px + (3688 - 1146) * ((100vw - 1200px) / (3840 - 1200)));
     margin: 0 auto;
     @media screen and (max-width: 1024px){   
         width: calc(279px + (1120 - 279) * ((100vw - 300px) / (1200 - 300))); 
@@ -103,6 +109,6 @@ $red: #EF3824;
 // Lines
 
 $line: calc(1.5px + (3 - 1.5) * ((100vw - 1200px) / (3840 - 1200)));
-$line-mobile: calc(1px + (2 - 1) * ((100vw - 300px) / (1200 - 300)));
+$line-mobile: calc(1px + (2.5 - 1) * ((100vw - 300px) / (1200 - 300)));
 
 

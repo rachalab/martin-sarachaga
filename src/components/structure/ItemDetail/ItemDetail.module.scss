@@ -5,14 +5,16 @@
     display: grid;
     grid-template-areas: 'col-left col-right';
     grid-template-columns:
-    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)))
-    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(559.5px + (1808 - 559.5) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(559.5px + (1808 - 559.5) * ((100vw - 1200px) / (3840 - 1200)))
     ;
-    grid-gap: calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)));    
+    grid-gap: calc(27px + (74 - 27) * ((100vw - 1200px) / (3840 - 1200)));    
     min-height: 60vh; 
+    margin-bottom: calc(108px + (340 - 108) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
         grid-template-areas: 'col-right';
-        grid-template-columns: 100%;        
+        grid-template-columns: 100%;       
+        margin-bottom: calc(43px + (143 - 43) * ((100vw - 300px) / (1024 - 300)));
     }   
     .col_left{
         grid-area: col-left;
@@ -134,36 +136,15 @@
     }
 }
 
-@media print {
-    
+@media print {    
     .wrapper{
-        position: relative;
-        min-height: auto;
-        padding-top: 50px;
-
-           
+        padding-top: 50px;           
         .col_left{
-            grid-area: col-left;
-            padding-top: 0;
-            .img_wrapper{
-                margin-bottom: calc(20px + (56 - 20) * ((100vw - 1200px) / (3840 - 1200)));  
-                @media screen and (max-width: 1024px){
-                    margin-bottom: calc(10.5px + (34 - 10.5) * ((100vw - 300px) / (1024 - 300)));
-                }
-                &:last-of-type{
-                    margin-bottom: 0;
-                }
-                img{
-                    width: 100%;
-                    height: auto;
-                }
-            }        
+            padding-top: 0;       
         }
         .col_right{
-            grid-area: col-right;  
             padding-top: 25px!important; 
             max-height: 100%;
-
             .header{
                 display: none!important; 
             }     
@@ -176,10 +157,6 @@
             .query_button{
                 display: none;      
             }
-            .image_mobile{
-               // display: none;
-            }
         }
     }
-
 }

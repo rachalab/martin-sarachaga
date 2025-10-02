@@ -5,10 +5,15 @@
     display: grid;
     grid-template-areas: 'col-left col-right';
     grid-template-columns:
-    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)))
-    calc(554.5px + (1808 - 554.5) * ((100vw - 1200px) / (3840 - 1200)));
-    grid-gap: calc(30px + (74 - 30) * ((100vw - 1200px) / (3840 - 1200)));     
-    margin-bottom: calc(22px + (60 - 22) * ((100vw - 1200px) / (3840 - 1200)));
+    calc(559.5px + (1808 - 559.5) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(559.5px + (1808 - 559.5) * ((100vw - 1200px) / (3840 - 1200)));
+    grid-gap: calc(27px + (74 - 27) * ((100vw - 1200px) / (3840 - 1200)));     
+    margin-bottom: calc(23px + (73 - 23) * ((100vw - 1200px) / (3840 - 1200)));
+    @media screen and (max-width: 1024px){            
+        grid-template-areas: 'col-left' 'col-right';
+        grid-template-columns: 100% 100%; 
+        margin-bottom: calc(22px + (60 - 22) * ((100vw - 300px) / (1024 - 300))); 
+    }
 
     .col_left{
         grid-area: col-left;
@@ -17,6 +22,10 @@
             width: 100%;
             height: calc(385px + (1215 - 385) * ((100vw - 1200px) / (3840 - 1200)));
             background-color: rgb(231, 231, 231);
+            @media screen and (max-width: 1024px){
+                height: calc(222px + (765 - 222) * ((100vw - 300px) / (1024 - 300)));
+                margin-bottom: calc(8px + (40 - 8) * ((100vw - 300px) / (1024 - 300)));
+            }
             img{
                 position: absolute;
                 width: 100%;
@@ -36,6 +45,10 @@
             color: system.$black;
             line-height: 105%;
             margin-bottom: calc(35px + (125 - 35) * ((100vw - 1200px) / (3840 - 1200)));
+            @media screen and (max-width: 1024px){            
+                @include system.font-level-4-b-mobile;
+                margin-bottom: calc(15px + (45 - 15) * ((100vw - 300px) / (1024 - 300)));
+            }
             &:last-child{
                 margin-bottom: 0;
             }

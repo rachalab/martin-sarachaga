@@ -5,9 +5,9 @@
   @include system.container-width-1;
   display: flex;
   flex-direction: column;
-  margin-bottom: calc(72px + (216 - 72) * ((100vw - 1200px) / (3840 - 1200)));
+  margin-bottom: calc(72px + (224 - 72) * ((100vw - 1200px) / (3840 - 1200)));
   @media screen and (max-width: 1024px){
-    margin-bottom: calc(22px + (82 - 22) * ((100vw - 300px) / (1024 - 300)));
+    margin-bottom: calc(22px + (77 - 22) * ((100vw - 300px) / (1024 - 300)));
   } 
   .heading{
     @include system.font-level-6;
@@ -20,6 +20,7 @@
     } 
   }
   .link{
+    position: relative;
     @include system.font-level-1;
     line-height: 128%;
     font-weight: 900; 
@@ -38,5 +39,17 @@
         border-bottom: solid system.$line-mobile system.$black;
       }
     }
+    /* .arrow{
+      opacity: 0;    
+      transition: opacity 0.2s;  
+    }    
+    @media screen and (min-width: 1025px){
+      &:hover{
+        .arrow{
+          opacity: 1;     
+          transition: opacity 0.2s;
+        }      
+      }
+    }  */   
   }
 } 

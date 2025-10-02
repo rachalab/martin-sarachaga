@@ -13,10 +13,7 @@ export default function Timeline({ subtitle, years }){
   const [colRightHeight, setColRightHeight] = useState(0);
   const [currentYear, setCurrentYear] = useState(null);
   const [previousYear, setPreviousYear] = useState(null); 
-
-console.log("subtitle: ", subtitle);
-console.log("years: ", years);
-
+  
 
   useEffect(() => {
     if (!colRight.current) return;
@@ -47,26 +44,28 @@ console.log("years: ", years);
 
   
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      years?.forEach((year) => {        
-        if (year?.photo) {
-          ScrollTrigger.create({
-            trigger: `#date_${year.date}`,
-            start: "top 80%",
-            end: "top 80%",
-            onEnter: () => {
-              setPreviousYear(currentYear); 
-              
-              year?.date && setCurrentYear(year?.date);
-            },
-            onEnterBack: () => {
-              setCurrentYear(previousYear); 
-            },
-          });
-        }
-      });
-    }, container);
-    return () => ctx.revert();
+    if(windowSize.width >= 1025){
+      let ctx = gsap.context(() => {
+        years?.forEach((year) => {        
+          if (year?.photo) {
+            ScrollTrigger.create({
+              trigger: `#date_${year.date}`,
+              start: "top 80%",
+              end: "top 80%",
+              onEnter: () => {
+                setPreviousYear(currentYear); 
+                
+                year?.date && setCurrentYear(year?.date);
+              },
+              onEnterBack: () => {
+                setCurrentYear(previousYear); 
+              },
+            });
+          }
+        });
+      }, container);
+      return () => ctx.revert();
+    }    
   }, [colRightHeight, currentYear]); 
 
 
@@ -88,8 +87,10 @@ console.log("years: ", years);
           </div>
         }
       </div>
+
       {years &&
         <div className={styles.col_right} ref={colRight}>
+
           {years?.map((year, i) => {    
               return (            
                 <div className={styles.year} key={i} id={`date_${year.date}`}>
@@ -99,6 +100,7 @@ console.log("years: ", years);
                         <p>{year.date}</p>
                       </div> 
                     {year?.description && <p className={styles.description}>{year?.description}</p> }
+                    {windowSize.width <= 1024 && year?.photo && i !== 0 && <div className={styles.image_wrapper}><img src={year.photo} alt={year?.alt} key={i} className={styles.image} /></div> }
                     </>
                   }
                 </div>         
@@ -106,6 +108,7 @@ console.log("years: ", years);
           })}
         </div>
       }
+      
     </div>
   )
 }
