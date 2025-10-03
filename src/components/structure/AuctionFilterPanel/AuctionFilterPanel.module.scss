@@ -75,6 +75,7 @@
             }
             .title{
                 @include system.font-level-6;
+                text-transform: uppercase;
                 font-weight: 800;
                 color: system.$red;
                 margin-bottom: calc(6px + (12 - 6) * ((100vw - 1200px) / (3840 - 1200)));
