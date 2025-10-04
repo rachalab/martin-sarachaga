@@ -90,58 +90,7 @@ export default function AuctionPiecesContainer({ data }){
 
 
     
-   /*  useEffect(() => {
-        let pieces = data.lotes;
-        let noches = data.noches;
-        let nightsObject = { nronoche: [] };
-
-        if (currentAuctionCategory !== "all") {
-            pieces = pieces.filter((piece) => piece.categoria === currentAuctionCategory);
-
-            pieces.forEach((piece) => {
-                if (!nightsObject.nronoche.includes(piece.nronoche)) {
-                    nightsObject.nronoche.push(piece.nronoche);
-                }
-            });     
-              
-            if(nightsObject.nronoche.length > 1){
-                setDataAuctionNighs(noches);
-                setCurrentAuctionNight('all');
-            } else{                
-                setDataAuctionNighs(noches.filter((n) => n.noche === nightsObject.nronoche[0]));
-                setCurrentAuctionNight(nightsObject.nronoche[0]);
-            }
-        } 
-
-        if (currentAuctionAuthor !== "all") {
-            pieces = pieces.filter((piece) => piece.autor === currentAuctionAuthor); 
-            
-            pieces.forEach((piece) => {
-                if (!nightsObject.nronoche.includes(piece.nronoche)) {
-                    nightsObject.nronoche.push(piece.nronoche);
-                }
-            });     
-              
-            if(nightsObject.nronoche.length > 1){
-                setDataAuctionNighs(noches);
-                setCurrentAuctionNight('all');
-            } else{                
-                setDataAuctionNighs(noches.filter((n) => n.noche === nightsObject.nronoche[0]));
-                setCurrentAuctionNight(nightsObject.nronoche[0]);
-            }
-        }
-
-        if (currentAuctionNight !== "all") {
-            pieces = pieces.filter((piece) => piece.nronoche === currentAuctionNight);
-            noches = noches.filter((n) => n.noche === currentAuctionNight);
-        }
-        
-        setDataAuctionPieces(pieces);     
-        setDataAuctionNighs(noches);  
-           
-    }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, data]);   */
-
-    
+  
     
     //Si cambia alguna categoría, autor o noche, hace un scroll hasta el inicio de la página 
     useEffect(() => {
@@ -206,7 +155,9 @@ export default function AuctionPiecesContainer({ data }){
                                     <div className={styles.divider}>
                                         <div className={styles.info}>
                                             <p className={styles.red}>Noche {dataNoche.noche}</p>
-                                            <p>{dataNoche.dia.format.substring(dataNoche.dia.format.indexOf(',') + 1)}</p>
+                                            <p className={styles.red}>{dataNoche.dia.format}</p>
+                                            <p className={styles.red}>{dataNoche.dia.short}</p>
+                                             
                                             <p>{dataNoche.horario.format} H.</p>
                                         </div> 
                                         {i === 0 && <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>}
