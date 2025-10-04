@@ -1,5 +1,6 @@
 'use client'
 import { useRef, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation'; // 👈 importamos
 import { useWindowSize } from "@uidotdev/usehooks";
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
@@ -14,6 +15,12 @@ export default function ItemDetail({ dataPiece }){
   const colLeft = useRef(null);
   const [colLeftHeight, setColLeftHeight] = useState(0);
 
+  const pathname = usePathname(); 
+  const segments = pathname.split('/').filter(Boolean);
+  segments.pop();
+  
+  //Link de volver atrás
+  const backLink = '/' + segments.join('/');
 
   useEffect(() => {
     if(windowSize.width >= 1025){
@@ -48,7 +55,7 @@ export default function ItemDetail({ dataPiece }){
       {windowSize.width >= 1025 &&
         <div className={styles.col_left} ref={colLeft}>
           
-          {dataPiece?.images.map((photo, i) => {   
+          {dataPiece?.images?.map((photo, i) => {   
             return(
               <div key={i} className={styles.img_wrapper}>
                 <ImageMagnifier photo={photo} /> 
@@ -61,7 +68,7 @@ export default function ItemDetail({ dataPiece }){
       <div className={styles.col_right}>
 
         <div className={styles.header}>
-          <Link href={`/subasta-presencial/${dataPiece.subasta}/obras`} className={styles.link_back}>VOLVER</Link> 
+          <Link href={backLink} className={styles.link_back}>VOLVER</Link> 
            <button onClick={ () => window.print() } className={styles.print_btn}>IMPRIMIR</button>
         </div>
         <h2 className={styles.headline}>{dataPiece.autor}</h2>
@@ -85,7 +92,7 @@ export default function ItemDetail({ dataPiece }){
         {windowSize.width <= 1024 && dataPiece?.images &&
           dataPiece?.images.map((photo, i) => {   
             return(
-              i !== 0 && <img src={photo} alt={'Imagen pieza'} key={i} className={styles.image_mobile}/>                                             
+              i !== 0 && <img src={photo?.src} width={photo?.width} height={photo?.height} alt={'Imagen pieza'} key={i} className={styles.image_mobile}/>                                             
             );
           })
         }
