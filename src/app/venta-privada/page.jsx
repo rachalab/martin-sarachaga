@@ -6,7 +6,6 @@ import apiGetServer from "@/lib/apiGetServer";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata() {
-
   const data = await apiGetServer({
     url: `direct-sale`,
   });
@@ -15,13 +14,12 @@ export async function generateMetadata() {
   if (!data?.categorias) return notFound();
 
   return {
-    title: `Ventas online`,
-    description: `Ventas online`,  
+    title: `Venta privada`,
+    description: `Ventas privada`,
   };
 }
 
 export default async function Page() {
-
   const data = await apiGetServer({
     url: `direct-sale`,
   });
@@ -29,19 +27,17 @@ export default async function Page() {
   //Si no hay datos redireccionamos
   if (!data?.categorias) return notFound();
 
-  
   return (
-    <MainWrapper> 
-      <Heading data={{heading: 'Ventas online'}} />
-      
+    <MainWrapper>
+      <Heading data={{ heading: "Venta privada" }} />
+
       <pre>
         {data?.categorias
           ? JSON.stringify(data.categorias, null, 2)
           : "No hay categorías"}
       </pre>
 
-
-        <Footer />
-    </MainWrapper> 
+      <Footer />
+    </MainWrapper>
   );
 }
