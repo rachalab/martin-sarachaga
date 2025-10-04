@@ -35,6 +35,12 @@ $red: #EF3824;
     }
 }
 
+@mixin font-level-4-b-mobile {
+    @media screen and (max-width: 1024px){
+        font-size: calc(17px + (57 - 17) * ((100vw - 300px) / (1024 - 300)));
+    }
+}
+
 @mixin font-level-5 {
     //font-size: calc(17.5px + (48 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){

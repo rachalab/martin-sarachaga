@@ -27,6 +27,8 @@
         @media screen and (max-width: 1024px){
             width: calc(240px + (600 - 240) * ((100vw - 300px) / (1024 - 300))); 
             padding:
+            calc(4px + (14 - 4) * ((100vw - 300px) / (1024 - 300)))
+            calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300)))
             calc(20px + (60 - 20) * ((100vw - 300px) / (1024 - 300)))
             calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300)))
             ;
@@ -73,6 +75,7 @@
             }
             .title{
                 @include system.font-level-6;
+                text-transform: uppercase;
                 font-weight: 800;
                 color: system.$red;
                 margin-bottom: calc(6px + (12 - 6) * ((100vw - 1200px) / (3840 - 1200)));

@@ -20,8 +20,7 @@ export default function PrefilterImagesChange({ images = [] }) {
 
     return (
         <>
-            {images.map((image, i) => (
-             
+            {images.map((image, i) => (             
                 <Image
                 key={i}
                 src={image}

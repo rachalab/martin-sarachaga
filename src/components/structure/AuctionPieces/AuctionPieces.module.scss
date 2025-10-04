@@ -49,14 +49,15 @@
 
 .floating_filters{
     position: fixed;       
-    bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200))); 
+    bottom: 0; 
     right: calc(27px + (76 - 27) * ((100vw - 1200px) / (3840 - 1200)));
+    padding-bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200)));
     transition: all .2s ease-in-out;
     opacity: 0;
     visibility: hidden;
-    @media screen and (max-width: 1024px){
-        bottom: calc(15px + (34 - 15) * ((100vw - 300px) / (1024 - 300)));
-        right: calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300))); 
+    @media screen and (max-width: 1024px){        
+        right: calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300)));
+        padding-bottom: calc(15px + (34 - 15) * ((100vw - 300px) / (1024 - 300))); 
     }
     &.active{
         visibility: visible;
