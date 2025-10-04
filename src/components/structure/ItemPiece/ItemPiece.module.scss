@@ -19,7 +19,7 @@
             max-height: calc(250px + (860 - 250) * ((100vw - 300px) / (1024 - 300)));
             margin-bottom: calc(4px + (8 - 4) * ((100vw - 300px) / (1024 - 300)));
         }
-        img{
+        .img{
             display: flex;
             width: 100%;
             height: auto;

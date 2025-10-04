@@ -25,6 +25,7 @@ export default function AuctionPiecesContainer({ data }){
         dataAuctionNighs,
         setDataAuctionNighs,
         currentAuctionNight,
+        setCurrentAuctionNight,
         currentAuctionCategory,
         currentAuctionAuthor,
         auctionFilterPanelStatus,
@@ -34,28 +35,112 @@ export default function AuctionPiecesContainer({ data }){
 
     //Filtramos la data
     useEffect(() => {
+        // Se parte de la lista completa de lotes (obras) y de todas las noches disponibles
         let pieces = data.lotes;
-        if (currentAuctionCategory !== "all") {
-            pieces = pieces.filter((piece) => piece.categoria === currentAuctionCategory);
-        } 
-        if (currentAuctionAuthor !== "all") {
-            pieces = pieces.filter((piece) => piece.autor === currentAuctionAuthor);
-        }
-        if (currentAuctionNight !== "all") {
-            pieces = pieces.filter((piece) => piece.nronoche === currentAuctionNight);
-        }
-        setDataAuctionPieces(pieces);       
-    }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, data]);  
-
-
-    //Filtramos las noches
-    useEffect(() => {
         let noches = data.noches;
+
+        // Se crea un Set para almacenar las noches únicas resultantes después de aplicar filtros
+        const nightsSet = new Set();
+
+        // 🔍 Función que aplica un filtro (por categoría o autor)
+        const applyFilter = (filterValue, key) => {
+            // Solo filtra si no está seleccionado "all"
+            if (filterValue !== "all") {
+                // Filtra las piezas según el valor del filtro (ej: categoría o autor)
+                pieces = pieces.filter((piece) => piece[key] === filterValue);
+
+                // Guarda en el set las noches de las piezas filtradas
+                pieces.forEach((piece) => nightsSet.add(piece.nronoche));
+
+                // Si hay más de una noche en el resultado
+                if (nightsSet.size > 1) {
+                    // Se muestran todas las noches disponibles
+                    setDataAuctionNighs(noches);
+                    // Se reinicia la selección de noche en "all"
+                    setCurrentAuctionNight("all");
+                } else {
+                    // Si solo quedó una noche disponible, se fuerza esa selección
+                    const onlyNight = [...nightsSet][0];
+                    // Se limita el estado de noches únicamente a esa noche
+                    setDataAuctionNighs(noches.filter((n) => n.noche === onlyNight));
+                    // Se actualiza la noche seleccionada a esa noche única
+                    setCurrentAuctionNight(onlyNight);
+                }
+            }
+        };
+
+        // 👉 Aplica filtros de categoría y autor (en ese orden)
+        applyFilter(currentAuctionCategory, "categoria");
+        applyFilter(currentAuctionAuthor, "autor");
+
+        // 👉 Si el usuario eligió una noche específica
         if (currentAuctionNight !== "all") {
+            // Filtra las piezas solo por esa noche
+            pieces = pieces.filter((piece) => piece.nronoche === currentAuctionNight);
+            // Filtra también el array de noches para dejar solo la seleccionada
             noches = noches.filter((n) => n.noche === currentAuctionNight);
         }
-        setDataAuctionNighs(noches);       
-    }, [currentAuctionNight, data]); 
+
+        // ✅ Actualiza los estados finales con los resultados filtrados
+        setDataAuctionPieces(pieces); // piezas filtradas
+        setDataAuctionNighs(noches);  // noches filtradas o todas
+
+    // 🔄 Se ejecuta cada vez que cambia alguno de los filtros o los datos originales
+    }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, data]);
+
+
+    
+   /*  useEffect(() => {
+        let pieces = data.lotes;
+        let noches = data.noches;
+        let nightsObject = { nronoche: [] };
+
+        if (currentAuctionCategory !== "all") {
+            pieces = pieces.filter((piece) => piece.categoria === currentAuctionCategory);
+
+            pieces.forEach((piece) => {
+                if (!nightsObject.nronoche.includes(piece.nronoche)) {
+                    nightsObject.nronoche.push(piece.nronoche);
+                }
+            });     
+              
+            if(nightsObject.nronoche.length > 1){
+                setDataAuctionNighs(noches);
+                setCurrentAuctionNight('all');
+            } else{                
+                setDataAuctionNighs(noches.filter((n) => n.noche === nightsObject.nronoche[0]));
+                setCurrentAuctionNight(nightsObject.nronoche[0]);
+            }
+        } 
+
+        if (currentAuctionAuthor !== "all") {
+            pieces = pieces.filter((piece) => piece.autor === currentAuctionAuthor); 
+            
+            pieces.forEach((piece) => {
+                if (!nightsObject.nronoche.includes(piece.nronoche)) {
+                    nightsObject.nronoche.push(piece.nronoche);
+                }
+            });     
+              
+            if(nightsObject.nronoche.length > 1){
+                setDataAuctionNighs(noches);
+                setCurrentAuctionNight('all');
+            } else{                
+                setDataAuctionNighs(noches.filter((n) => n.noche === nightsObject.nronoche[0]));
+                setCurrentAuctionNight(nightsObject.nronoche[0]);
+            }
+        }
+
+        if (currentAuctionNight !== "all") {
+            pieces = pieces.filter((piece) => piece.nronoche === currentAuctionNight);
+            noches = noches.filter((n) => n.noche === currentAuctionNight);
+        }
+        
+        setDataAuctionPieces(pieces);     
+        setDataAuctionNighs(noches);  
+           
+    }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, data]);   */
+
     
     
     //Si cambia alguna categoría, autor o noche, hace un scroll hasta el inicio de la página 
