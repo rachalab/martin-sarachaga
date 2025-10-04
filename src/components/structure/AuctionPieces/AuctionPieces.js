@@ -155,8 +155,8 @@ export default function AuctionPiecesContainer({ data }){
                                     <div className={styles.divider}>
                                         <div className={styles.info}>
                                             <p className={styles.red}>Noche {dataNoche.noche}</p>
-                                            <p className={styles.red}>{dataNoche.dia.format}</p>
-                                            <p className={styles.red}>{dataNoche.dia.short}</p>
+                                            <p className={styles.date_dsk}>{dataNoche.dia.format}</p>
+                                            <p className={styles.date_mob}>{dataNoche.dia.short}</p>
                                              
                                             <p>{dataNoche.horario.format} H.</p>
                                         </div> 
