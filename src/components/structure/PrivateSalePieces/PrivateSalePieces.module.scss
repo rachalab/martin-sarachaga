@@ -18,25 +18,9 @@
                 @include system.font-level-6;
                 font-weight: 800;
                 text-transform: uppercase;
-                color: system.$black;
-                &.red{
-                    color: system.$red;
-                }
-                &.date_dsk{
-                    @media screen and (max-width: 1024px){
-                        display: none;
-                    }
-                }
-                &.date_mob{
-                    @media screen and (min-width: 1024px){
-                        display: none;
-                    }
-                }
+                color: system.$black;                
             }
         }    
-        .btn_filters{        
-            margin-bottom: calc(2px + (8 - 2) * ((100vw - 1200px) / (3840 - 1200)));        
-        }
     }
 
     .itemsGrid{
@@ -50,28 +34,5 @@
             grid-gap: calc(10.5px + (34 - 10.5) * ((100vw - 300px) / (1024 - 300)));
             margin-bottom: calc(35px + (125 - 35) * ((100vw - 300px) / (1024 - 300))); 
         }
-    }
-}
-
-.btn_filters{
-    @include system.button;             
-}
-
-.floating_filters{
-    position: fixed;       
-    bottom: 0; 
-    right: calc(27px + (76 - 27) * ((100vw - 1200px) / (3840 - 1200)));
-    padding-bottom: calc(19px + (52 - 19) * ((100vw - 1200px) / (3840 - 1200)));
-    transition: all .2s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-    @media screen and (max-width: 1024px){        
-        right: calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300)));
-        padding-bottom: calc(15px + (34 - 15) * ((100vw - 300px) / (1024 - 300))); 
-    }
-    &.active{
-        visibility: visible;
-        opacity: 1;        
-        transition: all .2s ease-in-out;
     }
 }

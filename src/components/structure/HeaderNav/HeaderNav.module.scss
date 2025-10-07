@@ -30,9 +30,7 @@
         .logotype{
             position: absolute;
             top: calc(22px + (75.4 - 22) * ((100vw - 1200px) / (3840 - 1200)));  
-            left: calc(27px + (76 - 27) * ((100vw - 1200px) / (3840 - 1200))); 
-            display: flex;    
-            align-items: flex-start;  
+            left: calc(27px + (76 - 27) * ((100vw - 1200px) / (3840 - 1200)));             
             @include system.font-level-6;   
             font-weight: 800;
             line-height: 100%; 
@@ -42,8 +40,6 @@
             @media screen and (max-width: 1024px){
                 top: calc(14px + (36 - 14) * ((100vw - 300px) / (1024 - 300)));
                 left: calc(10px + (34 - 10) * ((100vw - 300px) / (1024 - 300))); 
-                justify-content: space-between;
-                width: calc(286px + (976 - 286) * ((100vw - 300px) / (1024 - 300)));
             }           
         }               
 

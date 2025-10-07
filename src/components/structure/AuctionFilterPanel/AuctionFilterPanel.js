@@ -39,13 +39,40 @@ export default function AuctionFilterPanel({ data }) {
 
   // 🔍 Función para filtrar piezas según filtros activos
   function getFilteredPieces(noche, categoria, autor) {
-    return dataAuctionPieces.filter((piece) => {
+    return data?.lotes?.filter((piece) => {
       const matchNoche = noche === 'all' || piece.nronoche == noche;
       const matchCategoria = categoria === 'all' || piece.categoria == categoria;
       const matchAutor = autor === 'all' || piece.autor == autor;
       return matchNoche && matchCategoria && matchAutor;
     });
   }
+
+  // Filtra las categorías que tienen obras
+  const categoriasConObras = data?.categorias?.filter(cat => {
+    const obras = getFilteredPieces(currentAuctionNight, cat.id, currentAuctionAuthor);
+    return obras.length > 0;
+  }) || [];
+
+  // Si solo hay una categoría con obras, asegúrate de activarla automáticamente
+  useEffect(() => {
+    if (categoriasConObras.length === 1) {
+      setCurrentAuctionCategory(categoriasConObras[0].id);
+    }
+  }, [categoriasConObras]);
+
+  // Filtra los autores que tienen obras
+  const autoresConObras = data?.autores?.filter(autor => {
+    const obras = getFilteredPieces(currentAuctionNight, currentAuctionCategory, autor.original);
+    return obras.length > 0;
+  }) || [];
+
+  // Si solo hay un autor con obras, activarlo automáticamente
+  useEffect(() => {
+    if (autoresConObras.length === 1) {
+      setCurrentAuctionAuthor(autoresConObras[0].original);
+    }
+  }, [autoresConObras]);
+
 
   const panelContent = (
     <div className={!isClosing ? `${styles.wrapper}` : `${styles.wrapper} ${styles.closing}`}>
@@ -58,13 +85,13 @@ export default function AuctionFilterPanel({ data }) {
 
         {/* FILTRO: NOCHES */}
         <div className={styles.filter_group}>
-          <h5 className={styles.title}>FECHA</h5>
-          <button
+          <h5 className={styles.title}>Noche</h5>
+          {/* <button
             onClick={() => resetFilters('all') }
             className={currentAuctionNight === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
           >
             Todas
-          </button>
+          </button> */}
           {data?.noches?.map((dataNoche, i) => {
             //const obras = getFilteredPieces(dataNoche.noche, currentAuctionCategory, currentAuctionAuthor);
             //if (obras.length === 0) return null;
@@ -75,7 +102,7 @@ export default function AuctionFilterPanel({ data }) {
                 key={i}
                 className={currentAuctionNight === dataNoche.noche ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
               >
-                <span className={styles.text}>Noche N°{dataNoche.noche}</span>
+                <span className={`${styles.text} ${styles.date}`}>{dataNoche.dia.short}</span>
                 <span className={styles.bg} />
               </button>
             );
@@ -85,12 +112,15 @@ export default function AuctionFilterPanel({ data }) {
         {/* FILTRO: CATEGORÍAS */}
         <div className={styles.filter_group}>
           <h5 className={styles.title}>CATEGORÍA</h5>
-          <button
-            onClick={() => setCurrentAuctionCategory('all')}
-            className={currentAuctionCategory === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
-          >
-            Todas
-          </button>
+           {categoriasConObras.length > 1 && (
+            <button
+              onClick={() => setCurrentAuctionCategory('all')}
+              className={currentAuctionCategory === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
+            >
+              Todas
+            </button>
+          )}
+
           {data?.categorias?.map((dataCategoria, i) => {
             const obras = getFilteredPieces(currentAuctionNight, dataCategoria.id, currentAuctionAuthor);
             if (obras.length === 0) return null;
@@ -111,12 +141,14 @@ export default function AuctionFilterPanel({ data }) {
         {/* FILTRO: AUTORES */}
         <div className={styles.filter_group}>
           <h5 className={styles.title}>AUTOR</h5>
-          <button
-            onClick={() => setCurrentAuctionAuthor('all')}
-            className={currentAuctionAuthor === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
-          >
-            Todos
-          </button>
+          {autoresConObras.length > 1 && (
+            <button
+              onClick={() => setCurrentAuctionAuthor('all')}
+              className={currentAuctionAuthor === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
+            >
+              Todos
+            </button>
+          )}
           {data?.autores?.map((dataAutor, i) => {
             const obras = getFilteredPieces(currentAuctionNight, currentAuctionCategory, dataAutor.original);
             if (obras.length === 0) return null;

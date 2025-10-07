@@ -1,5 +1,5 @@
 'use client';
-import { use, useEffect, useState , useRef } from 'react';
+import { useEffect, useState , useRef } from 'react';
 import ReactDOM from "react-dom";
 import { useWindowSize } from "@uidotdev/usehooks";
 import styles from './ImageMagnifier.module.scss';
@@ -52,17 +52,17 @@ const ImageMagnifier = ({ photo }) => {
 
     // Ajustar clase del overlay según las proporciones de la imagen
     useEffect(() => {
-        if (photo?.width && photo?.height) {
-            const proportions = photo?.width / photo?.height;
-            //Si la imagen es más ancha que alta
+        if (photo && photo.width && photo.height) {
+            const proportions = photo.width / photo.height;
+            // Si la imagen es más ancha que alta
             if (proportions > 1) {
                 setOverlayClass(styles.overlay_height);
-            //Si la imagen es más alta que ancha
+            // Si la imagen es más alta que ancha
             } else if (proportions < 1) {
                 setOverlayClass(styles.overlay_width);
-            //Si la imagen es cuadrada
+            // Si la imagen es cuadrada
             } else {
-                setOverlayClass(styles.overlay_height);
+                setOverlayClass(styles.overlay_width);
             }
         }
     }, [photo]);

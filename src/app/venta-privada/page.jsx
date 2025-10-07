@@ -1,6 +1,6 @@
 import MainWrapper from "../../components/structure/MainWrapper/MainWrapper";
 import Heading from "../../components/structure/Heading/Heading";
-//import AuctionPrefilter from "@/src/components/structure/AuctionPrefilter/AuctionPrefilter";
+import PrivateSalePieces from "@/src/components/structure/PrivateSalePieces/PrivateSalePieces";
 import Footer from "../../components/structure/Footer/Footer";
 import apiGetServer from "@/lib/apiGetServer";
 import { notFound } from "next/navigation";
@@ -30,13 +30,7 @@ export default async function Page() {
   return (
     <MainWrapper>
       <Heading data={{ heading: "Venta privada" }} />
-
-      <pre>
-        {data?.categorias
-          ? JSON.stringify(data.categorias, null, 2)
-          : "No hay categorías"}
-      </pre>
-
+      <PrivateSalePieces data={data} />
       <Footer />
     </MainWrapper>
   );

@@ -12,12 +12,18 @@ export default function AuctionPrefilter({ subastaId, links }){
   const container = useRef(null);
   const router = useRouter();
   const windowSize = useWindowSize();
-  const {setCurrentAuctionCategory} = useAppContext(); 
+  const {setCurrentAuctionNight, setCurrentAuctionCategory, setCurrentAuctionAuthor} = useAppContext(); 
 
   const handleClick = (value) => {
     setCurrentAuctionCategory(value);
     router.push(`${subastaId}/obras`);
   }
+
+  useEffect(() => {
+    setCurrentAuctionNight(1);  
+    setCurrentAuctionCategory('all');
+    setCurrentAuctionAuthor('all');
+  }, []);
 
   useEffect(() => {
     if(windowSize.width >= 1025){
@@ -112,7 +118,7 @@ export default function AuctionPrefilter({ subastaId, links }){
           })}
         </div>        
 
-        <Link href={`${subastaId}/obras`} className={`${styles.link} ${styles.cta}`}>Ver todo ➔</Link>
+        {/* <Link href={`${subastaId}/obras`} className={`${styles.link} ${styles.cta}`}>Ver todo ➔</Link> */}
       </section>
     </>
   )

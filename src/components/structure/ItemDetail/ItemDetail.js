@@ -74,7 +74,7 @@ export default function ItemDetail({ dataPiece }){
         <h2 className={styles.headline}>{dataPiece.autor}</h2>
 
         {windowSize.width <= 1024 && dataPiece?.images &&
-          <img src={dataPiece.images[0]} alt={'Imagen pieza'} className={styles.image_mobile}/>  
+           <img src={dataPiece.images[0].src} width={dataPiece.images[0].width} height={dataPiece.images[0].height}  alt={'Imagen pieza'} className={styles.image_mobile}/>  
         }
 
         <p className={styles.description}>{dataPiece.descripcion}</p>
@@ -84,7 +84,8 @@ export default function ItemDetail({ dataPiece }){
           <li><span>Lote N°</span> {dataPiece.lote}</li>
           <li><span>Fecha de subasta</span> -</li>
           <li><span>Lugar</span> -</li>
-          <li><span>Valor base</span> U$S {dataPiece.preciominimo}</li>
+          {dataPiece.preciominimo && <li><span>Valor base</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciominimo}</li>}
+          {dataPiece.preciofijo && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
         </ul>
 
         <a className={styles.query_button} href="https://www.google.com" rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>

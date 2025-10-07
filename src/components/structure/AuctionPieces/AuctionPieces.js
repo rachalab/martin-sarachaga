@@ -2,6 +2,7 @@
 import { useRef, useEffect, useState } from 'react';
 import ReactDOM from "react-dom";
 import { useAppContext } from '../../../app/context/AppContext';
+import { useWindowSize } from "@uidotdev/usehooks";
 import { gsap, Circ } from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
@@ -15,7 +16,7 @@ export default function AuctionPiecesContainer({ data }){
     const isFirstRender = useRef(true);
     const [isBrowser, setIsBrowser] = useState(false);
     const [floatingFiltersBtn, setFloatingFiltersBtn] = useState(false);
-    
+    const windowSize = useWindowSize();
 
     //Traemos lo que necesitamos de AppContext        
     const {
@@ -87,30 +88,43 @@ export default function AuctionPiecesContainer({ data }){
 
     // 🔄 Se ejecuta cada vez que cambia alguno de los filtros o los datos originales
     }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, data]);
-
-
     
   
     
     //Si cambia alguna categoría, autor o noche, hace un scroll hasta el inicio de la página 
     useEffect(() => {
-        if (!isBrowser || !scrollbar.current) return;
+        if (!isBrowser) return;
 
+        // Evitar ejecución en el primer render
         if (isFirstRender.current) {
             isFirstRender.current = false;
             return;
         }
 
-        const target = document.querySelector("#scroll-container");
+        const isDesktop = windowSize.width >= 1025;
+        const targetSelector = isDesktop ? "#scroll-container" : "#main-container";
+        const target = document.querySelector(targetSelector);
+
         if (!target) return;
 
-        gsap.to(scrollbar.current, {
+        const scrollTarget = isDesktop ? scrollbar.current : window;
+
+        // Verificar scrollbar solo si es desktop
+        if (isDesktop && !scrollbar.current) return;
+
+        gsap.to(scrollTarget, {
             scrollTo: { y: target.offsetTop },
-            duration: 0.8,
+            duration: isDesktop ? 0.8 : 0.5,
             ease: Circ.easeOut,
         });
-
-    }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, isBrowser]);  
+    }, [
+    currentAuctionNight,
+    currentAuctionCategory,
+    currentAuctionAuthor,
+    isBrowser,
+    windowSize.width,
+    ]);
+    
     
 
     //Muestra y oculta el botón de filtros flotante

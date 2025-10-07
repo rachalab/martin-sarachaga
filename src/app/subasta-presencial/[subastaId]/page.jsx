@@ -40,9 +40,8 @@ export default async function Page({ params }) {
           return (
             <div className={styles.night} key={i}>
               <p className={styles.red}>Noche {data.noche}</p>
-              <p>
-                {data.dia.format.substring(data.dia.format.indexOf(",") + 1)}
-              </p>
+              <p className={styles.date_dsk}>{data.dia.format}</p>
+              <p className={styles.date_mob}>{data.dia.short}</p>
               <p>{data.horario.format} H.</p>
             </div>
           );
