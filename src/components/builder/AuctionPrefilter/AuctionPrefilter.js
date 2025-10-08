@@ -20,7 +20,7 @@ export default function AuctionPrefilter({ subastaId, links }){
   }
 
   useEffect(() => {
-    setCurrentAuctionNight(1);  
+    setCurrentAuctionNight('all');  
     setCurrentAuctionCategory('all');
     setCurrentAuctionAuthor('all');
   }, []);
