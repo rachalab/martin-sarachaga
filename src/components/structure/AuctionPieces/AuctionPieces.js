@@ -21,76 +21,75 @@ export default function AuctionPiecesContainer({ data }){
     //Traemos lo que necesitamos de AppContext        
     const {
         scrollbar,
-        dataAuctionPieces,
-        setDataAuctionPieces,
-        dataAuctionNighs,
-        setDataAuctionNighs,
         currentAuctionNight,
-        setCurrentAuctionNight,
         currentAuctionCategory,
         currentAuctionAuthor,
         auctionFilterPanelStatus,
         setAuctionFilterPanelStatus
     } = useAppContext(); 
 
+    //Informacion de noches
+    const [noches , setNoches] = useState([...data.noches]);
+    
+    //Mapeo de lotes de subasta
+    const [dataAuction, setDataAuction] = useState([]);
+    const [dataCountAuction, setDataCountAuction] = useState(false);
 
-    //Filtramos la data
     useEffect(() => {
-        // Se parte de la lista completa de lotes (obras) y de todas las noches disponibles
-        let pieces = data.lotes;
-        let noches = data.noches;
-
-        // Se crea un Set para almacenar las noches únicas resultantes después de aplicar filtros
-        const nightsSet = new Set();
-
-        // 🔍 Función que aplica un filtro (por categoría o autor)
-        const applyFilter = (filterValue, key) => {
-            // Solo filtra si no está seleccionado "all"
-            if (filterValue !== "all") {
-                // Filtra las piezas según el valor del filtro (ej: categoría o autor)
-                pieces = pieces.filter((piece) => piece[key] === filterValue);
-
-                // Guarda en el set las noches de las piezas filtradas
-                pieces.forEach((piece) => nightsSet.add(piece.nronoche));
-
-                // Si hay más de una noche en el resultado
-                if (nightsSet.size > 1) {
-                    // Se muestran todas las noches disponibles
-                    setDataAuctionNighs(noches);
-                    // Se reinicia la selección de noche en "all"
-                    setCurrentAuctionNight("all");
-                } else {
-                    // Si solo quedó una noche disponible, se fuerza esa selección
-                    const onlyNight = [...nightsSet][0];
-                    // Se limita el estado de noches únicamente a esa noche
-                    setDataAuctionNighs(noches.filter((n) => n.noche === onlyNight));
-                    // Se actualiza la noche seleccionada a esa noche única
-                    setCurrentAuctionNight(onlyNight);
-                }
-            }
-        };
-
-        // 👉 Aplica filtros de categoría y autor (en ese orden)
-        applyFilter(currentAuctionCategory, "categoria");
-        applyFilter(currentAuctionAuthor, "autor");
-
-        // 👉 Si el usuario eligió una noche específica
-        if (currentAuctionNight !== "all") {
-            // Filtra las piezas solo por esa noche
-            pieces = pieces.filter((piece) => piece.nronoche === currentAuctionNight);
-            // Filtra también el array de noches para dejar solo la seleccionada
-            noches = noches.filter((n) => n.noche === currentAuctionNight);
+        //Si hay noche o lotes
+        if (!noches?.length || !data?.lotes?.length) {
+            setDataAuction([]); return;
         }
 
-        // ✅ Actualiza los estados finales con los resultados filtrados
-        setDataAuctionPieces(pieces); // piezas filtradas
-        setDataAuctionNighs(noches);  // noches filtradas o todas
+        //Array para filtrar
+        let filteredLotes = [...data.lotes];
 
-    // 🔄 Se ejecuta cada vez que cambia alguno de los filtros o los datos originales
-    }, [currentAuctionNight, currentAuctionCategory, currentAuctionAuthor, data]);
-    
-  
-    
+        //Filtro por noche
+        if (currentAuctionNight !== "all") {
+            filteredLotes = filteredLotes.filter(
+                (lote) => String(lote.nronoche) === String(currentAuctionNight)
+            );
+        }
+
+        //Filtro por categoria
+        if (currentAuctionCategory !== "all") {
+            filteredLotes = filteredLotes.filter(
+                (lote) => String(lote.categoria) === String(currentAuctionCategory)
+            );
+        }
+
+        //Filtro por Autor
+        if (currentAuctionAuthor !== "all") {
+            filteredLotes = filteredLotes.filter(
+                (lote) => String(lote.autor) === String(currentAuctionAuthor)
+            );
+        }
+
+        // Agrupar lotes por número de noche
+        const grouped = noches?.map((noche) => {
+            const nocheNumero = noche.noche;
+            const lotesDeNoche = filteredLotes.filter(lote => lote.nronoche === nocheNumero);
+
+            return {
+                nocheNumero,
+                dataNoche: noche,
+                lotes: lotesDeNoche
+            };
+
+        });
+
+        //Salida final para mapear
+        setDataAuction(grouped);
+
+        //Verificar si al menos una noche tiene lotes
+        const hayLotes = grouped.some((noche) => noche.lotes.length > 0);
+
+        //Setea si hay o no coincidencia de filtros
+        setDataCountAuction(hayLotes);
+     
+    }, [data, currentAuctionNight, currentAuctionCategory, currentAuctionAuthor]);
+
+
     //Si cambia alguna categoría, autor o noche, hace un scroll hasta el inicio de la página 
     useEffect(() => {
         if (!isBrowser) return;
@@ -118,15 +117,11 @@ export default function AuctionPiecesContainer({ data }){
             ease: Circ.easeOut,
         });
     }, [
-    currentAuctionNight,
-    currentAuctionCategory,
-    currentAuctionAuthor,
+    dataAuction,
     isBrowser,
     windowSize.width,
     ]);
     
-    
-
     //Muestra y oculta el botón de filtros flotante
     useEffect(() => {
         let ctx = gsap.context(() => {        
@@ -152,44 +147,62 @@ export default function AuctionPiecesContainer({ data }){
 
 
     return (
-        <>           
-            {auctionFilterPanelStatus && <AuctionFilterPanel data={data} />}  
+        <>
+            {auctionFilterPanelStatus && <AuctionFilterPanel data={data} />}
 
             {isBrowser && ReactDOM.createPortal(<div className={!floatingFiltersBtn ? `${styles.floating_filters}` : `${styles.floating_filters} ${styles.active}`}>
                 <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>
-            </div>,document.getElementById("filters-btn-root"))}    
-            
-            <div ref={container}>     
-                {dataAuctionNighs?.map((dataNoche, i) => {     
-                    let obras = dataAuctionPieces.filter(item => item.nronoche === dataNoche.noche);
+            </div>,document.getElementById("filters-btn-root"))}
+
+            <div ref={container}>
+                {dataAuction?.length > 0 && !dataCountAuction &&
+                    <section className={styles.wrapper}>
+                        <div className={styles.divider}>
+                            <div className={styles.info}>
+                                <p className={styles.red}>Si resultados</p> 
+                            </div>
+                            <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>                            
+                        </div>
+                        <div className={styles.itemsGrid}>  
+                            <p>No hay coincidencias en la categoria {data?.categorias?.find((c) => c.id === currentAuctionCategory)?.nombre} {currentAuctionAuthor != "all" && `con el autor ${currentAuctionAuthor}`}.</p>
+                        </div>                             
+                    </section>
+                }
+
+                {dataAuction.map((nocheItem, i, arr) =>{
+                    //Datos
+                    const { dataNoche, lotes } = nocheItem;
+
+                    // Encontrar índice del primer bloque que tiene lotes
+                    const firstIndex = arr.findIndex(item => item.lotes?.length > 0);
+
                     return (
-                        <section key={i} className={styles.wrapper}>                                 
-                            {obras.length > 0 && 
-                                <>  
+                        <section key={i} className={styles.wrapper}>
+                            {lotes?.length > 0 &&
+                                <>
                                     <div className={styles.divider}>
                                         <div className={styles.info}>
                                             <p className={styles.red}>Noche {dataNoche.noche}</p>
                                             <p className={styles.date_dsk}>{dataNoche.dia.format}</p>
                                             <p className={styles.date_mob}>{dataNoche.dia.short}</p>
-                                             
+                                                
                                             <p>{dataNoche.horario.format} H.</p>
                                         </div> 
-                                        {i === 0 && <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>}
-                                    </div>                                     
-
+                                        {i === firstIndex && <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>}
+                                    </div>
                                     <div className={styles.itemsGrid}>
-                                        {obras.map((dataPiece, i) => {               
+                                        {lotes.map((dataPiece, i) => {               
                                             return (
                                                 <ItemPiece key={i} data={dataPiece} />
                                             );
                                         })}
                                     </div>
-                                </>
-                            }                                                          
-                        </section>                  
-                    );
-                })}  
+                                </>                    
+                            }
+                        </section>
+                    )
+                })}
             </div>
-        </>
+        </> 
     )
 }

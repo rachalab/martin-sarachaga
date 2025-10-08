@@ -36,7 +36,7 @@ export default async function Page({ params }) {
 
   return (   
     <MainWrapper>
-      <ItemDetail dataPiece={data.lote} />
+      <ItemDetail dataPiece={data.lote} dataNoche={data.noche} />
       <Footer />
     </MainWrapper>
   );
