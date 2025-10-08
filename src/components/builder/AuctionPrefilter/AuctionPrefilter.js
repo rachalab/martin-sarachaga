@@ -20,7 +20,7 @@ export default function AuctionPrefilter({ subastaId, links }){
   }
 
   useEffect(() => {
-    setCurrentAuctionNight(1);  
+    setCurrentAuctionNight('all');  
     setCurrentAuctionCategory('all');
     setCurrentAuctionAuthor('all');
   }, []);
@@ -118,7 +118,7 @@ export default function AuctionPrefilter({ subastaId, links }){
           })}
         </div>        
 
-        {/* <Link href={`${subastaId}/obras`} className={`${styles.link} ${styles.cta}`}>Ver todo ➔</Link> */}
+        <Link href={`${subastaId}/obras`} className={`${styles.link} ${styles.cta}`}>Ver todo ➔</Link>
       </section>
     </>
   )

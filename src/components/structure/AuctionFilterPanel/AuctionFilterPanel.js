@@ -84,14 +84,14 @@ export default function AuctionFilterPanel({ data }) {
         </div>
 
         {/* FILTRO: NOCHES */}
-        <div className={styles.filter_group}>
+        {/* <div className={styles.filter_group}>
           <h5 className={styles.title}>Noche</h5>
-          {/* <button
+           <button
             onClick={() => resetFilters('all') }
             className={currentAuctionNight === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
           >
             Todas
-          </button> */}
+          </button>
           {data?.noches?.map((dataNoche, i) => {
             //const obras = getFilteredPieces(dataNoche.noche, currentAuctionCategory, currentAuctionAuthor);
             //if (obras.length === 0) return null;
@@ -107,23 +107,23 @@ export default function AuctionFilterPanel({ data }) {
               </button>
             );
           })}
-        </div>
+        </div> */}
 
         {/* FILTRO: CATEGORÍAS */}
         <div className={styles.filter_group}>
           <h5 className={styles.title}>CATEGORÍA</h5>
-           {categoriasConObras.length > 1 && (
+           
             <button
               onClick={() => setCurrentAuctionCategory('all')}
               className={currentAuctionCategory === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
             >
               Todas
             </button>
-          )}
+         
 
           {data?.categorias?.map((dataCategoria, i) => {
-            const obras = getFilteredPieces(currentAuctionNight, dataCategoria.id, currentAuctionAuthor);
-            if (obras.length === 0) return null;
+            //const obras = getFilteredPieces(currentAuctionNight, dataCategoria.id, currentAuctionAuthor);
+            //if (obras.length === 0) return null;
 
             return (
               <button

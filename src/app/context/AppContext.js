@@ -13,7 +13,7 @@ export default function AppProvider({ children }) {
   //States utilizados en Subasta Presencial
   const [dataAuctionPieces, setDataAuctionPieces] = useState([]);
   const [dataAuctionNighs, setDataAuctionNighs] = useState([]);
-  const [currentAuctionNight, setCurrentAuctionNight] = useState(1);
+  const [currentAuctionNight, setCurrentAuctionNight] = useState('all');
   const [currentAuctionCategory, setCurrentAuctionCategory] = useState('all');
   const [currentAuctionAuthor, setCurrentAuctionAuthor] = useState('all');
   const [auctionFilterPanelStatus, setAuctionFilterPanelStatus] = useState(false);

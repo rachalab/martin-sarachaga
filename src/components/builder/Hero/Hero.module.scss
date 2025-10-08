@@ -18,8 +18,8 @@
         justify-content: space-between;         
         z-index: 200;
         @media screen and (max-width: 1024px){
-            top: calc(14px + (36 - 14) * ((100vw - 300px) / (1024 - 300)));
-            left: calc(2px + (13.5 - 2) * ((100vw - 300px) / (1024 - 300))); 
+            top: calc(13.5px + (36 - 13.5) * ((100vw - 300px) / (1024 - 300)));
+            left: calc(2.3px + (14 - 2.3) * ((100vw - 300px) / (1024 - 300))); 
             right: calc(11px + (34 - 11) * ((100vw - 300px) / (1024 - 300))); 
         }       
         img{
@@ -34,6 +34,9 @@
             line-height: 100%; 
             color: system.$black; 
             font-weight: 800;
+            @media screen and (max-width: 1024px){
+                padding-top: calc(1px + (0 - 1) * ((100vw - 300px) / (1024 - 300)));
+            }
         }                            
     } 
     .wrapper{
