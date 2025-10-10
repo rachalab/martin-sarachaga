@@ -94,7 +94,7 @@ export default function AuctionFilterPanel({ data }) {
               onClick={() => resetFilters({
                 night: currentAuctionNight, 
                 category: "all", 
-                author: 'all'
+                author: currentAuctionAuthor
               })}
               className={currentAuctionCategory === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
               >
@@ -107,7 +107,7 @@ export default function AuctionFilterPanel({ data }) {
                   onClick={() => resetFilters({
                     night: currentAuctionNight, 
                     category: dataCategoria.id, 
-                    author: currentAuctionAuthor
+                    author: "all"
                   })}                
                   key={i}
                   className={currentAuctionCategory === dataCategoria.id ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
