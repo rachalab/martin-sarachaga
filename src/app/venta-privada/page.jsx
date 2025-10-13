@@ -7,15 +7,15 @@ import { notFound } from "next/navigation";
 
 export async function generateMetadata() {
   const data = await apiGetServer({
-    url: `direct-sale`,
+    url: `direct-sale/meta/metadata`,
   });
 
   //Si no hay dotos redireccionamos
-  if (!data?.categorias) return notFound();
+  if (!data?.title || !data?.description) return notFound();
 
   return {
-    title: `Venta privada`,
-    description: `Ventas privada`,
+    title: data?.title,
+    description: data?.description,
   };
 }
 

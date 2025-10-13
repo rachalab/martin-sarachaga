@@ -10,15 +10,15 @@ export async function generateMetadata({ params, searchParams }) {
   const { subastaId } = await params;
 
   const data = await apiGetServer({
-    url: `/auctions/${subastaId}`,
+    url: `/auctions/${subastaId}/meta/metadata`,
   });
 
   //Si no hay datos redireccionamos
-  if (!data?.subasta) return notFound();
+  if (!data?.title || !data?.description) return notFound();
 
   return {
-    title: `Subasta Nro ${data?.subasta?.nro}`,
-    description: data?.subasta?.description,  
+    title: data?.title,
+    description: data?.description,
   }
 }
 
