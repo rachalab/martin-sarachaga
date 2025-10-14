@@ -36,7 +36,7 @@ export default async function Page({ params }) {
 
   return (   
     <MainWrapper>
-      <ItemDetail dataPiece={data.lote} dataNoche={data.noche} />
+      <ItemDetail dataPiece={data.lote} dataNoche={data.noche} address="Rodriguez Peña 1778 (1021)" />
       <Footer />
     </MainWrapper>
   );

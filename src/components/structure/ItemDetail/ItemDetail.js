@@ -9,7 +9,7 @@ import ImageMagnifier from '../ImageMagnifier/ImageMagnifier';
 import styles from "./ItemDetail.module.scss"; 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ItemDetail({ dataPiece, dataNoche = false }){
+export default function ItemDetail({ dataPiece, address, dataNoche = false }){
   const windowSize = useWindowSize();
   const container = useRef(null);
   const colLeft = useRef(null);
@@ -85,7 +85,7 @@ export default function ItemDetail({ dataPiece, dataNoche = false }){
           {dataPiece?.subasta && 
             <li><span>Fecha de subasta</span> {dataNoche?.dia?.format ?? '-' }</li>
           }
-          <li><span>Lugar</span> -</li>
+          {address && <li><span>Lugar</span> {address}</li>}
           {dataPiece.preciominimo && <li><span>Valor base</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciominimo}</li>}
           {dataPiece.preciofijo && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
         </ul>
