@@ -86,9 +86,6 @@ const ImageMagnifier = ({ photo }) => {
                         width={photo?.width}
                         height={photo?.height}
                         className={styles.image}
-                        style={{ objectFit: "cover" }}
-                        placeholder="blur"
-                        blurDataURL="/assets/images/blur.jpg"
                     />
                 </div>
             }
