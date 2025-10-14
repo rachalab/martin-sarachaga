@@ -81,9 +81,6 @@ export default function ItemDetail({ dataPiece, dataNoche = false }){
             height={dataPiece.images[0].height}  
             alt={'Imagen pieza'} 
             className={styles.image_mobile}
-            style={{ objectFit: "cover" }}
-            placeholder="blur"
-            blurDataURL="/assets/images/blur.jpg"
           />  
         }
 
@@ -113,9 +110,6 @@ export default function ItemDetail({ dataPiece, dataNoche = false }){
                   alt={'Imagen pieza'} 
                   key={i} 
                   className={styles.image_mobile}
-                  style={{ objectFit: "cover" }}
-                  placeholder="blur"
-                  blurDataURL="/assets/images/blur.jpg"
                 />             
             );
           })
