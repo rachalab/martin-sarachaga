@@ -7,13 +7,14 @@ export default function ItemPiece({ data }){
   return (
     <Link href={data.url} className={styles.item}>      
       <div className={styles.image_wrapper}>
-        {data.images ?
+        {data?.images ?
           <Image
-            src={data.images[0]}
+            src={data?.images?.src}
             alt={`Imagen lote N° ${data.lote}`}
-            width={500}
-            height={500}
+            width={data?.images?.width}
+            height={data?.images?.height}
             className={styles.img}
+            loading="lazy"
           />
           :
           <div className={styles.img_void}/>
