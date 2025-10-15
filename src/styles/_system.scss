@@ -31,7 +31,7 @@ $red: #EF3824;
 @mixin font-level-4 {
     font-size: calc(32px + (100 - 32) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
-        font-size: calc(24px + (62 - 24) * ((100vw - 300px) / (1024 - 300)));
+        font-size: calc(22px + (62 - 22) * ((100vw - 300px) / (1024 - 300)));
     }
 }
 
@@ -42,9 +42,9 @@ $red: #EF3824;
 }
 
 @mixin font-level-5 {
-    //font-size: calc(17.5px + (48 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
+    font-size: calc(17.5px + (55 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
-        //font-size: calc(16px + (28 - 16) * ((100vw - 300px) / (1024 - 300)));
+        font-size: calc(12px + (34 - 12) * ((100vw - 300px) / (1024 - 300)));
     }
 }
 
@@ -59,9 +59,9 @@ $red: #EF3824;
 }
 
 @mixin font-level-7 {
-    //font-size: calc(17.5px + (48 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
+    font-size: calc(11.5px + (35 - 11.5) * ((100vw - 1200px) / (3840 - 1200)));
     @media screen and (max-width: 1024px){
-        //font-size: calc(16px + (28 - 16) * ((100vw - 300px) / (1024 - 300)));
+        font-size: calc(9px + (23 - 9) * ((100vw - 300px) / (1024 - 300)));
     }
 }
 
@@ -83,17 +83,18 @@ $red: #EF3824;
     display: inline-block;
     @include font-level-6;
     font-weight: 800;    
+    line-height: 100%;
     background-color: $red;
     color: $white;
     text-decoration: none;
     text-transform: uppercase;
     padding:
-    calc(8px + (24 - 8) * ((100vw - 1200px) / (3840 - 1200)))
+    calc(10px + (32 - 10) * ((100vw - 1200px) / (3840 - 1200)))
     calc(16px + (52 - 16) * ((100vw - 1200px) / (3840 - 1200)))
     ;
     @media screen and (max-width: 1024px){
         padding:
-        calc(8px + (18 - 8) * ((100vw - 300px) / (1200 - 300)))
+        calc(8px + (22 - 8) * ((100vw - 300px) / (1200 - 300)))
         calc(12px + (32 - 12) * ((100vw - 300px) / (1200 - 300)))
         ;
     }
