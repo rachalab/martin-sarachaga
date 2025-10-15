@@ -1,8 +1,37 @@
-import styles from "./Announcement.module.scss"; 
+"use client";
 
-export default function Announcement(){
+import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import Link from 'next/link';
+import styles from "./Announcement.module.scss";
 
-  return (
-       <p>-</p>
-  )
+export default function Announcement() {
+  const [isBrowser, setIsBrowser] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [announcementStatus, setAnnouncementStatus] = useState(true);
+
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+
+  function closeFilters() {
+    setIsClosing(true);
+    setTimeout(() => {    
+      setAnnouncementStatus(false);  
+    }, 800);
+  }
+
+  const announcementContent = (
+    <div className={!isClosing ? `${styles.wrapper}` : `${styles.wrapper} ${styles.closing}`}>
+      <button onClick={closeFilters} className={styles.close_btn} />             
+      <p>Abierta la recepción próxima subasta agosto — </p>
+      <Link href='/' className={styles.link}>Más información</Link>   
+    </div>
+  );
+
+  if (isBrowser && announcementStatus) {
+    return ReactDOM.createPortal(announcementContent, document.getElementById("modal-root"));
+  } else {
+    return null;
+  }
 }

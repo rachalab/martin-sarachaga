@@ -16,6 +16,7 @@ export default function AuctionPiecesContainer({ data }){
     const isFirstRender = useRef(true);
     const [isBrowser, setIsBrowser] = useState(false);
     const [floatingFiltersBtn, setFloatingFiltersBtn] = useState(false);
+    const [containerHeight, setContainertHeight] = useState(0);
     const windowSize = useWindowSize();
 
     //Traemos lo que necesitamos de AppContext        
@@ -121,24 +122,42 @@ export default function AuctionPiecesContainer({ data }){
     isBrowser,
     windowSize.width,
     ]);
-    
+
+
+    // Calcula el alto del contenedor con las piezas
+    useEffect(() => {
+        if (!container.current) return;
+        const resizeObserver = new ResizeObserver(() => {
+        container?.current?.offsetHeight && setContainertHeight(container.current.offsetHeight);
+        });
+        resizeObserver.observe(container.current);            
+        return () => resizeObserver.disconnect();        
+    }, []); 
+
+
     //Muestra y oculta el botón de filtros flotante
     useEffect(() => {
         let ctx = gsap.context(() => {        
             ScrollTrigger.create({
                 trigger: container.current,
                 start: "top -10%",
-                end: "top bottom",
-                onEnter: () => {
-                setFloatingFiltersBtn(true);
+                end: () => `+=${containerHeight} 80%`,
+                onEnterBack: function() {
+                    setFloatingFiltersBtn(true);
                 },
-                onEnterBack: () => {
-                setFloatingFiltersBtn(false);
+                onEnter: function() {
+                    setFloatingFiltersBtn(true);
                 },
+                onLeaveBack: function() {
+                    setFloatingFiltersBtn(false);
+                },
+                onLeave: function() {
+                    setFloatingFiltersBtn(false);
+                }
             });    
         }, container);
         return () => ctx.revert();
-    }, []); 
+    }, [containerHeight]);
 
 
     useEffect(() => {
