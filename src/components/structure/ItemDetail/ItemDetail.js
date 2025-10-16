@@ -19,7 +19,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
   const pathname = usePathname(); 
   const segments = pathname.split('/').filter(Boolean);
   segments.pop();
-  
+
   //Link de volver atrás
   const backLink = '/' + segments.join('/');
 
@@ -59,7 +59,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           {dataPiece?.images?.map((photo, i) => {   
             return(
               <div key={i} className={styles.img_wrapper}>
-                <ImageMagnifier photo={photo} /> 
+                <ImageMagnifier photo={photo} priority={i === 0} /> 
               </div>                                           
             );
           })} 
@@ -76,9 +76,9 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
 
         {windowSize.width <= 1024 && dataPiece?.images &&
            <Image 
-            src={dataPiece.images[0].src} 
-            width={dataPiece.images[0].width} 
-            height={dataPiece.images[0].height}  
+            src={dataPiece?.images[0]?.src} 
+            width={dataPiece?.images[0]?.width} 
+            height={dataPiece?.images[0]?.height}  
             alt={'Imagen pieza'} 
             className={styles.image_mobile}
           />  

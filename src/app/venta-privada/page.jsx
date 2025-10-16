@@ -4,6 +4,8 @@ import PrivateSalePieces from "@/src/components/structure/PrivateSalePieces/Priv
 import Footer from "../../components/structure/Footer/Footer";
 import apiGetServer from "@/lib/apiGetServer";
 import { notFound } from "next/navigation";
+import { generatePageMetadata } from "@/lib/generatePageMetadata";
+import Image from "next/image";
 
 export async function generateMetadata() {
   const data = await apiGetServer({
@@ -13,10 +15,12 @@ export async function generateMetadata() {
   //Si no hay dotos redireccionamos
   if (!data?.title || !data?.description) return notFound();
 
-  return {
+  return generatePageMetadata({
     title: data?.title,
     description: data?.description,
-  };
+    url: data?.url,
+    images: [data?.image],
+  });
 }
 
 export default async function Page() {
@@ -31,6 +35,15 @@ export default async function Page() {
     <MainWrapper>
       <Heading data={{ heading: "Venta privada" }} />
       <PrivateSalePieces data={data} />
+
+      <Image 
+        src={"/assets/images/sarachaga_meta_thumb.jpg"}
+        width={1200}
+        height={600}
+        alt={"Martín Saráchaga Subastas"}
+        style={{display: "none"}}
+      />
+    
       <Footer />
     </MainWrapper>
   );

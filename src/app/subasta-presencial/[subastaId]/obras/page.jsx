@@ -4,9 +4,10 @@ import MainWrapper from "../../../../components/structure/MainWrapper/MainWrappe
 import Heading from "../../../../components/structure/Heading/Heading";
 import AuctionPieces from "@/src/components/structure/AuctionPieces/AuctionPieces";
 import Footer from "../../../../components/structure/Footer/Footer";
+import { generatePageMetadata } from "@/lib/generatePageMetadata";
+import Image from "next/image";
 
-export async function generateMetadata({ params, searchParams }) {
-
+export async function generateMetadata({ params }) {
   const { subastaId } = await params;
 
   const data = await apiGetServer({
@@ -16,10 +17,12 @@ export async function generateMetadata({ params, searchParams }) {
   //Si no hay datos redireccionamos
   if (!data?.title || !data?.description) return notFound();
 
-  return {
+  return generatePageMetadata({
     title: data?.title,
     description: data?.description,
-  }
+    url: data?.url,
+    images: [data?.image],
+  });
 }
 
 export default async function Page({ params }) {
@@ -39,6 +42,15 @@ export default async function Page({ params }) {
     <MainWrapper>
       <Heading data={{heading: 'SUBASTA PRESENCIAL'}} />
       <AuctionPieces data={data} />
+
+      <Image 
+        src={"/assets/images/sarachaga_meta_thumb.jpg"}
+        width={1200}
+        height={600}
+        alt={"Martín Saráchaga Subastas"}
+        style={{display: "none"}}
+      />
+
       <Footer />
     </MainWrapper>
   );

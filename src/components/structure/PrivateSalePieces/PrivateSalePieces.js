@@ -131,7 +131,9 @@ export default function PrivateSalePieces({ data }){
                                 <div className={styles.info}>
                                     <p>{d.nombre}</p>                        
                                 </div>    
-                                {i === 0 && <button onClick={ () => setFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>}                                   
+                                {i === 0 && dataPrivateSalePieces.length > 1 && (
+                                    <button onClick={ () => setFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>
+                                )}                                   
                             </div>                                   
                             <div className={styles.itemsGrid}>
                                 {d.lotes.map((lote, i) => {               
