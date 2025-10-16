@@ -71,7 +71,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           <Link href={backLink} className={styles.link_back}>VOLVER</Link> 
            <button onClick={ () => window.print() } className={styles.print_btn}>IMPRIMIR</button>
         </div>
-        <h2 className={styles.headline}>{dataPiece.autor}</h2>
+        <h1 className={styles.headline}>{dataPiece.autor}</h1>
 
         {windowSize.width <= 1024 && dataPiece?.images &&
            <img src={dataPiece.images[0].src} width={dataPiece.images[0].width} height={dataPiece.images[0].height}  alt={'Imagen pieza'} className={styles.image_mobile}/>  
