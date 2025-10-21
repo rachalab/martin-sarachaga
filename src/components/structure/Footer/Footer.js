@@ -1,7 +1,7 @@
 import styles from "./Footer.module.scss"; 
+import Link from "next/link";
 
-export default function Footer(){
-
+export default function Footer({content}){
   return (
     <footer className={styles.footer}>
       <div className={styles.wrapper}>
@@ -10,19 +10,39 @@ export default function Footer(){
         </div>
         <div className={styles.col_right}>
           <div className={styles.whatsapp}>
-            <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">WhatsApp</a>
-            <p>(+54) 11 4815-0742</p>
-            <p>(+54) 9 11 2478-7437</p>
+            { content?.waphone && 
+              <Link 
+                href={content?.waphone} 
+                rel="noopener noreferrer" 
+                target="_blank">WhatsApp
+              </Link> 
+            }
+
+            { content?.phones && content?.phones.map((p, index) => (
+              <p key={index}>{p?.phone}</p>
+            ))}
           </div>
           <div className={styles.social_networks}>
-            <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">Instagram</a>
-            <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">Facebook</a>
-            <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">LinkedIn</a>
-            <a href="https://www.google.com" rel="noopener noreferrer" target="_blank">YouTube</a>
+            { content?.networks && content?.networks.map((network, index) => (
+              <Link 
+                key={index} 
+                href={network?.urlnetwork} 
+                rel="noopener noreferrer" 
+                target="_blank">{network?.socialnetwork}
+              </Link>
+            ))}
           </div>
           <div className={styles.adress}>
+            { content?.mail && 
+              <Link 
+                href={`mailto:${content?.mail}`} 
+                rel="noopener noreferrer" 
+                target="_blank">{content?.mail}
+              </Link>
+            }
+
             <a href="mailto:info@martinsarachaga.com" rel="noopener noreferrer" target="_blank">info@martinsarachaga.com</a>
-            <p>Rodriguez Peña 1778 (1021) Buenos Aires, Argentina.</p>
+            { content?.address && <p>{content?.address}</p> }
           </div>
         </div>
       </div>

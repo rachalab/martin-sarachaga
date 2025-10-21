@@ -1,3 +1,4 @@
+import { builder } from "@builder.io/sdk";
 import MainWrapper from "../../../components/structure/MainWrapper/MainWrapper";
 import Heading from "../../../components/structure/Heading/Heading";
 import AuctionPrefilter from "../../../components/builder/AuctionPrefilter/AuctionPrefilter";
@@ -7,6 +8,9 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.scss";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
 import Image from "next/image";
+
+// Builder Public API Key set in .env file
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
 export async function generateMetadata({ params }) {
   const { subastaId } = await params;
@@ -36,6 +40,10 @@ export default async function Page({ params }) {
   //Si no hay datos redireccionamos
   if (!data?.categorias) return notFound();
 
+  const contentFooter = await builder
+    .get("footer", { userAttributes: { urlPath: "/footer" } })
+    .toPromise();
+  
   return (
     <MainWrapper>
       <Heading data={{ heading: "SUBASTA PRESENCIAL" }} />
@@ -59,7 +67,7 @@ export default async function Page({ params }) {
         alt={"Martín Saráchaga Subastas"}
         style={{display: "none"}}
       />      
-      <Footer />
+      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
     </MainWrapper>
   );
 }

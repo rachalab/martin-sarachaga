@@ -1,9 +1,13 @@
+import { builder } from "@builder.io/sdk";
 import apiGetServer from "@/lib/apiGetServer";
 import MainWrapper from "../../../components/structure/MainWrapper/MainWrapper";
 import ItemDetail from "@/src/components/structure/ItemDetail/ItemDetail";
 import Footer from "../../../components/structure/Footer/Footer";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
 import { notFound } from "next/navigation";
+
+// Builder Public API Key set in .env file
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
 export async function generateMetadata({ params }) {
 
@@ -47,10 +51,14 @@ export default async function Page({ params }) {
 
   if (!data?.lote ) return notFound();
 
+  const contentFooter = await builder
+    .get("footer", { userAttributes: { urlPath: "/footer" } })
+    .toPromise();
+
   return (   
     <MainWrapper>
       <ItemDetail dataPiece={data.lote} />
-      <Footer />
+      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
     </MainWrapper>
   );
 } 

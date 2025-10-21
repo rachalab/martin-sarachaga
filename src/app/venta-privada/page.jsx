@@ -1,3 +1,4 @@
+import { builder } from "@builder.io/sdk";
 import MainWrapper from "../../components/structure/MainWrapper/MainWrapper";
 import Heading from "../../components/structure/Heading/Heading";
 import PrivateSalePieces from "@/src/components/structure/PrivateSalePieces/PrivateSalePieces";
@@ -6,6 +7,9 @@ import apiGetServer from "@/lib/apiGetServer";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
 import Image from "next/image";
+
+// Builder Public API Key set in .env file
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
 export async function generateMetadata() {
   const data = await apiGetServer({
@@ -31,6 +35,10 @@ export default async function Page() {
   //Si no hay datos redireccionamos
   if (!data?.categorias) return notFound();
 
+  const contentFooter = await builder
+    .get("footer", { userAttributes: { urlPath: "/footer" } })
+    .toPromise();
+
   return (
     <MainWrapper>
       <Heading data={{ heading: "Venta privada" }} />
@@ -44,7 +52,7 @@ export default async function Page() {
         style={{display: "none"}}
       />
     
-      <Footer />
+      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
     </MainWrapper>
   );
 }

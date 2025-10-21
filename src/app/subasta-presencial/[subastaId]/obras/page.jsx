@@ -1,3 +1,4 @@
+import { builder } from "@builder.io/sdk";
 import apiGetServer from "@/lib/apiGetServer";
 import { notFound } from "next/navigation";
 import MainWrapper from "../../../../components/structure/MainWrapper/MainWrapper";
@@ -6,6 +7,9 @@ import AuctionPieces from "@/src/components/structure/AuctionPieces/AuctionPiece
 import Footer from "../../../../components/structure/Footer/Footer";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
 import Image from "next/image";
+
+// Builder Public API Key set in .env file
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
 export async function generateMetadata({ params }) {
   const { subastaId } = await params;
@@ -37,6 +41,9 @@ export default async function Page({ params }) {
   //Si no hay datos redireccionamos
   if (!data?.subasta) return notFound();
 
+  const contentFooter = await builder
+    .get("footer", { userAttributes: { urlPath: "/footer" } })
+    .toPromise();
 
   return (
     <MainWrapper>
@@ -51,7 +58,7 @@ export default async function Page({ params }) {
         style={{display: "none"}}
       />
 
-      <Footer />
+      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
     </MainWrapper>
   );
 }
