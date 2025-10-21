@@ -39,9 +39,7 @@ export default async function Page(props) {
   // If no content is found, trigger a 404
   (content && builderModelName) ?? notFound();
 
-  const contentFooter = await builder
-    .get("footer", { userAttributes: { urlPath: "/footer" } })
-    .toPromise();
+  const contentFooter = await builder.get("footer").toPromise();
 
   // Render for Builder editor
   if (isBuilder) {

@@ -51,9 +51,7 @@ export default async function Page({ params }) {
 
   if (!data?.lote ) return notFound();
 
-  const contentFooter = await builder
-    .get("footer", { userAttributes: { urlPath: "/footer" } })
-    .toPromise();
+  const contentFooter = await builder.get("footer").toPromise();
 
   return (   
     <MainWrapper>
