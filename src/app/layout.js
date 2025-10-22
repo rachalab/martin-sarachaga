@@ -1,15 +1,22 @@
+import { builder } from "@builder.io/sdk";
 import AppContext from "./context/AppContext";
 import HeaderNav from "../components/structure/HeaderNav/HeaderNav";
 import Newsletter from "../components/structure/Newsletter/Newsletter";
 import Announcement from "../components/structure/Announcement/Announcement";
 import "./globals.scss";
 
+// Builder Public API Key set in .env file
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
+
 export const metadata = {
   title: "Martín Saráchaga Subastas",
   description: "description",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+
+  const contentBanner = await builder.get("banner").toPromise();
+
   return (
     <html lang="en">
             
@@ -36,7 +43,7 @@ export default function RootLayout({ children }) {
         <AppContext>          
           <div id="modal-root"/>
           <Newsletter/>
-          <Announcement />
+          {contentBanner && contentBanner?.data?.active && <Announcement content={contentBanner?.data} model={"banner"} /> }
           <HeaderNav />
           <div id="filters-btn-root"/>
           <>{children}</>

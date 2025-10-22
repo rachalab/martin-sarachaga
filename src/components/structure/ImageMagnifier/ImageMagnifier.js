@@ -5,7 +5,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import styles from './ImageMagnifier.module.scss';
 import Image from 'next/image';
 
-const ImageMagnifier = ({ photo }) => {    
+const ImageMagnifier = ({ photo, priority = false }) => {    
     const imageContainerRef = useRef(null);
     const overlayRef = useRef(null);  
     const windowSize = useWindowSize();
@@ -86,6 +86,7 @@ const ImageMagnifier = ({ photo }) => {
                         width={photo?.width}
                         height={photo?.height}
                         className={styles.image}
+                        priority={priority}
                     />
                 </div>
             }
