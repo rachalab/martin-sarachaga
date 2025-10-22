@@ -97,7 +97,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           {dataPiece.preciofijo && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
         </ul>
 
-        <a className={styles.query_button} href="https://www.google.com" rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>
+        <a className={styles.query_button} href="https://api.whatsapp.com/send?phone=5491124787437&text=Hola" rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>
 
         {windowSize.width <= 1024 && dataPiece?.images &&
           dataPiece?.images.map((photo, i) => {   
