@@ -5,6 +5,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
+import Image from 'next/image';
 import ImageMagnifier from '../ImageMagnifier/ImageMagnifier';
 import styles from "./ItemDetail.module.scss"; 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,7 +19,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
   const pathname = usePathname(); 
   const segments = pathname.split('/').filter(Boolean);
   segments.pop();
-  
+
   //Link de volver atrás
   const backLink = '/' + segments.join('/');
 
@@ -58,7 +59,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           {dataPiece?.images?.map((photo, i) => {   
             return(
               <div key={i} className={styles.img_wrapper}>
-                <ImageMagnifier photo={photo} /> 
+                <ImageMagnifier photo={photo} priority={i === 0} /> 
               </div>                                           
             );
           })} 
@@ -74,7 +75,13 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
         <h1 className={styles.headline}>{dataPiece.autor}</h1>
 
         {windowSize.width <= 1024 && dataPiece?.images &&
-           <img src={dataPiece.images[0].src} width={dataPiece.images[0].width} height={dataPiece.images[0].height}  alt={'Imagen pieza'} className={styles.image_mobile}/>  
+           <Image 
+            src={dataPiece?.images[0]?.src} 
+            width={dataPiece?.images[0]?.width} 
+            height={dataPiece?.images[0]?.height}  
+            alt={'Imagen pieza'} 
+            className={styles.image_mobile}
+          />  
         }
 
         <p className={styles.description}>{dataPiece.descripcion}</p>
@@ -95,7 +102,15 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
         {windowSize.width <= 1024 && dataPiece?.images &&
           dataPiece?.images.map((photo, i) => {   
             return(
-              i !== 0 && <img src={photo?.src} width={photo?.width} height={photo?.height} alt={'Imagen pieza'} key={i} className={styles.image_mobile}/>                                             
+              i !== 0 && 
+                <Image 
+                  src={photo?.src} 
+                  width={photo?.width} 
+                  height={photo?.height} 
+                  alt={'Imagen pieza'} 
+                  key={i} 
+                  className={styles.image_mobile}
+                />             
             );
           })
         }

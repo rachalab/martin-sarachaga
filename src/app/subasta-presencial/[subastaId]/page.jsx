@@ -1,3 +1,4 @@
+import { builder } from "@builder.io/sdk";
 import MainWrapper from "../../../components/structure/MainWrapper/MainWrapper";
 import Heading from "../../../components/structure/Heading/Heading";
 import AuctionPrefilter from "../../../components/builder/AuctionPrefilter/AuctionPrefilter";
@@ -5,6 +6,11 @@ import Footer from "../../../components/structure/Footer/Footer";
 import apiGetServer from "@/lib/apiGetServer";
 import { notFound } from "next/navigation";
 import styles from "./page.module.scss";
+import { generatePageMetadata } from "@/lib/generatePageMetadata";
+import Image from "next/image";
+
+// Builder Public API Key set in .env file
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
 export async function generateMetadata({ params }) {
   const { subastaId } = await params;
@@ -14,12 +20,14 @@ export async function generateMetadata({ params }) {
   });
 
   //Si no hay dotos redireccionamos
-  if (!data?.categorias) return notFound();
+  if (!data?.meta?.title || !data?.meta?.description) return notFound();
 
-  return {
-    title: `Subasta Nro ${data?.subasta?.nro}`,
-    description: data?.subasta?.description,
-  };
+  return generatePageMetadata({
+    title: data?.meta?.title,
+    description: data?.meta?.description,
+    url: data?.meta?.url,
+    images: [data?.meta?.image],
+  });
 }
 
 export default async function Page({ params }) {
@@ -32,6 +40,8 @@ export default async function Page({ params }) {
   //Si no hay datos redireccionamos
   if (!data?.categorias) return notFound();
 
+  const contentFooter = await builder.get("footer").toPromise();
+  
   return (
     <MainWrapper>
       <Heading data={{ heading: "SUBASTA PRESENCIAL" }} />
@@ -48,7 +58,14 @@ export default async function Page({ params }) {
         })}
       </div>
       <AuctionPrefilter subastaId={subastaId} links={data?.categorias} />
-      <Footer />
+      <Image 
+        src={data?.meta?.image?.src ?? '/assets/images/sarachaga_meta_thumb.jpg'}
+        width={data?.meta?.image?.width ?? 1200}
+        height={data?.meta?.image?.height ?? 600}
+        alt={"Martín Saráchaga Subastas"}
+        style={{display: "none"}}
+      />      
+      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
     </MainWrapper>
   );
 }

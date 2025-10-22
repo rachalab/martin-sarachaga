@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import Link from 'next/link';
 import styles from "./Announcement.module.scss";
 
-export default function Announcement() {
+export default function Announcement({content, model}) {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [announcementStatus, setAnnouncementStatus] = useState(false);
@@ -27,8 +27,14 @@ export default function Announcement() {
   const announcementContent = (
     <div className={!isClosing ? `${styles.wrapper}` : `${styles.wrapper} ${styles.closing}`}>
       <button onClick={closeFilters} className={styles.close_btn} />             
-      <p>Abierta la recepción próxima subasta agosto — </p>
-      <Link href='/' className={styles.link}>Más información</Link>   
+      { content?.info && <p>{content?.info} — </p> }
+      {content?.link && content?.textlink && 
+        <Link 
+          href={content?.link} 
+          className={styles.link}>
+            {content?.textlink}
+        </Link>
+      }   
     </div>
   );
 

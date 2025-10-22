@@ -4,34 +4,55 @@ import MainWrapper from "../../components/structure/MainWrapper/MainWrapper";
 import Heading from "../../components/structure/Heading/Heading";
 import { notFound } from "next/navigation";
 import Footer from "../../components/structure/Footer/Footer";
+import { generatePageMetadata } from "@/lib/generatePageMetadata";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
-export default async function Page(props) {
-  const builderModelName = "page";
+export async function generateMetadata({ params }) {
 
+  const { page } = await params;
+
+  const urlPath = "/" + ((page?.join("/")) || "");
+  
+  const content = await builder
+    .get("page", { userAttributes: { urlPath } })
+    .toPromise();
+
+  return generatePageMetadata({
+    title: content?.data?.title + ' — Martín Saráchaga Subastas' || "Martín Saráchaga Subastas",
+    description: content?.data?.description || "Martín Saráchaga Subastas",
+    url: urlPath
+  });
+}
+
+export default async function Page(props) {
   const searchParams = await props.searchParams;
 
   const isBuilder = searchParams["builder.space"] ? true : false;
+  
+  const urlPath = "/" + ((await props?.params)?.page?.join("/") || "");
+  
+  const builderModelName = "page";
 
   const content = await builder
-    // Get the page content from Builder with the specified options
-    .get(builderModelName, {
-      userAttributes: {
-        // Use the page path specified in the URL to fetch the content
-        urlPath: "/" + ((await props?.params)?.page?.join("/") || ""),
-      },
-    })
-    // Convert the result to a promise
+    .get(builderModelName, { userAttributes: { urlPath } })
     .toPromise();
 
   // If no content is found, trigger a 404
   (content && builderModelName) ?? notFound();
 
+  const contentFooter = await builder.get("footer").toPromise();
+
+  // Render for Builder editor
   if (isBuilder) {
-    // 🚫 No envolver con MainWrapper (evita conflictos en editor)
-    return <RenderBuilderContent content={content} model={builderModelName} />;
+    return (
+      <>
+        {content?.data?.title && <Heading data={{heading: content?.data?.title}} />}    
+        <RenderBuilderContent content={content} model={builderModelName} />
+        {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }      
+      </>
+    );
   }
 
   // ✅ En el sitio real, envolver con MainWrapper
@@ -39,7 +60,7 @@ export default async function Page(props) {
     <MainWrapper>
       {content?.data?.title && <Heading data={{heading: content?.data?.title}} />}
       <RenderBuilderContent content={content} model={builderModelName} />
-      <Footer />
+      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
     </MainWrapper>
   );
 }
