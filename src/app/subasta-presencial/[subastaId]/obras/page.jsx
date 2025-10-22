@@ -25,7 +25,11 @@ export async function generateMetadata({ params }) {
     title: data?.title,
     description: data?.description,
     url: data?.url,
-    images: [data?.image],
+    images: {
+      src: '/assets/images/sarachaga_meta_thumb.jpg',
+      width: 1200,
+      height: 600
+    }
   });
 }
 

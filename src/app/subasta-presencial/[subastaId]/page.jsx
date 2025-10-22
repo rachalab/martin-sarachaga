@@ -26,7 +26,11 @@ export async function generateMetadata({ params }) {
     title: data?.meta?.title,
     description: data?.meta?.description,
     url: data?.meta?.url,
-    images: [data?.meta?.image],
+    images: {
+      src: '/assets/images/sarachaga_meta_thumb.jpg',
+      width: 1200,
+      height: 600
+    }
   });
 }
 
@@ -59,9 +63,9 @@ export default async function Page({ params }) {
       </div>
       <AuctionPrefilter subastaId={subastaId} links={data?.categorias} />
       <Image 
-        src={data?.meta?.image?.src ?? '/assets/images/sarachaga_meta_thumb.jpg'}
-        width={data?.meta?.image?.width ?? 1200}
-        height={data?.meta?.image?.height ?? 600}
+        src={'/assets/images/sarachaga_meta_thumb.jpg'}
+        width={1200}
+        height={600}
         alt={"Martín Saráchaga Subastas"}
         style={{display: "none"}}
       />      
