@@ -19,7 +19,6 @@ export default function LinksList({ title, links }){
                   key={i}
                 >
                   {data.title}
-                  {/* <span className={styles.arrow}>➔</span> */}
                 </Link>
               }
             </Fragment>

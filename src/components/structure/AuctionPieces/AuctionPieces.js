@@ -30,7 +30,7 @@ export default function AuctionPiecesContainer({ data }){
     } = useAppContext(); 
 
     //Informacion de noches
-    const [noches , setNoches] = useState([...data.noches]);
+    const [noches, setNoches] = useState([...data.noches]);
     
     //Mapeo de lotes de subasta
     const [dataAuction, setDataAuction] = useState([]);

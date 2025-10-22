@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
     url: `category/${subastaId}`,
   });
 
-  //Si no hay dotos redireccionamos
+  //Si no hay datos redireccionamos
   if (!data?.meta?.title || !data?.meta?.description) return notFound();
 
   return generatePageMetadata({

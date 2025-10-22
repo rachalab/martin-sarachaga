@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
   const { subastaId, obraId } = await params;
 
-  // acá params ya está disponible
+  // Acá params ya está disponible
   const batchId = obraId.split("-")[0];
 
   const data = await apiGetServer({
