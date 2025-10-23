@@ -59,7 +59,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           {dataPiece?.images?.map((photo, i) => {   
             return(
               <div key={i} className={styles.img_wrapper}>
-                <ImageMagnifier photo={photo} priority={i === 0} /> 
+                <ImageMagnifier photo={photo} preload={i === 0} /> 
               </div>                                           
             );
           })} 

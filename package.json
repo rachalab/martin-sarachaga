@@ -14,9 +14,9 @@
     "@builder.io/sdk": "^6.1.2",
     "@uidotdev/usehooks": "^2.4.1",
     "gsap": "^3.13.0",
-    "next": "15.4.6",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "16.0.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "sass": "^1.90.0",
     "smooth-scrollbar": "^8.8.4"
   }
