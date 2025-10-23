@@ -11,7 +11,6 @@ export default function AppProvider({ children }) {
   let scrollbar = useRef();
 
   //States utilizados en Subasta Presencial
-  const [dataAuctionPieces, setDataAuctionPieces] = useState([]);
   const [dataAuctionNighs, setDataAuctionNighs] = useState([]);
   const [currentAuctionNight, setCurrentAuctionNight] = useState('all');
   const [currentAuctionCategory, setCurrentAuctionCategory] = useState('all');
@@ -26,8 +25,6 @@ export default function AppProvider({ children }) {
       scrollbar,
       showNavBar,
       setShowNavBar,
-      dataAuctionPieces,
-      setDataAuctionPieces,
       dataAuctionNighs,
       setDataAuctionNighs,
       currentAuctionNight,

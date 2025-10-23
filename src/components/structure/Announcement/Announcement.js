@@ -8,10 +8,13 @@ import styles from "./Announcement.module.scss";
 export default function Announcement({content, model}) {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [announcementStatus, setAnnouncementStatus] = useState(true);
+  const [announcementStatus, setAnnouncementStatus] = useState(false);
 
   useEffect(() => {
     setIsBrowser(true);
+    setTimeout(() => {    
+      setAnnouncementStatus(true);  
+    }, 1000);
   }, []);
 
   function closeFilters() {

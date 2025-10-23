@@ -7,10 +7,13 @@ import styles from "./Newsletter.module.scss";
 export default function Newsletter() {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [newsletterStatus, setNewsletterStatus] = useState(true);
+  const [newsletterStatus, setNewsletterStatus] = useState(false);
 
   useEffect(() => {
     setIsBrowser(true);
+    setTimeout(() => {    
+      setNewsletterStatus(true);  
+    }, 2000);
   }, []);
 
   function closeFilters() {

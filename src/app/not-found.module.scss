@@ -1,0 +1,33 @@
+@use "../styles/system";
+
+.ops{    
+    font-size: calc(204px + (658 - 204) * ((100vw - 1200px) / (3840 - 1200))); 
+    font-weight: 900;
+    color: system.$red;
+    line-height: 100%;   
+    margin-top: calc(55px + (185 - 55) * ((100vw - 1200px) / (3840 - 1200)));
+    margin-left: calc(21px + (58 - 21) * ((100vw - 1200px) / (3840 - 1200)));
+    @media screen and (max-width: 1024px){
+        font-size: calc(60px + (240 - 60) * ((100vw - 300px) / (1024 - 300)));
+        margin-top: calc(48px + (122 - 48) * ((100vw - 300px) / (1024 - 300)));
+        margin-left: calc(9px + (28 - 9) * ((100vw - 300px) / (1024 - 300)));
+        margin-bottom: calc(5px + (10 - 5) * ((100vw - 300px) / (1024 - 300)));
+    }
+}
+
+.message{
+    @include system.container-width-1;    
+    @include system.font-level-4;
+    font-weight: 800;
+    color: system.$black;
+    line-height: 105%;
+    margin-bottom: calc(60px + (200 - 60) * ((100vw - 1200px) / (3840 - 1200)));
+    @media screen and (max-width: 1024px){
+        line-height: 110%;
+        margin-bottom: calc(28px + (104 - 28) * ((100vw - 300px) / (1024 - 300)));
+    }
+}
+
+.links_container{
+    display: flex;
+}

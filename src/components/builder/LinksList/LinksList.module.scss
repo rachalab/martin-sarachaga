@@ -38,18 +38,6 @@
       @media screen and (max-width: 1024px){
         border-bottom: solid system.$line-mobile system.$black;
       }
-    }
-    /* .arrow{
-      opacity: 0;    
-      transition: opacity 0.2s;  
-    }    
-    @media screen and (min-width: 1025px){
-      &:hover{
-        .arrow{
-          opacity: 1;     
-          transition: opacity 0.2s;
-        }      
-      }
-    }  */   
+    }  
   }
 } 

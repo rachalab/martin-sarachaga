@@ -72,7 +72,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           <Link href={backLink} className={styles.link_back}>VOLVER</Link> 
            <button onClick={ () => window.print() } className={styles.print_btn}>IMPRIMIR</button>
         </div>
-        <h2 className={styles.headline}>{dataPiece.autor}</h2>
+        <h1 className={styles.headline}>{dataPiece.autor}</h1>
 
         {windowSize.width <= 1024 && dataPiece?.images &&
            <Image 
@@ -97,7 +97,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           {dataPiece.preciofijo && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
         </ul>
 
-        <a className={styles.query_button} href="https://www.google.com" rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>
+        <a className={styles.query_button} href="https://api.whatsapp.com/send?phone=5491124787437&text=Hola" rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>
 
         {windowSize.width <= 1024 && dataPiece?.images &&
           dataPiece?.images.map((photo, i) => {   

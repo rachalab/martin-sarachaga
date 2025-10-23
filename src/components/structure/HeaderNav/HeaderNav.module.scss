@@ -45,7 +45,7 @@
 
         &.is_menu{
             background-color: transparent;
-            z-index: 1100;                                          
+            z-index: 8100;                                          
             .logotype{
                 color: system.$white;      
                 cursor: default;                
@@ -118,7 +118,7 @@
         bottom: 0;
         right: 0;
         left: 0;
-        z-index: 1050;
+        z-index: 8000;
         display: flex;
         justify-content: center;
         background-color: system.$red;
