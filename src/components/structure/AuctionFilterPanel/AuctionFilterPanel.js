@@ -58,6 +58,19 @@ export default function AuctionFilterPanel({ data }) {
 
   }, [currentAuctionNight, currentAuctionCategory, data?.lotes]);
 
+  /**
+   * Solo se da si el array de autores tiene un único valor
+   * filtro automático a ese autor
+   */
+  useEffect(() => {
+    if (dataAuthor?.length === 1) {
+      resetFilters({
+        night: currentAuctionNight,
+        category: currentAuctionCategory,
+        author: dataAuthor[0].original,
+      });
+    }
+  }, [dataAuthor]);
 
   useEffect(() => {
     setIsBrowser(true);
@@ -154,18 +167,18 @@ export default function AuctionFilterPanel({ data }) {
         {/* FILTRO: AUTORES */}
         <div className={styles.filter_group}>
           <h5 className={styles.title}>AUTOR</h5>
-
-            <button
-              onClick={() => resetFilters({
-                night: currentAuctionNight, 
-                category: currentAuctionCategory,
-                author: "all"
-              })}
-              className={currentAuctionAuthor === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
-            >
-              Todos
-            </button>
-          
+            {dataAuthor?.length > 1 && (
+              <button
+                onClick={() => resetFilters({
+                  night: currentAuctionNight, 
+                  category: currentAuctionCategory,
+                  author: "all"
+                })}
+                className={currentAuctionAuthor === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
+              >
+                Todos
+              </button>
+            )}          
           {dataAuthor?.map((dataAutor, i) => {
             return (
               <button
