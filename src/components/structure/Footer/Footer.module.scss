@@ -18,6 +18,9 @@
         calc(12px + (34 - 12) * ((100vw - 300px) / (1024 - 300)))
         ; 
     }
+    @media print {
+        display: none;
+    }
     .wrapper{
         width: 100%;        
         display: grid;

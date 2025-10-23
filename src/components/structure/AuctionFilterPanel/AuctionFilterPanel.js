@@ -110,8 +110,9 @@ export default function AuctionFilterPanel({ data }) {
                 author: currentAuctionAuthor
               })}
               className={currentAuctionCategory === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
-              >
-              Todas
+              >              
+              <span className={styles.text}>Todas</span>
+              <span className={styles.bg} />
             </button>
 
             {data?.categorias?.map((dataCategoria, i) => {
@@ -132,38 +133,7 @@ export default function AuctionFilterPanel({ data }) {
             })}
           </div>
         )}
-        {/* FILTRO: NOCHES */}
-        {/*data?.noches.length > 1 && (
-          <div className={styles.filter_group}>
-            <h5 className={styles.title}>Noche</h5>
-            {<button
-              onClick={() => resetFilters({
-                night:'all', 
-                category: currentAuctionCategory, 
-                author: 'all'
-              })}
-              className={currentAuctionNight === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
-            >
-              Todas
-            </button>}
-            {data?.noches?.map((dataNoche, i) => {
-              return (
-                <button
-                  onClick={() => resetFilters({
-                    night: dataNoche.noche,
-                    category: currentAuctionCategory, 
-                    author: currentAuctionAuthor
-                  })}
-                  key={i}
-                  className={currentAuctionNight === dataNoche.noche ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
-                >
-                  <span className={`${styles.text} ${styles.date}`}>{dataNoche.dia.short}</span>
-                  <span className={styles.bg} />
-                </button>
-              );
-            })}
-          </div>
-        )*/}        
+           
         {/* FILTRO: AUTORES */}
         <div className={styles.filter_group}>
           <h5 className={styles.title}>AUTOR</h5>
@@ -176,9 +146,10 @@ export default function AuctionFilterPanel({ data }) {
                 })}
                 className={currentAuctionAuthor === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
               >
-                Todos
+                <span className={styles.text}>Todos</span>
+                <span className={styles.bg} />
               </button>
-            )}          
+            )}         
           {dataAuthor?.map((dataAutor, i) => {
             return (
               <button

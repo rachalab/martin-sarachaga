@@ -8,7 +8,7 @@ import Link from 'next/link';
 import styles from "./Hero.module.scss"; 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Hero({line1, line2, cta_txt, cta_url, photo}){
+export default function Hero({text, cta_txt, cta_url, photo}){
 
   const refHero = useRef(null);
   const { setShowNavBar } = useAppContext(); 
@@ -42,11 +42,8 @@ export default function Hero({line1, line2, cta_txt, cta_url, photo}){
 
       <div className={styles.wrapper}  style={photo && { backgroundImage: `url(${photo})` }}>
         <div className={styles.info}>
-          {(line1 || line2) && (
-            <h2 className={styles.headline}>
-              {line1}
-              {line1 && line2 && <br />}
-              {line2}
+          {(text) && (
+            <h2 className={styles.headline} dangerouslySetInnerHTML={{ __html:text.replace(/(\r\n|\r|\n)/g, '<br>')}}>
             </h2>
           )}
           {cta_txt && 

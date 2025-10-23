@@ -39,6 +39,8 @@ export default function PrivateSalePieces({ data }){
 
     // Calcula el alto del contenedor con las piezas
     useEffect(() => {
+        if (dataPrivateSalePieces.length < 1) return;
+        
         if (!container.current) return;
         const resizeObserver = new ResizeObserver(() => {
         container?.current?.offsetHeight && setContainertHeight(container.current.offsetHeight);
@@ -50,6 +52,8 @@ export default function PrivateSalePieces({ data }){
 
     // Cuando el usuario filtra contenido hace Scroll To hacia el inicio de la página
     useEffect(() => {
+        if (dataPrivateSalePieces.length < 1) return;
+
         if (!isBrowser) return;
 
         if (isFirstRender.current) {
@@ -80,7 +84,9 @@ export default function PrivateSalePieces({ data }){
 
 
     //Muestra y oculta el botón de filtros flotante
-    useEffect(() => {
+    useEffect(() => {        
+        if (dataPrivateSalePieces.length < 1) return;
+
         let ctx = gsap.context(() => {        
             ScrollTrigger.create({
                 trigger: container.current,
@@ -119,7 +125,7 @@ export default function PrivateSalePieces({ data }){
                 setCurrentPrivateSaleCategory={setCurrentPrivateSaleCategory}            
             />}
 
-            {isBrowser && ReactDOM.createPortal(<div className={!floatingFiltersBtn ? `${styles.floating_filters}` : `${styles.floating_filters} ${styles.active}`}>
+            {dataPrivateSalePieces.length > 1 && isBrowser && ReactDOM.createPortal(<div className={!floatingFiltersBtn ? `${styles.floating_filters}` : `${styles.floating_filters} ${styles.active}`}>
                 <button onClick={ () =>setFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>
             </div>,document.getElementById("filters-btn-root"))}  
 

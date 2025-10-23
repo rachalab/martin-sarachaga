@@ -20,14 +20,9 @@ Builder.registerComponent(Hero, {
   friendlyName: "Destacado",
   inputs: [
     {
-      name: "line1",
-      friendlyName: "Línea 1",
-      type: "string",
-    },
-    {
-      name: "line2",
-      friendlyName: "Línea 2",
-      type: "string",
+      name: "text",
+      friendlyName: "Texto",
+      type: "longText",
     },
     {
       name: "cta_txt",
