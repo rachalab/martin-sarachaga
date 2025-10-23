@@ -97,8 +97,9 @@ export default function AuctionFilterPanel({ data }) {
                 author: currentAuctionAuthor
               })}
               className={currentAuctionCategory === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
-              >
-              Todas
+              >              
+              <span className={styles.text}>Todas</span>
+              <span className={styles.bg} />
             </button>
 
             {data?.categorias?.map((dataCategoria, i) => {
@@ -131,8 +132,9 @@ export default function AuctionFilterPanel({ data }) {
                 author: "all"
               })}
               className={currentAuctionAuthor === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
-            >
-              Todos
+            >              
+              <span className={styles.text}>Todos</span>
+              <span className={styles.bg} />
             </button>
           
           {dataAuthor?.map((dataAutor, i) => {

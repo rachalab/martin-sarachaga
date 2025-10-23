@@ -39,7 +39,10 @@ export default function PrivateSaleFilterPanel({
             
                 <button
                 onClick={() => setCurrentPrivateSaleCategory('all')}
-                className={currentPrivateSaleCategory === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}>Todas</button>        
+                className={currentPrivateSaleCategory === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}>
+                    <span className={styles.text}>Todas</span>
+                    <span className={styles.bg} />
+                </button>        
 
                 {data?.categorias?.map((dataCategoria, i) => {      
                     return (
