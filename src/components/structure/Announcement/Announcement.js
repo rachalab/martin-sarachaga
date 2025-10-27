@@ -30,6 +30,7 @@ export default function Announcement({content, model}) {
       { content?.info && <p>{content?.info} — </p> }
       {content?.link && content?.textlink && 
         <Link 
+          onClick={closeFilters}
           href={content?.link} 
           className={styles.link}>
             {content?.textlink}
