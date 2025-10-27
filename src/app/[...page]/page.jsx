@@ -5,6 +5,7 @@ import Heading from "../../components/structure/Heading/Heading";
 import { notFound } from "next/navigation";
 import Footer from "../../components/structure/Footer/Footer";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
+import Image from "next/image";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
@@ -60,6 +61,15 @@ export default async function Page(props) {
     <MainWrapper>
       {content?.data?.title && <Heading data={{heading: content?.data?.title}} />}
       <RenderBuilderContent content={content} model={builderModelName} />
+
+      <Image 
+        src={"/assets/images/sarachaga_meta_thumb.jpg"}
+        width={1200}
+        height={600}
+        alt={"Martín Saráchaga Subastas"}
+        style={{display: "none"}}
+      />
+
       {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
     </MainWrapper>
   );

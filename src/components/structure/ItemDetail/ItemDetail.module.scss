@@ -39,7 +39,7 @@
         max-height: 95vh;
         @media screen and (max-width: 1024px){
             max-height: 100%;    
-            padding-top: calc(52px + (145 - 52) * ((100vw - 300px) / (1024 - 300)));   
+            padding-top: calc(58px + (188 - 58) * ((100vw - 300px) / (1024 - 300)));  
         }
         p, li, a, .print_btn{
             @include system.font-level-6;

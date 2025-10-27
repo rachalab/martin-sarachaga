@@ -1,9 +1,15 @@
+import { builder } from "@builder.io/sdk";
 import MainWrapper from "../components/structure/MainWrapper/MainWrapper";
 import LinksList from '../components/builder/LinksList/LinksList';
 import Footer from "../components/structure/Footer/Footer";
 import styles from "./not-found.module.scss";
 
-export default function NotFound() {
+// Builder Public API Key set in .env file
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
+
+export default async function NotFound() {
+
+  const contentFooter = await builder.get("footer").toPromise();
 
   const dataLinks = [
     {destination: "/subasta-presencial", title: "Subasta presencial", type: "internal"},
@@ -19,7 +25,7 @@ export default function NotFound() {
       <div className={styles.links_container}>
         <LinksList title="SEGUIR NAVEGANDO" links={dataLinks}/>
       </div>    
-      <Footer />      
+      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }   
     </MainWrapper>
   );
 }
