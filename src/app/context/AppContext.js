@@ -17,6 +17,7 @@ export default function AppProvider({ children }) {
   const [currentAuctionAuthor, setCurrentAuctionAuthor] = useState('all');
   const [auctionFilterPanelStatus, setAuctionFilterPanelStatus] = useState(false);
   const [ showNavBar, setShowNavBar] = useState(false);
+  const [announcementStatus, setAnnouncementStatus] = useState(false);
  
 
   return (
@@ -25,6 +26,8 @@ export default function AppProvider({ children }) {
       scrollbar,
       showNavBar,
       setShowNavBar,
+      announcementStatus,
+      setAnnouncementStatus,
       dataAuctionNighs,
       setDataAuctionNighs,
       currentAuctionNight,

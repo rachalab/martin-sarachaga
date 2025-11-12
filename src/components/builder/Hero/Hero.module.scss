@@ -61,10 +61,12 @@
             right: calc(28px + (78 - 28) * ((100vw - 1200px) / (3840 - 1200)));
             text-align: right;
             mix-blend-mode: screen;
+            max-width: calc(850px + (2650 - 850) * ((100vw - 1200px) / (3840 - 1200)));
             @media screen and (max-width: 1024px){
                 top: auto;
                 right: calc(12px + (36 - 12) * ((100vw - 300px) / (1024 - 300)));
                 bottom: calc(12px + (36 - 12) * ((100vw - 300px) / (1024 - 300)));
+                max-width: calc(255px + (885 - 255) * ((100vw - 300px) / (1024 - 300)));
             } 
             .headline{
                 text-transform: uppercase;
@@ -77,7 +79,20 @@
                 @media screen and (max-width: 1024px){
                     line-height: 100%;
                     margin-bottom: calc(6px + (16 - 6) * ((100vw - 300px) / (1024 - 300)));
-                }       
+                }   
+            }
+            .description{
+                @include system.font-level-4;
+                font-weight: 800;
+                color: system.$white; 
+                line-height: 110%; 
+                margin-top: calc(-12px + (-36 - -12) * ((100vw - 1200px) / (3840 - 1200)));
+                margin-bottom: calc(14px + (44 - 14) * ((100vw - 1200px) / (3840 - 1200)));    
+                @media screen and (max-width: 1024px){
+                    line-height: 105%;
+                    margin-top: calc(-5px + (-10 - -5) * ((100vw - 300px) / (1024 - 300)));
+                    margin-bottom: calc(10px + (24 - 10) * ((100vw - 300px) / (1024 - 300)));
+                }   
             }
             .view_pieces_btn{
                 @include system.button;
@@ -99,6 +114,9 @@
             overflow: hidden;   
             display: grid;  
             grid-template-columns: repeat(auto-fit, minmax(calc(45px + (85 - 45) * ((100vw - 1200px) / (2560 - 1200))), 1fr));
+            @media screen and (max-width: 1024px){
+                display: none;
+            }
             .point{
                 display: flex;
                 justify-content: center;

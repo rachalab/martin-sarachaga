@@ -1,6 +1,7 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
 import ImageWithText from "./ImageWithText/ImageWithText";
+import ReceptionDetail from "./ReceptionDetail/ReceptionDetail";
 import LinksList from "./LinksList/LinksList";
 import Hero from "./Hero/Hero";
 import Timeline from "./Timeline/Timeline";
@@ -22,6 +23,11 @@ Builder.registerComponent(Hero, {
     {
       name: "text",
       friendlyName: "Texto",
+      type: "longText",
+    },
+    {
+      name: "description",
+      friendlyName: "Descripción",
       type: "longText",
     },
     {
@@ -55,6 +61,48 @@ Builder.registerComponent(ImageWithText, {
       friendlyName: "Texto",
       type: "longText",
       defaultValue: "Descripcion de la imagen",
+    },
+    {
+      name: "images",
+      friendlyName: "Imágenes",
+      type: "array",
+      subFields: [
+        {
+          name: "photo",
+          friendlyName: "Imagen",
+          type: "file",
+          allowedFileTypes: ["png", "jpg", "jpeg", "webp", "avif"],
+        },
+      ],
+    },
+  ],
+});
+
+// ReceptionDetail
+Builder.registerComponent(ReceptionDetail, {
+  name: "ReceptionDetail",
+  friendlyName: "Detalle recepción de obras",
+  inputs: [
+    {
+      name: "highlighted",
+      friendlyName: "Texto destacado",
+      type: "string"
+    },
+    {
+      name: "text",
+      friendlyName: "Texto",
+      type: "longText",
+      defaultValue: "Descripcion de la imagen",
+    },
+    {
+      name: "cta_txt",
+      friendlyName: "Llamado a la acción",
+      type: "string",     
+    },
+    {
+      name: "cta_url",
+      friendlyName: "Enlace",
+      type: "url",
     },
     {
       name: "images",

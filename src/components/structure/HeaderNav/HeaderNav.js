@@ -55,7 +55,7 @@ export default function HeaderNav(){
       <nav className={styles.inner_menu}>        
         <div className={styles.items_wrapper}>
           {menuLinks.map((menuLink, key)=>
-            <NavLink key={key} href={menuLink.url} className={styles.item} onClick={ () => changeMenuState(false) }>{menuLink.title}</NavLink>
+            <NavLink key={key} href={menuLink.url} className={styles.item} onClick={ () => setTimeout(() => { changeMenuState(false) }, 200) }>{menuLink.title}</NavLink>
           )}
         </div>
       </nav>

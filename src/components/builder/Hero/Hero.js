@@ -8,7 +8,7 @@ import Link from 'next/link';
 import styles from "./Hero.module.scss"; 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Hero({text, cta_txt, cta_url, photo}){
+export default function Hero({text, description, cta_txt, cta_url, photo}){
 
   const refHero = useRef(null);
   const { setShowNavBar } = useAppContext(); 
@@ -43,8 +43,10 @@ export default function Hero({text, cta_txt, cta_url, photo}){
       <div className={styles.wrapper}  style={photo && { backgroundImage: `url(${photo})` }}>
         <div className={styles.info}>
           {(text) && (
-            <h2 className={styles.headline} dangerouslySetInnerHTML={{ __html:text.replace(/(\r\n|\r|\n)/g, '<br>')}}>
-            </h2>
+            <h2 className={styles.headline} dangerouslySetInnerHTML={{ __html:text.replace(/(\r\n|\r|\n)/g, '<br>')}} />
+          )}
+          {(description) && (
+            <p className={styles.description} dangerouslySetInnerHTML={{ __html:description}} />
           )}
           {cta_txt && 
             <Link href={cta_url ? cta_url : "#"} className={styles.view_pieces_btn}>{cta_txt}</Link>
