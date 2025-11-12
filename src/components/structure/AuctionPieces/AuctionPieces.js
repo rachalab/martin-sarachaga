@@ -22,6 +22,7 @@ export default function AuctionPiecesContainer({ data }){
     //Traemos lo que necesitamos de AppContext        
     const {
         scrollbar,
+        announcementStatus,
         currentAuctionNight,
         currentAuctionCategory,
         currentAuctionAuthor,
@@ -169,7 +170,9 @@ export default function AuctionPiecesContainer({ data }){
         <>
             {auctionFilterPanelStatus && <AuctionFilterPanel data={data} />}
 
-            {isBrowser && ReactDOM.createPortal(<div className={!floatingFiltersBtn ? `${styles.floating_filters}` : `${styles.floating_filters} ${styles.active}`}>
+            {isBrowser && ReactDOM.createPortal(<div className={`
+            ${!floatingFiltersBtn ? `${styles.floating_filters}` : `${styles.floating_filters} ${styles.active}`}
+            ${announcementStatus ? styles.with_announcement : ""}`}>                
                 <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>
             </div>,document.getElementById("filters-btn-root"))}
 

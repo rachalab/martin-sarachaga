@@ -74,4 +74,10 @@
         opacity: 1;        
         transition: all .2s ease-in-out;
     }
+    &.with_announcement{
+        padding-bottom: calc(92px + (284 - 92) * ((100vw - 1200px) / (3840 - 1200)));
+        @media screen and (max-width: 1024px){        
+            padding-bottom: calc(75px + (195 - 75) * ((100vw - 300px) / (1024 - 300))); 
+        }
+    }
 }

@@ -2,13 +2,18 @@
 
 import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useAppContext } from '../../../app/context/AppContext';
 import Link from 'next/link';
 import styles from "./Announcement.module.scss";
 
 export default function Announcement({content, model}) {
   const [isBrowser, setIsBrowser] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [announcementStatus, setAnnouncementStatus] = useState(false);
+
+  const {
+    announcementStatus,
+    setAnnouncementStatus,
+  } = useAppContext(); 
 
   useEffect(() => {
     setIsBrowser(true);
@@ -17,20 +22,20 @@ export default function Announcement({content, model}) {
     }, 1000);
   }, []);
 
-  function closeFilters() {
+  function closeAnnouncement() {
     setIsClosing(true);
     setTimeout(() => {    
       setAnnouncementStatus(false);  
-    }, 800);
+    }, 200);
   }
 
   const announcementContent = (
     <div className={!isClosing ? `${styles.wrapper}` : `${styles.wrapper} ${styles.closing}`}>
-      <button onClick={closeFilters} className={styles.close_btn} />             
+      <button onClick={closeAnnouncement} className={styles.close_btn} />             
       { content?.info && <p>{content?.info} — </p> }
       {content?.link && content?.textlink && 
         <Link 
-          onClick={closeFilters}
+          onClick={closeAnnouncement}
           href={content?.link} 
           className={styles.link}>
             {content?.textlink}
