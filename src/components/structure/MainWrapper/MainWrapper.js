@@ -10,6 +10,6 @@ export default function MainWrapper({ children }) {
     if(size.width >= 1025) {
         return(<CustomScrollbar>{children}</CustomScrollbar>);
     } else {
-        return (<main id="main-container" className={styles.main_container}>{children}</main>);
+        return (<main id="main-container" className={styles.main_container}><div>{children}</div></main>);
     }
 }
