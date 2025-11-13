@@ -5,24 +5,18 @@ import ReceptionDetail from "./ReceptionDetail/ReceptionDetail";
 import LinksList from "./LinksList/LinksList";
 import Hero from "./Hero/Hero";
 import Timeline from "./Timeline/Timeline";
-import Test from "./Test/Test";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
 
-Builder.registerComponent(Test, {
-  name: "Test", // cómo aparece en Builder
-  friendlyName: "Test"
-});
-
-
 Builder.registerComponent(Hero, {
   name: "hero", // cómo aparece en Builder
-  friendlyName: "Destacado",
+  image: "https://martin-sarachaga.vercel.app/assets/icons/hero_ico.svg",
+  friendlyName: "Portada",
   inputs: [
     {
       name: "text",
-      friendlyName: "Texto",
+      friendlyName: "Título",
       type: "longText",
     },
     {
@@ -54,12 +48,13 @@ Builder.registerComponent(Hero, {
 // ImageWithText
 Builder.registerComponent(ImageWithText, {
   name: "ImageWithTexto",
-  friendlyName: "Imagen con texto",
+  image: "https://martin-sarachaga.vercel.app/assets/icons/img_w_t_ico.svg",
+  friendlyName: "Imagen con párrafos",
   inputs: [
     {
       name: "text",
       friendlyName: "Texto",
-      type: "longText",
+      type: "richText",
       defaultValue: "Descripcion de la imagen",
     },
     {
@@ -81,7 +76,8 @@ Builder.registerComponent(ImageWithText, {
 // ReceptionDetail
 Builder.registerComponent(ReceptionDetail, {
   name: "ReceptionDetail",
-  friendlyName: "Detalle recepción de obras",
+  image: "https://martin-sarachaga.vercel.app/assets/icons/img_w_t_plus_ico.svg",
+  friendlyName: "Imagen con destacado, párrafos y CTA",
   inputs: [
     {
       name: "highlighted",
@@ -91,7 +87,7 @@ Builder.registerComponent(ReceptionDetail, {
     {
       name: "text",
       friendlyName: "Texto",
-      type: "longText",
+      type: "richText",
       defaultValue: "Descripcion de la imagen",
     },
     {
@@ -123,6 +119,7 @@ Builder.registerComponent(ReceptionDetail, {
 // LinksList
 Builder.registerComponent(LinksList, {
   name: "LinksList",
+  image: "https://martin-sarachaga.vercel.app/assets/icons/links_list_ico.svg",
   friendlyName: "Lista de enlaces",
   inputs: [
     {
@@ -172,6 +169,7 @@ Builder.registerComponent(LinksList, {
 
 Builder.registerComponent(Timeline, {
   name: "Timeline", // cómo aparece en Builder
+  image: "https://martin-sarachaga.vercel.app/assets/icons/timeline_ico.svg",
   friendlyName: "Línea de tiempo",
   inputs: [
     {
