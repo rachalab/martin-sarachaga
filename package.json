@@ -17,6 +17,7 @@
     "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-gtm-module": "^2.0.11",
     "sass": "^1.90.0",
     "smooth-scrollbar": "^8.8.4"
   }

@@ -3,6 +3,8 @@ import AppContext from "./context/AppContext";
 import HeaderNav from "../components/structure/HeaderNav/HeaderNav";
 import Newsletter from "../components/structure/Newsletter/Newsletter";
 import Announcement from "../components/structure/Announcement/Announcement";
+import GoogleTagManager from "../components/GoogleTagManager/GoogleTagManager";
+
 import "./globals.scss";
 
 // Builder Public API Key set in .env file
@@ -48,6 +50,7 @@ export default async function RootLayout({ children }) {
           <div id="filters-btn-root"/>
           <>{children}</>
         </AppContext>
+        <GoogleTagManager />
       </body>
 
     </html>
