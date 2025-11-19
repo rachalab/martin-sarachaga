@@ -1,7 +1,6 @@
 import { builder } from "@builder.io/sdk";
 import AppContext from "./context/AppContext";
 import HeaderNav from "../components/structure/HeaderNav/HeaderNav";
-import Newsletter from "../components/structure/Newsletter/Newsletter";
 import Announcement from "../components/structure/Announcement/Announcement";
 import GoogleTagManager from "../components/GoogleTagManager/GoogleTagManager";
 
@@ -44,7 +43,6 @@ export default async function RootLayout({ children }) {
       <body>
         <AppContext>          
           <div id="modal-root"/>
-          <Newsletter/>
           {contentBanner && contentBanner?.data?.active && <Announcement content={contentBanner?.data} model={"banner"} /> }
           <HeaderNav />
           <div id="filters-btn-root"/>
