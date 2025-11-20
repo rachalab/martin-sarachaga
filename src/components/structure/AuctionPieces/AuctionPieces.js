@@ -136,11 +136,17 @@ export default function AuctionPiecesContainer({ data }){
 
   // 3) esperar hasta que exista el elemento
   let cancelled = false;
-  let start = performance.now();
-  const maxWait = 2000;
+  
   let rafId = 0;
 
-  const check = () => {
+ const maxWait = 2000;
+let start = 0;
+
+const check = () => {
+  if (start === 0) {
+    start = performance.now();  // <-- seguro en el cliente
+  }
+
     if (cancelled) return;
     const el = document.getElementById(`id-${targetId}`);
     if (el) {
