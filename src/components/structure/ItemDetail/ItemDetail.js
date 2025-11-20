@@ -99,8 +99,8 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
             <li><span>Fecha de subasta</span> {dataNoche?.dia?.format ?? '-' }</li>
           }
           {/*address && <li><span>Lugar</span> {address}</li>*/}
-          {dataPiece.preciominimo && <li><span>Valor base</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciominimo}</li>}
-          {dataPiece.preciofijo && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
+          {!!dataPiece.preciominimo && Number(dataPiece.preciominimo) !== 0 && <li><span>Valor base</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciominimo}</li>}
+          {!!dataPiece.preciofijo && Number(dataPiece.preciofijo) !== 0 && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
         </ul>
 
         <a className={styles.query_button} href="https://api.whatsapp.com/send?phone=5491124787437&text=Hola" rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>
