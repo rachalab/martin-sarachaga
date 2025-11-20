@@ -1,3 +1,5 @@
+// Componente AuctionPiecesContainer optimizado con renderizado progresivo por IntersectionObserver
+
 'use client'
 import { useRef, useEffect, useState } from 'react';
 import ReactDOM from "react-dom";
@@ -9,6 +11,7 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import ItemPiece from '../ItemPiece/ItemPiece';
 import AuctionFilterPanel from '../AuctionFilterPanel/AuctionFilterPanel';
 import styles from "./AuctionPieces.module.scss"; 
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function AuctionPiecesContainer({ data }){
@@ -16,10 +19,13 @@ export default function AuctionPiecesContainer({ data }){
     const isFirstRender = useRef(true);
     const [isBrowser, setIsBrowser] = useState(false);
     const [floatingFiltersBtn, setFloatingFiltersBtn] = useState(false);
-    const [containerHeight, setContainertHeight] = useState(0);
+    const [containerHeight, setContainerHeight] = useState(0);
     const windowSize = useWindowSize();
+    const [fadeAll, setFadeAll] = useState(false);
 
-    //Traemos lo que necesitamos de AppContext        
+    const loadMoreRef = useRef(null);
+    const [visibleCount, setVisibleCount] = useState(18);
+
     const {
         scrollbar,
         announcementStatus,
@@ -30,73 +36,53 @@ export default function AuctionPiecesContainer({ data }){
         setAuctionFilterPanelStatus
     } = useAppContext(); 
 
-    //Informacion de noches
     const [noches, setNoches] = useState([...data.noches]);
-    
-    //Mapeo de lotes de subasta
     const [dataAuction, setDataAuction] = useState([]);
     const [dataCountAuction, setDataCountAuction] = useState(false);
 
     useEffect(() => {
-        //Si hay noche o lotes
         if (!noches?.length || !data?.lotes?.length) {
-            setDataAuction([]); return;
+            setDataAuction([]);
+            return;
         }
 
-        //Array para filtrar
         let filteredLotes = [...data.lotes];
 
-        //Filtro por noche
         if (currentAuctionNight !== "all") {
             filteredLotes = filteredLotes.filter(
                 (lote) => String(lote.nronoche) === String(currentAuctionNight)
             );
         }
-
-        //Filtro por categoria
         if (currentAuctionCategory !== "all") {
             filteredLotes = filteredLotes.filter(
                 (lote) => String(lote.categoria) === String(currentAuctionCategory)
             );
         }
-
-        //Filtro por Autor
         if (currentAuctionAuthor !== "all") {
             filteredLotes = filteredLotes.filter(
                 (lote) => String(lote.autor) === String(currentAuctionAuthor)
             );
         }
 
-        // Agrupar lotes por número de noche
         const grouped = noches?.map((noche) => {
             const nocheNumero = noche.noche;
             const lotesDeNoche = filteredLotes.filter(lote => lote.nronoche === nocheNumero);
-
             return {
                 nocheNumero,
                 dataNoche: noche,
                 lotes: lotesDeNoche
             };
-
         });
 
-        //Salida final para mapear
         setDataAuction(grouped);
 
-        //Verificar si al menos una noche tiene lotes
         const hayLotes = grouped.some((noche) => noche.lotes.length > 0);
-
-        //Setea si hay o no coincidencia de filtros
         setDataCountAuction(hayLotes);
-     
+        setVisibleCount(18);
     }, [data, currentAuctionNight, currentAuctionCategory, currentAuctionAuthor]);
 
-
-    //Si cambia alguna categoría, autor o noche, hace un scroll hasta el inicio de la página 
     useEffect(() => {
         if (!isBrowser) return;
-
-        // Evitar ejecución en el primer render
         if (isFirstRender.current) {
             isFirstRender.current = false;
             return;
@@ -107,10 +93,7 @@ export default function AuctionPiecesContainer({ data }){
         const target = document.querySelector(targetSelector);
 
         if (!target) return;
-
         const scrollTarget = isDesktop ? scrollbar.current : window;
-
-        // Verificar scrollbar solo si es desktop
         if (isDesktop && !scrollbar.current) return;
 
         gsap.to(scrollTarget, {
@@ -118,113 +101,211 @@ export default function AuctionPiecesContainer({ data }){
             duration: isDesktop ? 0.8 : 0.5,
             ease: Circ.easeOut,
         });
-    }, [
-    dataAuction,
-    isBrowser,
-    windowSize.width,
-    ]);
+    }, [dataAuction, isBrowser, windowSize.width]);
+
+    
+    useEffect(() => {
+  if (!isBrowser || !dataAuction?.length) return;
+
+  const hash = window.location.hash;
+  if (!hash.startsWith("#id-")) return;
+
+  const targetId = hash.replace("#id-", "");
+
+  // activar fade (todo se pone con opacity 0)
+  setFadeAll(true);
+
+  // 1) recorrer para obtener índice global
+  let globalIndex = 0;
+  let foundIndex = null;
+  for (const noche of dataAuction) {
+    for (const lote of noche.lotes) {
+      if (String(lote.id) === String(targetId)) {
+        foundIndex = globalIndex;
+        break;
+      }
+      globalIndex++;
+    }
+    if (foundIndex !== null) break;
+  }
+
+  if (foundIndex === null) return;
+
+  // 2) asegurar que visibleCount cubra el ítem
+  setVisibleCount((prev) => Math.max(prev, foundIndex + 10));
+
+  // 3) esperar hasta que exista el elemento
+  let cancelled = false;
+  let start = performance.now();
+  const maxWait = 2000;
+  let rafId = 0;
+
+  const check = () => {
+    if (cancelled) return;
+    const el = document.getElementById(`id-${targetId}`);
+    if (el) {
+      const isDesktop = windowSize.width >= 1025;
+      const scrollTarget = isDesktop ? scrollbar?.current : window;
+
+      const onScrollDone = () => {
+        // fade-in cuando termina
+        setFadeAll(false);
+      };
+
+      if (isDesktop && scrollbar?.current && typeof scrollbar.current.scrollTo === "function") {
+        try {
+          scrollbar.current.scrollTo(0, el.offsetTop, 600);
+          setTimeout(onScrollDone, 650);
+        } catch {
+          gsap.to(scrollTarget, {
+            scrollTo: { y: el.offsetTop },
+            duration: isDesktop ? 0.8 : 0.5,
+            ease: Circ.easeOut,
+            onComplete: onScrollDone,
+          });
+        }
+      } else {
+        gsap.to(scrollTarget || window, {
+          scrollTo: { y: el.offsetTop },
+          duration: isDesktop ? 0.8 : 0.5,
+          ease: Circ.easeOut,
+          onComplete: onScrollDone,
+        });
+      }
+
+      return;
+    }
+
+    if (performance.now() - start < maxWait) {
+      rafId = requestAnimationFrame(check);
+    }
+  };
+
+  rafId = requestAnimationFrame(check);
+
+  return () => {
+    cancelled = true;
+    if (rafId) cancelAnimationFrame(rafId);
+  };
+}, [isBrowser, dataAuction, windowSize.width, scrollbar]);
 
 
-    // Calcula el alto del contenedor con las piezas
+
+
+
     useEffect(() => {
         if (!container.current) return;
         const resizeObserver = new ResizeObserver(() => {
-        container?.current?.offsetHeight && setContainertHeight(container.current.offsetHeight);
+            container?.current?.offsetHeight && setContainerHeight(container.current.offsetHeight);
         });
         resizeObserver.observe(container.current);            
         return () => resizeObserver.disconnect();        
-    }, []); 
+    }, []);
 
-
-    //Muestra y oculta el botón de filtros flotante
     useEffect(() => {
         let ctx = gsap.context(() => {        
             ScrollTrigger.create({
                 trigger: container.current,
                 start: "top -10%",
                 end: () => `+=${containerHeight} 80%`,
-                onEnterBack: function() {
-                    setFloatingFiltersBtn(true);
-                },
-                onEnter: function() {
-                    setFloatingFiltersBtn(true);
-                },
-                onLeaveBack: function() {
-                    setFloatingFiltersBtn(false);
-                },
-                onLeave: function() {
-                    setFloatingFiltersBtn(false);
-                }
+                onEnterBack: () => setFloatingFiltersBtn(true),
+                onEnter: () => setFloatingFiltersBtn(true),
+                onLeaveBack: () => setFloatingFiltersBtn(false),
+                onLeave: () => setFloatingFiltersBtn(false)
             });    
         }, container);
         return () => ctx.revert();
     }, [containerHeight]);
 
-
     useEffect(() => {
         setIsBrowser(true);  
     }, []);
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setVisibleCount((prev) => prev + 12);
+                }
+            },
+            { rootMargin: "600px" }
+        );
+
+        if (loadMoreRef.current) observer.observe(loadMoreRef.current);
+
+        return () => {
+            if (loadMoreRef.current) observer.unobserve(loadMoreRef.current);
+        };
+    }, []);
+
+    const renderWithLimits = () => {
+        let rendered = 0;
+
+        return dataAuction.map((nocheItem, i, arr) => {
+            const { dataNoche, lotes } = nocheItem;
+            const firstIndex = arr.findIndex(item => item.lotes?.length > 0);
+
+            const lotesToRender = lotes.slice(0, Math.max(0, visibleCount - rendered));
+            rendered += lotes.length;
+
+            return (
+                <section key={i} className={styles.wrapper}>
+                    {lotes.length > 0 && (
+                        <>
+                            <div className={styles.divider}>
+                                <div className={styles.info}>
+                                    <p className={styles.red}>Noche {dataNoche.noche}</p>
+                                    <p className={styles.date_dsk}>{dataNoche.dia.format}</p>
+                                    <p className={styles.date_mob}>{dataNoche.dia.short}</p>
+                                    <p>{dataNoche.horario.format} H.</p>
+                                </div>
+                                {i === firstIndex && (
+                                    <button onClick={() => setAuctionFilterPanelStatus(true)} className={styles.btn_filters}>FILTRAR</button>
+                                )}
+                            </div>
+
+                            <div className={`${styles.itemsGrid} ${fadeAll ? "fade-all" : "fade-all-active"}`}>
+                                {lotesToRender.map((dataPiece, i) => (
+                                    <ItemPiece key={i} data={dataPiece} />
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </section>
+            );
+        });
+    };
 
     return (
         <>
             {auctionFilterPanelStatus && <AuctionFilterPanel data={data} />}
 
-            {isBrowser && ReactDOM.createPortal(<div className={`
-            ${!floatingFiltersBtn ? `${styles.floating_filters}` : `${styles.floating_filters} ${styles.active}`}
-            ${announcementStatus ? styles.with_announcement : ""}`}>                
-                <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>
-            </div>,document.getElementById("filters-btn-root"))}
+            {isBrowser && ReactDOM.createPortal(
+                <div className={`${!floatingFiltersBtn ? `${styles.floating_filters}` : `${styles.floating_filters} ${styles.active}`} ${announcementStatus ? styles.with_announcement : ""}`}>
+                    <button onClick={() => setAuctionFilterPanelStatus(true)} className={styles.btn_filters}>FILTRAR</button>
+                </div>,
+                document.getElementById("filters-btn-root")
+            )}
 
             <div ref={container}>
-                {dataAuction?.length > 0 && !dataCountAuction &&
+                {dataAuction?.length > 0 && !dataCountAuction && (
                     <section className={styles.wrapper}>
                         <div className={styles.divider}>
                             <div className={styles.info}>
-                                <p className={styles.red}>Si resultados</p> 
+                                <p className={styles.red}>Sin resultados</p>
                             </div>
-                            <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>                            
+                            <button onClick={() => setAuctionFilterPanelStatus(true)} className={styles.btn_filters}>FILTRAR</button>
                         </div>
                         <div className={styles.itemsGrid}>  
-                            <p>No hay coincidencias en la categoria {data?.categorias?.find((c) => c.id === currentAuctionCategory)?.nombre} {currentAuctionAuthor != "all" && `con el autor ${currentAuctionAuthor}`}.</p>
+                            <p>No hay coincidencias.</p>
                         </div>                             
                     </section>
-                }
+                )}
 
-                {dataAuction.map((nocheItem, i, arr) =>{
-                    //Datos
-                    const { dataNoche, lotes } = nocheItem;
+                {renderWithLimits()}
 
-                    // Encontrar índice del primer bloque que tiene lotes
-                    const firstIndex = arr.findIndex(item => item.lotes?.length > 0);
-
-                    return (
-                        <section key={i} className={styles.wrapper}>
-                            {lotes?.length > 0 &&
-                                <>
-                                    <div className={styles.divider}>
-                                        <div className={styles.info}>
-                                            <p className={styles.red}>Noche {dataNoche.noche}</p>
-                                            <p className={styles.date_dsk}>{dataNoche.dia.format}</p>
-                                            <p className={styles.date_mob}>{dataNoche.dia.short}</p>
-                                                
-                                            <p>{dataNoche.horario.format} H.</p>
-                                        </div> 
-                                        {i === firstIndex && <button onClick={ () => setAuctionFilterPanelStatus(true) } className={styles.btn_filters}>FILTRAR</button>}
-                                    </div>
-                                    <div className={styles.itemsGrid}>
-                                        {lotes.map((dataPiece, i) => {               
-                                            return (
-                                                <ItemPiece key={i} data={dataPiece} />
-                                            );
-                                        })}
-                                    </div>
-                                </>                    
-                            }
-                        </section>
-                    )
-                })}
+                <div ref={loadMoreRef} style={{ height: 1 }}></div>
             </div>
-        </> 
-    )
+        </>
+    );
 }

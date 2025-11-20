@@ -83,6 +83,8 @@ export default function AuctionFilterPanel({ data }) {
     }, 800);
   }
 
+  console.log(data);
+
   //Filtrado de piezas
   function resetFilters({ night, category, author }) {
     setCurrentAuctionNight(night);
@@ -99,6 +101,42 @@ export default function AuctionFilterPanel({ data }) {
           <button onClick={closeFilters} className={styles.close_btn} />
         </div>
 
+
+
+      {/* FILTRO: NOCHES */}
+        {data?.noches.length > 1 && (        
+          <div className={styles.filter_group}>
+            <h5 className={styles.title}>NOCHE</h5>
+            <button
+              onClick={() => resetFilters({
+                night: "all", 
+                category: "all", 
+                author: currentAuctionAuthor
+              })}
+              className={currentAuctionNight === 'all' ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
+              >              
+              <span className={styles.text}>Todas</span>
+              <span className={styles.bg} />
+            </button>
+
+            {data?.noches?.map((dataNoche, i) => {
+              return (
+                <button
+                  onClick={() => resetFilters({
+                    night: dataNoche.noche, 
+                    category: "all", 
+                    author: "all"
+                  })}                
+                  key={i}
+                  className={currentAuctionNight === dataNoche.noche ? `${styles.btn_filter} ${styles.active}` : styles.btn_filter}
+                >
+                  <span className={styles.text}>Noche {dataNoche.noche}</span>
+                  <span className={styles.bg} />
+                </button>
+              );
+            })}
+          </div>
+        )}
         {/* FILTRO: CATEGORÍAS */}
         {data?.categorias.length > 1 && (        
           <div className={styles.filter_group}>
