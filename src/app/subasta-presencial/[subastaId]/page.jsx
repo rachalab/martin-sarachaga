@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import styles from "./page.module.scss";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
 import Image from "next/image";
+import NightPrefilter from "@/src/components/builder/NightPreFilter/NightPrefilter";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
@@ -27,10 +28,10 @@ export async function generateMetadata({ params }) {
     description: data?.meta?.description,
     url: data?.meta?.url,
     images: {
-      src: '/assets/images/sarachaga_meta_thumb.jpg',
+      src: "/assets/images/sarachaga_meta_thumb.jpg",
       width: 1200,
-      height: 600
-    }
+      height: 600,
+    },
   });
 }
 
@@ -45,31 +46,22 @@ export default async function Page({ params }) {
   if (!data?.categorias) return notFound();
 
   const contentFooter = await builder.get("footer").toPromise();
-  
+
   return (
     <MainWrapper>
       <Heading data={{ heading: "SUBASTA PRESENCIAL" }} />
-      <div className={styles.nights}>
-        {data?.noches.map((data, i) => {
-          return (
-            <div className={styles.night} key={i}>
-              <p className={styles.red}>Noche {data.noche}</p>
-              <p className={styles.date_dsk}>{data.dia.format}</p>
-              <p className={styles.date_mob}>{data.dia.short}</p>
-              <p>{data.horario.format} H.</p>
-            </div>
-          );
-        })}
-      </div>
+      <NightPrefilter subastaId={subastaId} noches={data?.noches} />
       <AuctionPrefilter subastaId={subastaId} links={data?.categorias} />
-      <Image 
-        src={'/assets/images/sarachaga_meta_thumb.jpg'}
+      <Image
+        src={"/assets/images/sarachaga_meta_thumb.jpg"}
         width={1200}
         height={600}
         alt={"Martín Saráchaga Subastas"}
-        style={{display: "none"}}
-      />      
-      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
+        style={{ display: "none" }}
+      />
+      {contentFooter?.data && (
+        <Footer content={contentFooter?.data} model={"footer"} />
+      )}
     </MainWrapper>
   );
 }

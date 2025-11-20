@@ -15,7 +15,6 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
   const container = useRef(null);
   const colLeft = useRef(null);
   const [colLeftHeight, setColLeftHeight] = useState(0);
-
   const pathname = usePathname(); 
   const segments = pathname.split('/').filter(Boolean);
   segments.pop();
@@ -27,7 +26,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
     if(windowSize.width >= 1025){
       if (!colLeft.current) return;
       const resizeObserver = new ResizeObserver(() => {
-        setColLeftHeight(colLeft.current.offsetHeight);
+        setColLeftHeight(colLeft.current?.offsetHeight);
       });
       resizeObserver.observe(colLeft.current);            
       return () => resizeObserver.disconnect();  
@@ -69,10 +68,18 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
       <div className={styles.col_right}>
 
         <div className={styles.header}>
-          <Link href={backLink} className={styles.link_back}>VOLVER</Link> 
+          <Link href={`${backLink}#id-${dataPiece.id}`} className={styles.link_back}>CATÁLOGO</Link> 
            <button onClick={ () => window.print() } className={styles.print_btn}>IMPRIMIR</button>
         </div>
-        <h1 className={styles.headline}>{dataPiece.autor}</h1>
+        <h3 className={styles.lote}>Lote N° {dataPiece.lote}</h3>
+        {dataPiece.categoria !== 1 && dataPiece.categoria !== 22 ?
+                <h1 className={styles.headline}>{dataPiece.titulo}</h1>
+
+        :
+                <h1 className={styles.headline}>{dataPiece.autor}</h1>
+
+      
+        }
 
         {windowSize.width <= 1024 && dataPiece?.images &&
            <Image 
@@ -87,12 +94,11 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
         <p className={styles.description}>{dataPiece.descripcion}</p>
 
         <ul className={styles.technical_sheet}>
-          <li><span>Título</span> {dataPiece.titulo}</li>
-          <li><span>Lote N°</span> {dataPiece.lote}</li>
+          {(dataPiece.categoria == 1 || dataPiece.categoria == 22) && (<li><span>Título</span> {dataPiece.titulo}</li>)}
           {dataPiece?.subasta && 
             <li><span>Fecha de subasta</span> {dataNoche?.dia?.format ?? '-' }</li>
           }
-          {address && <li><span>Lugar</span> {address}</li>}
+          {/*address && <li><span>Lugar</span> {address}</li>*/}
           {dataPiece.preciominimo && <li><span>Valor base</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciominimo}</li>}
           {dataPiece.preciofijo && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
         </ul>

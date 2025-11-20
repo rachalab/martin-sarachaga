@@ -73,6 +73,17 @@
                 font-weight: 800;
                 border-bottom: solid system.$line system.$black;
             }
+       
+        }     
+         .lote{
+            @include system.font-level-5;
+            font-weight: 800;
+            color: system.$black;
+            line-height: 100%;
+            margin-bottom: calc(16px + (38 - 16) * ((100vw - 1200px) / (3840 - 1200)));
+            @media screen and (max-width: 1024px){
+                margin-bottom: calc(8px + (18 - 8) * ((100vw - 300px) / (1024 - 300)));
+            }
         }     
         .headline{
             @include system.font-level-3;

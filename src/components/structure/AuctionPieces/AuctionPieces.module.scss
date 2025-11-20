@@ -50,7 +50,17 @@
             grid-gap: calc(10.5px + (34 - 10.5) * ((100vw - 300px) / (1024 - 300)));
             margin-bottom: calc(35px + (125 - 35) * ((100vw - 300px) / (1024 - 300))); 
         }
+            transition: opacity 0.5s ease;
+
     }
+    .fade-all {
+    opacity: 0;
+    }
+
+    .fade-all-active {
+    opacity: 1;
+    }
+
 }
 
 .btn_filters{

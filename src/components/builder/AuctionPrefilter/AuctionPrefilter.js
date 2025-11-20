@@ -14,7 +14,7 @@ export default function AuctionPrefilter({ subastaId, links }){
   const windowSize = useWindowSize();
   const {setCurrentAuctionNight, setCurrentAuctionCategory, setCurrentAuctionAuthor} = useAppContext(); 
 
-  const handleClick = (value) => {
+  const setCategory = (value) => {
     setCurrentAuctionCategory(value);
     router.push(`${subastaId}/obras`);
   }
@@ -106,7 +106,7 @@ export default function AuctionPrefilter({ subastaId, links }){
 
         {links?.map((data, i) => {               
           return (
-            <button onClick={() => handleClick(data.id)} className={styles.link} data-label={`id_${data.id}`} key={i}>{data.nombre}</button>
+            <button onClick={() => setCategory(data.id)} className={styles.link} data-label={`id_${data.id}`} key={i}>{data.nombre}</button>
           );
         })}
 
@@ -118,7 +118,7 @@ export default function AuctionPrefilter({ subastaId, links }){
           })}
         </div>        
 
-        <Link href={`${subastaId}/obras`} className={`${styles.link} ${styles.cta}`}>Ver todo ➔</Link>
+        <Link href={`${subastaId}/obras`} className={`${styles.link} ${styles.cta}`}>Ver catálogo ➔</Link>
       </section>
     </>
   )
