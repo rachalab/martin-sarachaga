@@ -5,25 +5,26 @@ import Heading from "../../components/structure/Heading/Heading";
 import { notFound } from "next/navigation";
 import Footer from "../../components/structure/Footer/Footer";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
-import Image from "next/image";
+//import Image from "next/image";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
 
 export async function generateMetadata({ params }) {
-
   const { page } = await params;
 
-  const urlPath = "/" + ((page?.join("/")) || "");
-  
+  const urlPath = "/" + (page?.join("/") || "");
+
   const content = await builder
     .get("page", { userAttributes: { urlPath } })
     .toPromise();
 
   return generatePageMetadata({
-    title: content?.data?.title + ' — Martín Saráchaga Subastas' || "Martín Saráchaga Subastas",
+    title:
+      content?.data?.title + " — Martín Saráchaga Subastas" ||
+      "Martín Saráchaga Subastas",
     description: content?.data?.description || "Martín Saráchaga Subastas",
-    url: urlPath
+    url: urlPath,
   });
 }
 
@@ -31,9 +32,9 @@ export default async function Page(props) {
   const searchParams = await props.searchParams;
 
   const isBuilder = searchParams["builder.space"] ? true : false;
-  
+
   const urlPath = "/" + ((await props?.params)?.page?.join("/") || "");
-  
+
   const builderModelName = "page";
 
   const content = await builder
@@ -49,9 +50,13 @@ export default async function Page(props) {
   if (isBuilder) {
     return (
       <>
-        {content?.data?.title && <Heading data={{heading: content?.data?.title}} />}    
+        {content?.data?.title && (
+          <Heading data={{ heading: content?.data?.title }} />
+        )}
         <RenderBuilderContent content={content} model={builderModelName} />
-        {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }      
+        {contentFooter?.data && (
+          <Footer content={contentFooter?.data} model={"footer"} />
+        )}
       </>
     );
   }
@@ -59,18 +64,22 @@ export default async function Page(props) {
   // ✅ En el sitio real, envolver con MainWrapper
   return (
     <MainWrapper>
-      {content?.data?.title && <Heading data={{heading: content?.data?.title}} />}
+      {content?.data?.title && (
+        <Heading data={{ heading: content?.data?.title }} />
+      )}
       <RenderBuilderContent content={content} model={builderModelName} />
 
-      <Image 
+      <img
         src={"/assets/images/sarachaga_meta_thumb.jpg"}
         width={1200}
         height={600}
         alt={"Martín Saráchaga Subastas"}
-        style={{display: "none"}}
+        style={{ display: "none" }}
       />
 
-      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
+      {contentFooter?.data && (
+        <Footer content={contentFooter?.data} model={"footer"} />
+      )}
     </MainWrapper>
   );
 }

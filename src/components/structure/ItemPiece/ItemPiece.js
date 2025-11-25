@@ -9,7 +9,7 @@ export default function ItemPiece({ data }){
     <Link href={data.url} id={`id-${data?.id}`} className={styles.item}>
       <div className={styles.image_wrapper}>
         {data?.images ?
-          <Image
+          <img
             src={data?.images?.src}
             alt={`Imagen lote N° ${data.lote}`}
             width={data?.images?.width}

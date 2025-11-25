@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
+//import Image from 'next/image';
 import styles from "./PrefilterImagesChange.module.scss";
 
 export default function PrefilterImagesChange({ images = [] }) {
@@ -21,7 +21,7 @@ export default function PrefilterImagesChange({ images = [] }) {
     return (
         <>
             {images.map((image, i) => (             
-                <Image
+                <img
                 key={i}
                 src={image}
                 alt={`Imagen ${i + 1}`}

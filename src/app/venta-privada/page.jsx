@@ -6,7 +6,7 @@ import Footer from "../../components/structure/Footer/Footer";
 import apiGetServer from "@/lib/apiGetServer";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
-import Image from "next/image";
+//import Image from "next/image";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
@@ -24,10 +24,10 @@ export async function generateMetadata() {
     description: data?.description,
     url: data?.url,
     images: {
-      src: '/assets/images/sarachaga_meta_thumb.jpg',
+      src: "/assets/images/sarachaga_meta_thumb.jpg",
       width: 1200,
-      height: 600
-    }
+      height: 600,
+    },
   });
 }
 
@@ -46,15 +46,17 @@ export default async function Page() {
       <Heading data={{ heading: "Venta privada" }} />
       <PrivateSalePieces data={data} />
 
-      <Image 
+      <img
         src={"/assets/images/sarachaga_meta_thumb.jpg"}
         width={1200}
         height={600}
         alt={"Martín Saráchaga Subastas"}
-        style={{display: "none"}}
+        style={{ display: "none" }}
       />
-    
-      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
+
+      {contentFooter?.data && (
+        <Footer content={contentFooter?.data} model={"footer"} />
+      )}
     </MainWrapper>
   );
 }
