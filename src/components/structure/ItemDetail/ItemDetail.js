@@ -5,7 +5,7 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Link from 'next/link';
-import Image from 'next/image';
+//import Image from 'next/image';
 import ImageMagnifier from '../ImageMagnifier/ImageMagnifier';
 import styles from "./ItemDetail.module.scss"; 
 gsap.registerPlugin(ScrollTrigger);
@@ -82,7 +82,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
         }
 
         {windowSize.width <= 1024 && dataPiece?.images &&
-           <Image 
+           <img 
             src={dataPiece?.images[0]?.src} 
             width={dataPiece?.images[0]?.width} 
             height={dataPiece?.images[0]?.height}  
@@ -109,7 +109,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           dataPiece?.images.map((photo, i) => {   
             return(
               i !== 0 && 
-                <Image 
+                <img 
                   src={photo?.src} 
                   width={photo?.width} 
                   height={photo?.height} 

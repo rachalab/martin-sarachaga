@@ -7,7 +7,7 @@ import apiGetServer from "@/lib/apiGetServer";
 import { notFound } from "next/navigation";
 import styles from "./page.module.scss";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
-import Image from "next/image";
+//import Image from "next/image";
 import NightPrefilter from "@/src/components/builder/NightPreFilter/NightPrefilter";
 
 // Builder Public API Key set in .env file
@@ -52,7 +52,7 @@ export default async function Page({ params }) {
       <Heading data={{ heading: "SUBASTA PRESENCIAL" }} />
       <NightPrefilter subastaId={subastaId} noches={data?.noches} />
       <AuctionPrefilter subastaId={subastaId} links={data?.categorias} />
-      <Image
+      <img
         src={"/assets/images/sarachaga_meta_thumb.jpg"}
         width={1200}
         height={600}

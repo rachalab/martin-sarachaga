@@ -6,7 +6,7 @@ import Heading from "../../../../components/structure/Heading/Heading";
 import AuctionPieces from "@/src/components/structure/AuctionPieces/AuctionPieces";
 import Footer from "../../../../components/structure/Footer/Footer";
 import { generatePageMetadata } from "@/lib/generatePageMetadata";
-import Image from "next/image";
+//import Image from "next/image";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY);
@@ -26,21 +26,19 @@ export async function generateMetadata({ params }) {
     description: data?.description,
     url: data?.url,
     images: {
-      src: '/assets/images/sarachaga_meta_thumb.jpg',
+      src: "/assets/images/sarachaga_meta_thumb.jpg",
       width: 1200,
-      height: 600
-    }
+      height: 600,
+    },
   });
 }
 
 export default async function Page({ params }) {
-
   const { subastaId } = await params;
 
   const data = await apiGetServer({
     url: `/auctions/${subastaId}`,
   });
-
 
   //Si no hay datos redireccionamos
   if (!data?.subasta) return notFound();
@@ -49,18 +47,20 @@ export default async function Page({ params }) {
 
   return (
     <MainWrapper>
-      <Heading data={{heading: 'SUBASTA PRESENCIAL'}} />
+      <Heading data={{ heading: "SUBASTA PRESENCIAL" }} />
       <AuctionPieces data={data} />
 
-      <Image 
+      <img
         src={"/assets/images/sarachaga_meta_thumb.jpg"}
         width={1200}
         height={600}
         alt={"Martín Saráchaga Subastas"}
-        style={{display: "none"}}
+        style={{ display: "none" }}
       />
 
-      {contentFooter?.data && <Footer content={contentFooter?.data} model={"footer"} /> }
+      {contentFooter?.data && (
+        <Footer content={contentFooter?.data} model={"footer"} />
+      )}
     </MainWrapper>
   );
 }

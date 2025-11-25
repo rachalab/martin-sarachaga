@@ -3,7 +3,7 @@ import { useEffect, useState , useRef } from 'react';
 import ReactDOM from "react-dom";
 import { useWindowSize } from "@uidotdev/usehooks";
 import styles from './ImageMagnifier.module.scss';
-import Image from 'next/image';
+//import Image from 'next/image';
 
 const ImageMagnifier = ({ photo, preload = false }) => {    
     const imageContainerRef = useRef(null);
@@ -80,7 +80,7 @@ const ImageMagnifier = ({ photo, preload = false }) => {
 
             {photo?.src && 
                 <div ref={imageContainerRef} className={styles.image_container}>
-                    <Image 
+                    <img 
                         src={photo?.src}
                         alt="Imagen"
                         width={photo?.width}
