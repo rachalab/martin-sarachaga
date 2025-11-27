@@ -20,7 +20,8 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-            
+      <head>
+      <meta name="facebook-domain-verification" content="jk0xtnvkxlxlaxislecylig9ccfl5l" />
       <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png" />
       <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png" />
       <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png" />
@@ -37,8 +38,8 @@ export default async function RootLayout({ children }) {
       <link rel="manifest" href="/favicon/manifest.json" />
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png" /> 
-
       <meta name="theme-color" content="#000"/>
+      </head>
 
       <body>
         <AppContext>          
