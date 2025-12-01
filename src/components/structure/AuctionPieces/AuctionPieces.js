@@ -263,7 +263,7 @@ const check = () => {
                                     <p className={styles.red}>Noche {dataNoche.noche}</p>
                                     <p className={styles.date_dsk}>{dataNoche.dia.format}</p>
                                     <p className={styles.date_mob}>{dataNoche.dia.short}</p>
-                                    <p>{dataNoche.horario.format} H.</p>
+                                    <p>{dataNoche.horario.system}</p>
                                 </div>
                                 {i === firstIndex && (
                                     <button onClick={() => setAuctionFilterPanelStatus(true)} className={styles.btn_filters}>FILTRAR</button>
