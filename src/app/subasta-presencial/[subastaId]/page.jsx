@@ -50,7 +50,7 @@ export default async function Page({ params }) {
   return (
     <MainWrapper>
       <Heading data={{ heading: "SUBASTA PRESENCIAL" }} />
-      <NightPrefilter subastaId={subastaId} noches={data?.noches} />
+      <NightPrefilter subastaId={subastaId} noches={data?.noches} catalogo={data?.subasta?.catalogo} />
       <AuctionPrefilter subastaId={subastaId} links={data?.categorias} />
       <img
         src={"/assets/images/sarachaga_meta_thumb.jpg"}
