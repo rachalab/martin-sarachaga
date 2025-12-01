@@ -29,7 +29,7 @@ export default function NightPrefilter({ subastaId, noches }){
             <p className={styles.red}>Noche {data.noche}</p>
             <p className={styles.date_dsk}>{data.dia.format}</p>
             <p className={styles.date_mob}>{data.dia.short}</p>
-            <p>{data.horario.format} H.</p>
+            <p>{data.horario.system}</p>
           </button>
         );
       })}
