@@ -42,7 +42,7 @@ export default function Footer({content}){
             }
 
             <a href="mailto:info@martinsarachaga.com" rel="noopener noreferrer" target="_blank">info@martinsarachaga.com</a>
-            { content?.address && <p><a href={content?.addressmap} target="_blank">{content?.address}</a></p> }
+            { content?.address && <p><a href={content?.adressmap} target="_blank">{content?.address}</a></p> }
           </div>
         </div>
       </div>
