@@ -19,7 +19,7 @@ export default function Footer({content}){
             }
 
             { content?.phones && content?.phones.map((p, index) => (
-              <p key={index}>{p?.phone}</p>
+              <p key={index}><a href={`phone://${p?.phone}`}>{p?.phone}</a></p>
             ))}
           </div>
           <div className={styles.social_networks}>
@@ -42,7 +42,7 @@ export default function Footer({content}){
             }
 
             <a href="mailto:info@martinsarachaga.com" rel="noopener noreferrer" target="_blank">info@martinsarachaga.com</a>
-            { content?.address && <p>{content?.address}</p> }
+            { content?.address && <p><a href={content?.addressmap} target="_blank">{content?.address}</a></p> }
           </div>
         </div>
       </div>

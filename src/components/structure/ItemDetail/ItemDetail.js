@@ -71,7 +71,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           <Link href={`${backLink}#id-${dataPiece.id}`} className={styles.link_back}>CATÁLOGO</Link> 
            <button onClick={ () => window.print() } className={styles.print_btn}>IMPRIMIR</button>
         </div>
-        <h3 className={styles.lote}>Lote N° {dataPiece.lote}</h3>
+        <h3 className={styles.lote}>Lote N° {dataPiece.lote} {dataPiece.bis ? 'Bis' : ''}</h3>
         {dataPiece.categoria !== 1 && dataPiece.categoria !== 22 ?
                 <h1 className={styles.headline}>{dataPiece.titulo}</h1>
 
@@ -103,7 +103,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           {!!dataPiece.preciofijo && Number(dataPiece.preciofijo) !== 0 && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
         </ul>
 
-        <a className={styles.query_button} href="https://api.whatsapp.com/send?phone=5491124787437&text=Hola" rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>
+        <a className={styles.query_button} href={`https://api.whatsapp.com/send?phone=5491124787437&text=Hola,+me+interesa+esta+obra.+https://www.martinsarachaga.com${dataPiece.url}`} rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>
 
         {windowSize.width <= 1024 && dataPiece?.images &&
           dataPiece?.images.map((photo, i) => {   

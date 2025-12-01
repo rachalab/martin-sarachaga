@@ -21,7 +21,7 @@ export default function ItemPiece({ data }){
           <div className={styles.img_void}/>
         }               
       </div>     
-      <p>Lote N° {data.lote}{data.autor && ` — ${data.categoria ==1 ||  data.categoria == 22 ?  data.autor : data.titulo}`}</p>
+      <p>Lote N° {data.lote} {data.bis ? 'Bis' : ''} {data.autor && ` — ${data.categoria ==1 ||  data.categoria == 22 ?  data.autor : data.titulo}`}</p>
     </Link>
 
   )
