@@ -1,40 +1,65 @@
 @use "../../../styles/system";
 
-.nights{
-    @include system.container-width-1;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: calc(40px + (130 - 40) * ((100vw - 1200px) / (3840 - 1200)));
-    @media screen and (max-width: 1024px){
-        margin-bottom: calc(25px + (75 - 25) * ((100vw - 300px) / (1024 - 300)));
-    }
-    .night{
-        margin-right: calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200)));
-        text-align: left;
-        &:last-of-type{
-            margin-right: 0;
-        }
-        @media screen and (max-width: 1024px){
-            margin-right: calc(20px + (50 - 20) * ((100vw - 300px) / (1024 - 300)));
-        }
-        p{
-            @include system.font-level-6;
-            font-weight: 800;
-            color: system.$black;
-            line-height: 100% !important;
+.nightsPrefilter
+{
+     @include system.container-width-1;
+     display: flex;
+     flex-direction: row;
+     @media screen and (max-width: 1024px){
+        flex-direction: row;
+     }
+     justify-content: space-between;
+    
+    .catalogo
+    {
+            @include system.button; 
+            display: inline-flex;
+            margin-bottom: calc(40px + (130 - 40) * ((100vw - 1200px) / (3840 - 1200)));
+             @media screen and (max-width: 1024px){
+                    margin-bottom: calc(25px + (75 - 25) * ((100vw - 300px) / (1024 - 300)));
+                    max-width: 40%;
+            }
+            
+            align-items: center;
+            justify-content: center;
 
-            text-transform: uppercase;
-            &.red{
-                color: system.$red;
+    }
+    .nights{
+       
+        display: flex;
+        flex-direction: row;
+        margin-bottom: calc(40px + (130 - 40) * ((100vw - 1200px) / (3840 - 1200)));
+        @media screen and (max-width: 1024px){
+            margin-bottom: calc(25px + (75 - 25) * ((100vw - 300px) / (1024 - 300)));
+        }
+        .night{
+            margin-right: calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200)));
+            text-align: left;
+            &:last-of-type{
+                margin-right: 0;
             }
-            &.date_dsk{
-                @media screen and (max-width: 1024px){
-                    display: none;
+            @media screen and (max-width: 1024px){
+                margin-right: calc(20px + (50 - 20) * ((100vw - 300px) / (1024 - 300)));
+            }
+            p{
+                @include system.font-level-6;
+                font-weight: 800;
+                color: system.$black;
+                line-height: 100% !important;
+
+                text-transform: uppercase;
+                &.red{
+                    color: system.$red;
                 }
-            }
-            &.date_mob{
-                @media screen and (min-width: 1024px){
-                    display: none;
+                &.date_dsk{
+                    @media screen and (max-width: 1024px){
+                        display: none;
+                    }
+                }
+                &.date_mob{
+                    @media screen and (min-width: 1024px){
+                        display: none;
+                    }
                 }
             }
         }

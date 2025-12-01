@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useAppContext } from '../../../app/context/AppContext';
 import styles from "./NightPrefilter.module.scss"; 
 
-export default function NightPrefilter({ subastaId, noches }){
+export default function NightPrefilter({ subastaId, noches, catalogo }){
   
     const router = useRouter();
 
@@ -17,7 +17,7 @@ export default function NightPrefilter({ subastaId, noches }){
   };
 
   return (
-
+<div className={styles.nightsPrefilter}>
      <div className={styles.nights}>
       {noches?.map((data, i) => {
         return (
@@ -33,6 +33,8 @@ export default function NightPrefilter({ subastaId, noches }){
           </button>
         );
       })}
+    </div>
+    {catalogo && (<a href={catalogo} target="_blank" className={styles.catalogo}>Descargar catálogo</a>)}
     </div>
   )
 }
