@@ -99,8 +99,10 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
             <li><span>Fecha de subasta</span> {dataNoche?.dia?.format ?? '-' }</li>
           }
           {/*address && <li><span>Lugar</span> {address}</li>*/}
+          {!!dataPiece.escuela && Number(dataPiece.escuela) !== 0 && <li><span>Escuela</span> {dataPiece.escuela}</li>}
           {!!dataPiece.preciominimo && Number(dataPiece.precioestimativo) !== 0 && <li><span>Valor base</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.precioestimativo}</li>}
           {!!dataPiece.preciofijo && Number(dataPiece.preciofijo) !== 0 && <li><span>Precio de venta</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.preciofijo}</li>}
+
         </ul>
 
         <a className={styles.query_button} href={`https://api.whatsapp.com/send?phone=5491124787437&text=Hola,+me+interesa+esta+obra.+https://www.martinsarachaga.com${dataPiece.url}`} rel="noopener noreferrer" target="_blank">CONSULTAR POR WHATSAPP</a>
