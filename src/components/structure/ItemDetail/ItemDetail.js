@@ -18,6 +18,9 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
   const pathname = usePathname(); 
   const segments = pathname.split('/').filter(Boolean);
   segments.pop();
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+
+  const toggleContent = () => setDescriptionExpanded(!descriptionExpanded);
 
   //Link de volver atrás
   const backLink = '/' + segments.join('/');
@@ -71,15 +74,15 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           <Link href={`${backLink}#id-${dataPiece.id}`} className={styles.link_back}>CATÁLOGO</Link> 
            <button onClick={ () => window.print() } className={styles.print_btn}>IMPRIMIR</button>
         </div>
-        <h3 className={styles.lote}>Lote N° {dataPiece.lote} {dataPiece.bis ? 'Bis' : ''}</h3>
-        {dataPiece.categoria !== 1 && dataPiece.categoria !== 22 ?
-                <h1 className={styles.headline}>{dataPiece.titulo}</h1>
 
-        :
-                <h1 className={styles.headline}>{dataPiece.autor}</h1>
-
-      
-        }
+        <div className={styles.identifier}>
+          <span className={styles.lote}>Lote N° {dataPiece.lote} {dataPiece.bis ? 'Bis' : ''}  / </span>
+          {dataPiece.categoria !== 1 && dataPiece.categoria !== 22 ?
+            <h1 className={styles.headline}>{dataPiece.titulo}</h1>
+          :
+            <h1 className={styles.headline}>{dataPiece.autor}</h1>      
+          }
+        </div>        
 
         {windowSize.width <= 1024 && dataPiece?.images &&
            <img 
@@ -91,7 +94,20 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
           />  
         }
 
-        <p className={styles.description}>{dataPiece.descripcion}</p>
+        {dataPiece.descripcion?.length <= 145 ? (
+          <p className={styles.description}>{dataPiece.descripcion}</p>
+        ) : (
+          <>
+            <p className={styles.description}>
+              {descriptionExpanded ? dataPiece.descripcion : dataPiece.descripcion.slice(0, 146)}
+              {!descriptionExpanded && `...`}
+                &ensp;              
+              <button onClick={toggleContent} className={styles.read_more}>
+                {descriptionExpanded ? 'Leer menos' : 'Leer más'}
+              </button>
+            </p>            
+          </>
+        )}        
 
         <ul className={styles.technical_sheet}>
           {(dataPiece.categoria == 1 || dataPiece.categoria == 22) && (<li><span>Título</span> {dataPiece.titulo}</li>)}

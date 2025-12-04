@@ -302,8 +302,8 @@ const check = () => {
                             </div>
                             <button onClick={() => setAuctionFilterPanelStatus(true)} className={styles.btn_filters}>FILTRAR</button>
                         </div>
-                        <div className={styles.itemsGrid}>  
-                            <p>No hay coincidencias.</p>
+                        <div className={styles.no_results}>  
+                            <p className={styles.message}>No se encontraron lotes que coincidan con la búsqueda.</p>
                         </div>                             
                     </section>
                 )}

@@ -45,22 +45,26 @@
         grid-template-columns: repeat(3, 1fr);
         grid-gap: calc(20px + (56 - 20) * ((100vw - 1200px) / (3840 - 1200)));
         margin-bottom: calc(95px + (300 - 95) * ((100vw - 1200px) / (3840 - 1200)));     
+        transition: opacity 0.5s ease;
         @media screen and (max-width: 1024px){
             grid-template-columns: repeat(2, 1fr);
             grid-gap: calc(10.5px + (34 - 10.5) * ((100vw - 300px) / (1024 - 300)));
             margin-bottom: calc(35px + (125 - 35) * ((100vw - 300px) / (1024 - 300))); 
+        }                        
+    }    
+
+    .no_results{
+        @include system.container-width-1;        
+        margin-bottom: calc(95px + (300 - 95) * ((100vw - 1200px) / (3840 - 1200)));  
+        @media screen and (max-width: 1024px){
+            margin-bottom: calc(35px + (125 - 35) * ((100vw - 300px) / (1024 - 300))); 
         }
-            transition: opacity 0.5s ease;
-
-    }
-    .fade-all {
-    opacity: 0;
-    }
-
-    .fade-all-active {
-    opacity: 1;
-    }
-
+        .message{
+            @include system.font-level-6;
+            font-weight: 600;
+            color: system.$black;
+        }
+    } 
 }
 
 .btn_filters{

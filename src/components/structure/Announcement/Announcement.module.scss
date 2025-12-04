@@ -61,6 +61,15 @@
             margin-bottom: calc(18px + (46 - 18) * ((100vw - 300px) / (1024 - 300)));  
         }
     }
+
+    .link{
+        text-decoration: none;
+        @media screen and (min-width: 1024px){
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
  
     &.closing{      
         animation-name: contentOut;

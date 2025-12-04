@@ -19,7 +19,7 @@ export default function Footer({content}){
             }
 
             { content?.phones && content?.phones.map((p, index) => (
-              <p key={index}><a href={`phone://${p?.phone}`}>{p?.phone}</a></p>
+              <a href={`tel://+${p?.phone.replace(/\D/g, "")}`} key={index}>{p?.phone}</a>
             ))}
           </div>
           <div className={styles.social_networks}>

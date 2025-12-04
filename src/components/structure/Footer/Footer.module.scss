@@ -38,6 +38,14 @@
             @include system.font-level-6;
             font-weight: 800;
             color: system.$white;
+            text-decoration: none;            
+        }
+        a{
+            @media screen and (min-width: 1024px){
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
         }
         .col_left{
             grid-area: col-left;
@@ -77,10 +85,12 @@
                     margin-bottom: calc(18px + (48 - 18) * ((100vw - 300px) / (1024 - 300))); 
                 }
                 a{
-                    display: block;
-                    margin-bottom: calc(17.5px + (56 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
-                    @media screen and (max-width: 1024px){
-                        margin-bottom: calc(10px + (20 - 10) * ((100vw - 300px) / (1024 - 300))); 
+                    display: block;                    
+                    &:first-of-type{
+                        margin-bottom: calc(17.5px + (56 - 17.5) * ((100vw - 1200px) / (3840 - 1200)));
+                        @media screen and (max-width: 1024px){
+                            margin-bottom: calc(10px + (20 - 10) * ((100vw - 300px) / (1024 - 300))); 
+                        }
                     }
                 }
             }

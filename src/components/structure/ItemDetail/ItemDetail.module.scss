@@ -63,38 +63,41 @@
                 background-position: left center;
                 background-size: calc(12.5px + (38 - 12.5) * ((100vw - 1200px) / (3840 - 1200))) auto;
                 padding-left: calc(16px + (46 - 16) * ((100vw - 1200px) / (3840 - 1200)));
-                border-bottom: solid system.$line system.$black;
                 @media screen and (max-width: 1024px){
                     background-size: calc(11px + (28 - 11) * ((100vw - 300px) / (1024 - 300))) auto;
                     padding-left: calc(14px + (34 - 14) * ((100vw - 300px) / (1024 - 300)));
                 }
+                @media screen and (min-width: 1024px){
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
             }
             .print_btn{
                 font-weight: 800;
-                border-bottom: solid system.$line system.$black;
+                @media screen and (min-width: 1024px){
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
             }
        
         }     
-         .lote{
-            @include system.font-level-5;
-            font-weight: 800;
-            color: system.$black;
-            line-height: 100%;
+
+        .identifier{
             margin-bottom: calc(16px + (38 - 16) * ((100vw - 1200px) / (3840 - 1200)));
             @media screen and (max-width: 1024px){
                 margin-bottom: calc(8px + (18 - 8) * ((100vw - 300px) / (1024 - 300)));
             }
-        }     
-        .headline{
-            @include system.font-level-3;
-            font-weight: 800;
-            color: system.$black;
-            line-height: 100%;
-            margin-bottom: calc(16px + (38 - 16) * ((100vw - 1200px) / (3840 - 1200)));
-            @media screen and (max-width: 1024px){
-                margin-bottom: calc(8px + (18 - 8) * ((100vw - 300px) / (1024 - 300)));
+            .lote, .headline{
+                @include system.font-level-3;
+                font-weight: 800;
+                color: system.$black;
+                line-height: 100%;  
+                display: inline;              
             }
-        }        
+        }
+                
         .description{
             line-height: 130%;
             padding-right: calc(45px + (200 - 45) * ((100vw - 1200px) / (3840 - 1200)));
@@ -102,6 +105,12 @@
             @media screen and (max-width: 1024px){
                 padding-right: 0;
                 margin-bottom: calc(18px + (44 - 18) * ((100vw - 300px) / (1024 - 300)));
+            }
+            .read_more{
+                @include system.font-level-6;
+                font-weight: 600;
+                color: system.$black;
+                text-decoration: underline;
             }
         }
         .technical_sheet{

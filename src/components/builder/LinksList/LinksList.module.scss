@@ -33,6 +33,12 @@
       line-height: 142%;
       border-top: solid system.$line-mobile system.$black;
     }
+    @media screen and (min-width: 1025px){
+      &:hover{   
+        color: system.$white;
+        -webkit-text-stroke: calc(2px + (6 - 2) * ((100vw - 1200px) / (3840 - 1200))) system.$black;                  
+      }                    
+    }
     &:last-of-type{
       border-bottom: solid system.$line system.$black;
       @media screen and (max-width: 1024px){

@@ -1,53 +1,74 @@
 @use "../../../styles/system";
 
-.nightsPrefilter
-{
-     @include system.container-width-1;
-     display: flex;
-     flex-direction: row;
-     @media screen and (max-width: 1024px){
-        flex-direction: row;
-     }
-     justify-content: space-between;
+.nightsPrefilter{
+    @include system.container-width-1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: calc(40px + (130 - 40) * ((100vw - 1200px) / (3840 - 1200)));     
+    @media screen and (max-width: 1024px){
+        margin-bottom: calc(25px + (75 - 25) * ((100vw - 300px) / (1024 - 300)));
+    }     
     
-    .catalogo
-    {
-            @include system.button; 
-            display: inline-flex;
-            margin-bottom: calc(40px + (130 - 40) * ((100vw - 1200px) / (3840 - 1200)));
-             @media screen and (max-width: 1024px){
-                    margin-bottom: calc(25px + (75 - 25) * ((100vw - 300px) / (1024 - 300)));
-                    max-width: 40%;
-            }
-            
-            align-items: center;
-            justify-content: center;
-
-    }
-    .nights{
-       
+    .catalogo{
         display: flex;
         flex-direction: row;
-        margin-bottom: calc(40px + (130 - 40) * ((100vw - 1200px) / (3840 - 1200)));
+        align-items: flex-end;
+        @include system.font-level-6;
+        font-weight: 800;
+        color: system.$black;
+        line-height: normal;
+        text-transform: uppercase;
+        text-decoration: none;
         @media screen and (max-width: 1024px){
-            margin-bottom: calc(25px + (75 - 25) * ((100vw - 300px) / (1024 - 300)));
-        }
-        .night{
-            margin-right: calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200)));
-            text-align: left;
-            &:last-of-type{
-                margin-right: 0;
+            flex-direction: column;
+            width: calc(80px + (220 - 80) * ((100vw - 300px) / (1024 - 300)));
+            strong{
+                display: none;
             }
+        }
+        @media screen and (min-width: 1024px){
+            &:hover{
+                    text-decoration: underline;
+            }
+        }
+        img{
+            width: calc(22px + (70 - 22) * ((100vw - 1200px) / (3840 - 1200)));
+            height: auto;
+            margin-right: calc(6px + (26 - 6) * ((100vw - 1200px) / (3840 - 1200)));
+            @media screen and (max-width: 1024px){
+                width: calc(18px + (48 - 18) * ((100vw - 300px) / (1024 - 300)));                
+                margin-right: 0;
+                margin-bottom: calc(2px + (6 - 2) * ((100vw - 300px) / (1024 - 300)));
+            }
+        }  
+        strong{
+            font-weight: 800;
+        }          
+    }
+
+    .nights{             
+        .night{                      
+            @include system.font-level-6;
+            font-weight: 800;
+            color: system.$black;
+            line-height: normal;
+            text-transform: uppercase;            
+            text-align: left; 
+            margin-right: calc(30px + (95 - 30) * ((100vw - 1200px) / (3840 - 1200)));            
             @media screen and (max-width: 1024px){
                 margin-right: calc(20px + (50 - 20) * ((100vw - 300px) / (1024 - 300)));
             }
-            p{
-                @include system.font-level-6;
-                font-weight: 800;
-                color: system.$black;
-                line-height: 100% !important;
-
-                text-transform: uppercase;
+            @media screen and (min-width: 1024px){
+                &:hover{
+                    text-decoration: underline;
+                }
+            } 
+            &:last-of-type{
+                margin-right: 0;
+            }
+            span{
+                display: block;
                 &.red{
                     color: system.$red;
                 }
@@ -57,11 +78,11 @@
                     }
                 }
                 &.date_mob{
-                    @media screen and (min-width: 1024px){
+                    @media screen and (min-width: 1025px){
                         display: none;
                     }
                 }
-            }
+            }                 
         }
     }
 }
