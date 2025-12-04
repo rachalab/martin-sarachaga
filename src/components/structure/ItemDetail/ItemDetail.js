@@ -48,6 +48,8 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
     }                   
   }, [windowSize.width, colLeftHeight]);
 
+  console.log(dataPiece);
+
 
   return (
     <div className={styles.wrapper} ref={container}>
@@ -101,7 +103,7 @@ export default function ItemDetail({ dataPiece, address, dataNoche = false }){
             <li><span>Fecha de subasta</span> {dataNoche?.dia?.format ?? '-' }</li>
           }
           {/*address && <li><span>Lugar</span> {address}</li>*/}
-          {!!dataPiece.preciominimo && Number(dataPiece.precioestimativo) !== 0 && <li><span>Valor base</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.precioestimativo}</li>}
+          {!!dataPiece.precioestimativo && Number(dataPiece.precioestimativo) !== 0 && <li><span>Valor base</span> {dataPiece.moneda === 'd' ? 'U$S' : '$'} {dataPiece.precioestimativo}</li>}
           {/* Bloque de Precio de Venta - Se muestra SOLO SI NO HAY PRECIO MÍNIMO */}
           {/* Se verifica si dataPiece.preciominimo NO es truthy Y si dataPiece.preciofijo existe */}
           {!dataPiece.preciominimo && !!dataPiece.preciofijo && (

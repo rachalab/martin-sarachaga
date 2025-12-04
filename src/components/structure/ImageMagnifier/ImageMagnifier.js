@@ -86,7 +86,7 @@ const ImageMagnifier = ({ photo, preload = false }) => {
                         width={photo?.width}
                         height={photo?.height}
                         className={styles.image}
-                        preload={preload}
+               
                     />
                 </div>
             }
