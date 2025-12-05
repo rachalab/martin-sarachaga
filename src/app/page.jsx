@@ -18,10 +18,8 @@ export async function generateMetadata({ params }) {
     .toPromise();
 
   return generatePageMetadata({
-    title:
-      content?.data?.title + " — Martín Saráchaga Subastas" ||
-      "Martín Saráchaga Subastas",
-    description: content?.data?.description || "Martín Saráchaga Subastas",
+    title:       "Martín Saráchaga Subastas",
+    description: "Obras de arte en Argentina. Subastas presenciales y virtuales.",
     url: urlPath,
   });
 }

@@ -21,8 +21,7 @@ export async function generateMetadata({ params }) {
 
   return generatePageMetadata({
     title:
-      content?.data?.title + " — Martín Saráchaga Subastas" ||
-      "Martín Saráchaga Subastas",
+      content?.data?.title + " — Martín Saráchaga Subastas" ||  "Martín Saráchaga Subastas",
     description: content?.data?.description || "Martín Saráchaga Subastas",
     url: urlPath,
   });

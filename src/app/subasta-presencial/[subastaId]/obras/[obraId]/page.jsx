@@ -31,8 +31,12 @@ export async function generateMetadata({ params }) {
     image = data?.lote?.images[0];
   }
 
+  const titulo = data?.lote?.categoria !== 1 && data?.lote?.categoria !== 22 ?         data?.lote?.titulo : data?.lote?.autor;
+  const lote = `${data?.lote?.lote} ${data?.lote?.bis ? 'Bis' : ''}`;
+
   return generatePageMetadata({
-    title: `${data?.lote?.titulo} — Martín Saráchaga Subastas`,
+
+    title: `${titulo} — Lote N° ${lote} — Martín Saráchaga Subastas`,
     description: data?.lote?.descripcion,
     url: data?.lote?.url,
     images: [image],
